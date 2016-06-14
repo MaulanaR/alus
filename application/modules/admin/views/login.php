@@ -56,9 +56,7 @@
                           <div class="col-sm-12 col-md-12 input-group">
                             <span class="input-group-addon"><i class="fa fa-lock"></i></span>
                             <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Password" tabindex="2" required>
-                          
                           </div>
-
                         </div>
                         <hr/>
                         <!-- captcha -->
