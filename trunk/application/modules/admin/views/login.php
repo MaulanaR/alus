@@ -11,6 +11,14 @@
     <script src="<?php echo base_url()?>Assets/dist/js/jquery-2.1.4.min.js"></script>  
     <script src="<?php echo base_url();?>Assets/dist/js/bootstrap.min.js"></script>
     <script src="<?php echo base_url(); ?>Assets/dist/js/patternfly.min.js"></script>
+     <script>
+        $(document).ready(function() { 
+            
+              $('#capt').fadeIn("slow");
+            
+        });
+          
+    </script>
 
   </head>
 
@@ -51,7 +59,21 @@
                         </div>
                         <hr/>
                         <!-- captcha -->
+                        <div id="capt" style="display:none">
+                        <div class="form-group">
+                         <center><label>Input Captcha</label>
+                            <div class="col-md-12 input-group">
+                            <?php echo $captcha ;?>
+                            </div>
+                          </center>
+                        </div>
+                        <div class="form-group">
+                          <div class="col-sm-12 col-md-12 input-group">
+                          <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                            <input type="text" name="captcha" class="form-control" id="inputCaptcha" placeholder="Isikan seperti yang terlihat di gambar" tabindex="2"  required>
+                          </div>
 
+                        </div>
                         <!-- end div hide-->
                         </div>
                         <div class="form-group">

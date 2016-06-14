@@ -179,7 +179,7 @@ class Users extends CI_Controller {
 	{
 		if($this->privilege['can_edit'] == 0)
 		{
-			$this->session->set_flashdata('message','Anda tidak memiliki akses untuk menambahkan user');
+			$this->session->set_flashdata('message','Anda tidak memiliki akses untuk action ini');
 			redirect('users/table_users');
 		}
 
