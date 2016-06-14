@@ -8,7 +8,7 @@ class Login extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		
+		$this->load->helper('captcha');
 	}
 		
 
@@ -19,11 +19,45 @@ class Login extends CI_Controller {
          {
 		 redirect('dashboard/','refresh');
 		}else
-		{
-			$this->load->view('login');
+		{	
+			$data['captcha'] = $this->load_captcha();
+			$this->load->view('login',$data);
 		}
 	}
 
+// membuat captcha img
+	function load_captcha()
+	{
+		
+		$option = array(
+			'img_path' => './Assets/dist/img/capimg/',
+			'img_url' => base_url().'Assets/dist/img/capimg/',
+			'img_width' => '140',
+			'img_height' => '40',
+			'word_length' => '5',
+			'font_path' => base_url().'Assets/dist/fonts/PatternFlyIcons-webfont',
+			'expiration' => 7200
+			);
+
+		$cap = create_captcha($option);
+
+		$image = $cap['image'];
+		$this->session->set_userdata('captchaword',md5($cap['word']));
+
+		return $cap['image'];
+
+	}
+// fungsi check captcha
+	function check_captcha($teks){
+		if( md5($teks) == $this->session->userdata('captchaword'))
+		{
+			return true;
+
+		}else{
+
+			return false;
+		}
+	}
 	public function login()
 	{
 		$this->data['title'] = "Login";
@@ -31,9 +65,20 @@ class Login extends CI_Controller {
 		//validate form input
 		$this->form_validation->set_rules('identity', 'Identity', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
+		$this->form_validation->set_rules('captcha', 'captcha', 'required');
+
 
 		if ($this->form_validation->run() == true)
 		{
+			$captcha = $this->input->post('captcha');
+			//cek captcha
+				$captchacek = $this->check_captcha($captcha);
+
+				if($captchacek == false)
+				{
+					$this->session->set_flashdata('message',"Kode Captcha tidak sesuai");
+					redirect('admin/Login/', 'refresh');
+				}
 			// check to see if the user is logging in
 			// check for "remember me"
 			$remember = (bool) $this->input->post('remember');
