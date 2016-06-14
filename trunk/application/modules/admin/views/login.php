@@ -24,12 +24,15 @@
 
   <body style="background: url('<?php echo base_url(); ?>Assets/dist/img/bg-login.jpg');">
         <div class="row" style="margin:0px;padding:0px;">
-            <div style="width:300px;margin:auto;margin-top:100px">
-            <?php if($this->session->flashdata('message') != ''){ ?>
-                <div class="col-sm-12" style="padding:7px;">
-                    <div class="alert alert-danger"><span class="fa fa-user"></span> <strong> Oops!</strong><?php echo $this->session->flashdata('message');?></div>
+        <div>
+           <?php if($this->session->flashdata('message') != ''){ ?>
+                <div class="col-sm-6 col-sm-offset-3">
+                    <div class="alert alert-danger text-center"><span class="fa fa-user"></span> <strong> Oops!</strong><?php echo $this->session->flashdata('message');?></div>
                 </div>
                  <?php }; ?>
+        </div>
+            <div style="width:300px;margin:auto;margin-top:100px">
+           
                 <div class="col-sm-12" style="padding:7px;">
                         <img src="<?php echo base_url();?>Assets/dist/img/logo.png" width="100%" height="100px">
                 </div>

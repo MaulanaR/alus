@@ -249,7 +249,7 @@ function kill(id)
         <!-- modal head -->
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Edit User</h4>
+        <h4 class="modal-title" id="myModalLabel">Edit Menu</h4>
       </div>
       <!-- modal body -->
      <form action="<?php echo base_url();?>menus/edit_data_menus" method="POST" id="NewEdit"> 
