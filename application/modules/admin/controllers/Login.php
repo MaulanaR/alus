@@ -34,7 +34,7 @@ class Login extends CI_Controller {
 			'img_url' => base_url().'Assets/dist/img/capimg/',
 			'img_width' => '140',
 			'img_height' => '40',
-			'word_length' => '5',
+			'word_length' => '4',
 			'font_path' => base_url().'Assets/dist/fonts/PatternFlyIcons-webfont',
 			'expiration' => 7200
 			);
