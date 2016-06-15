@@ -41,7 +41,7 @@
                  ?>
                  <tr>
                  <td class="text-right">
-                  <input type="radio" class="radio" name="parent" value="<?php echo $tre->menu_id;?>" <?php if($parent == $tre->menu_id){ echo "checked"; }; ?> <?php if($id == $tre->menu_id){echo "disabled"; };?>>
+                  <input type="radio" class="radio" name="parent" value="<?php echo $tre->menu_id;?>" <?php if($parent == $tre->menu_id){ echo "checked"; }; ?> <?php if($id == $tre->menu_id){echo "disabled";}; if($id == $tre->menu_parent){echo "disabled";};?>>
                   </td>
                  <td><?php echo $tre->menu_nama;?></td>
                 </tr>
