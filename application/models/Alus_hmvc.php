@@ -27,9 +27,9 @@ const login_attempt = 'login_attempts';
          	}else{
          		$group = $this->session->userdata('group');
          		if (empty(array_filter($this->session->userdata('group')))) {
-    				$menu[] = "";
+    				       $menu[] = "";
    		   			return $menu;
-				}
+			   	}
 	         		
 	         		$this->db->distinct('id_menu');
 	   				$this->db->from(self::table_group_akses);
@@ -41,16 +41,24 @@ const login_attempt = 'login_attempts';
 	   		   	$result = $this->db->get();
 	   		   	if($result->num_rows()>0)
 	   		   	{
-	   		   	foreach ($result->result() as $list) {
-	           	   $menu[] = $this->menu($list->id_menu);
-	           	 }
-				$this->session->set_userdata('menus', $menu);
+                     foreach ($result->result() as $key) {
+                        $this->db->or_where('menu_id', $key->id_menu);
+                     }
+                     $this->db->order_by('menu_parent', 'desc');
+                     $this->db->order_by('order_num', 'ASC');
+                  $nodes = $this->db->get(self::table_menus);
+                     foreach ($nodes->result_array() as $key) {
+                        $assoc_all[] = $key;
+                     } 
+	   		   	$menu = $this->get_menu_html($assoc_all, 0);
+
+				     $this->session->set_userdata('menus', $menu);
 	   		   	return $menu;
 
    			   	}
    				   	else
    		   		{
-   		   		$menu[] = "";
+   		   		$menu = "";
    		   		return $menu;	
    		   		};
          	}
@@ -60,19 +68,82 @@ const login_attempt = 'login_attempts';
    		};
 
    		}
-   	function menu($id)
-   	{
-   		$this->db->where('menu_id',$id);
-   		$men = $this->db->get(self::table_menus)->row();
-   		if(count($men) > 0)
-   		{
-   			$hasil ="<li><a href=".base_url().$men->menu_uri." target=".$men->menu_target.">".$men->menu_nama."</a></li>";	
-   		}else{
-   			$hasil ="";
-   		}
-   		
-   		return $hasil;
-   	}
+
+
+   function get_menu_html($menu_list, $root_menu_id = 0 )
+   {
+      $this->html  = array();
+      $this->items = $menu_list;
+      
+      foreach ( $this->items as $item )
+         $children[$item['menu_parent']][] = $item;
+      
+      // loop will be false if the root has no children (i.e., an empty menu!)
+      $loop = !empty( $children[$root_menu_id] );
+      
+      // initializing $parent as the root
+      $parent = $root_menu_id;
+      $parent_stack = array();
+      
+      // HTML wrapper for the menu (open)
+      $this->html[] = '<ul class="nav navbar-nav">';
+      $this->html[] = '<li><a href="dashboard" target="" >Home</a></li>';
+      
+      while ( $loop && ( ( $option = each( $children[$parent] ) ) || ( $parent > $root_menu_id ) ) )
+      {
+         if ( $option === false )
+         {
+            $parent = array_pop( $parent_stack );
+            
+            // HTML for menu item containing childrens (close)
+            $this->html[] = str_repeat( "\t", ( count( $parent_stack ) + 1 ) * 2 ) . '</ul>';
+            $this->html[] = str_repeat( "\t", ( count( $parent_stack ) + 1 ) * 2 - 1 ) . '</li>';
+         }
+         elseif ( !empty( $children[$option['value']['menu_id']] ) )
+         {
+            $tab = str_repeat( "\t", ( count( $parent_stack ) + 1 ) * 2 - 1 );
+            if(count($parent_stack) == 1)
+            {
+               $this->html[] = sprintf(
+               '%1$s<li class="dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">%3$s</a>',
+               $tab,   // %1$s = tabulation
+               $option['value']['menu_uri'],   // %2$s = menu_uri (URL)
+               $option['value']['menu_nama'],   // %3$s = menu_nama
+               $option['value']['menu_target']   // %4$s = menu_target
+            );   
+            }else{
+               // HTML for menu item containing childrens (open)
+
+            $this->html[] = sprintf(
+               '%1$s<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">%3$s<b class="caret"></b></a>',
+               $tab,   // %1$s = tabulation
+               $option['value']['menu_uri'],   // %2$s = menu_uri (URL)
+               $option['value']['menu_nama'],   // %3$s = menu_nama
+               $option['value']['menu_target']   // %4$s = menu_target
+            );    
+            }
+            
+            $this->html[] = $tab . "\t" . '<ul class="dropdown-menu">';
+            
+            array_push( $parent_stack, $option['value']['menu_parent'] );
+            $parent = $option['value']['menu_id'];
+         }
+         else
+            // HTML for menu item with no children (aka "leaf") 
+            $this->html[] = sprintf(
+               '%1$s<li><a href="%2$s" target="%4$s">%3$s</a></li>',
+               str_repeat( "\t", ( count( $parent_stack ) + 1 ) * 2 - 1 ),   // %1$s = tabulation
+               $option['value']['menu_uri'],   // %2$s = menu_uri (URL)
+               $option['value']['menu_nama'],   // %3$s = menu_nama
+               $option['value']['menu_target']   // %4$s = menu_target
+            );
+      }
+      
+      // HTML wrapper for the menu (close)
+      $this->html[] = '</ul>';
+      
+      return implode( "\r\n", $this->html );
+   }
 
    	function cek_privilege($menu_uri) //return array (can_add,can_edit,can_delete,can_view)
    	{
