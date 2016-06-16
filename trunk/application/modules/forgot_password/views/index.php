@@ -68,9 +68,6 @@ base_url = '<?php echo base_url();?>';
 			</div>
 			<div class="etc-login-form">
 				<p>already have an account? <a href="<?php echo base_url()?>">login here</a></p>
-
-
-				<p><a href="<?php echo base_url()?>recovery_password?activation_key=1vH8bSq.X2Aj.pJ.GGsdsMsLOc3301c5dd5ebbdd181">TEST</a></p>
 			</div>
 		</form>
 	</div>
