@@ -92,6 +92,7 @@ class Menus extends CI_Controller {
 								'menu_nama' => $this->input->post('name'),
 								'menu_uri' => $this->input->post('uri'),
 								'menu_target' => $this->input->post('target'),
+								'menu_icon' => $this->input->post('icon'),
 								'order_num' => $this->input->post('order')
 								
 								);
@@ -151,6 +152,7 @@ class Menus extends CI_Controller {
 		$data['order'] = $menu->order_num;
 		$data['target'] = $menu->menu_target;
 		$data['parent'] = $menu->menu_parent;
+		$data['icon'] = $menu->menu_icon;
 		$data['id'] = $id ;
 
 		$this->load->view('menus/get_menu',$data);
@@ -176,6 +178,7 @@ class Menus extends CI_Controller {
 								'menu_nama' => $this->input->post('name'),
 								'menu_uri' => $this->input->post('uri'),
 								'menu_target' => $this->input->post('target'),
+								'menu_icon' => $this->input->post('icon'),
 								'order_num' => $this->input->post('order')
 								
 								);

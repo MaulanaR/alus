@@ -226,6 +226,24 @@ function kill(id)
             </div>
             </div>
         </div>
+        <div class="form-group">
+                <label class="col-sm-12">Icon Menu</label>
+              <div class="col-sm-2"><input type="radio" name="icon" value="" checked><strong>None</strong></div>
+             <div class="col-sm-2"><input type="radio" name="icon" value="fa fa-home fa-fw"><i class="fa fa-home fa-2x" aria-hidden="true"></i></div>
+             <div class="col-sm-2"><input type="radio" name="icon" value="fa fa-book fa-fw"><i class="fa fa-book fa-2x" aria-hidden="true"></i></div>
+             <div class="col-sm-2"><input type="radio" name="icon" value="fa fa-users fa-fw"><i class="fa fa-users fa-2x" aria-hidden="true"></i></div>
+             <div class="col-sm-2"><input type="radio" name="icon" value="fa fa-fax fa-fw"><i class="fa fa-fax fa-2x" aria-hidden="true"></i></div>
+             <div class="col-sm-2"><input type="radio" name="icon" value="fa fa-folder fa-fw"><i class="fa fa-folder fa-2x" aria-hidden="true"></i></div>
+             <div class="col-sm-2"><input type="radio" name="icon" value="fa fa-folder-open  fa-fw"><i class="fa fa-folder-open  fa-2x" aria-hidden="true"></i></div>
+             <div class="col-sm-2"><input type="radio" name="icon" value="fa fa-folder-o fa-fw"><i class="fa fa-folder-o fa-2x" aria-hidden="true"></i></div>
+             <div class="col-sm-2"><input type="radio" name="icon" value="fa fa-user fa-fw"><i class="fa fa-user fa-2x" aria-hidden="true"></i></div>
+             <div class="col-sm-2"><input type="radio" name="icon" value="fa fa-cloud fa-fw"><i class="fa fa-cloud fa-2x" aria-hidden="true"></i></div>
+             <div class="col-sm-2"><input type="radio" name="icon" value="fa fa-calendar fa-fw"><i class="fa fa-calendar fa-2x" aria-hidden="true"></i></div>
+             <div class="col-sm-2"><input type="radio" name="icon" value="fa fa-building fa-fw"><i class="fa fa-building fa-2x" aria-hidden="true"></i></div>
+             <div class="col-sm-2"><input type="radio" name="icon" value="fa fa-bars fa-fw"><i class="fa fa-bars fa-2x" aria-hidden="true"></i></div>
+             <div class="col-sm-2"><input type="radio" name="icon" value="fa fa-archive fa-fw"><i class="fa fa-archive fa-2x" aria-hidden="true"></i></div>
+             <div class="col-sm-2"><input type="radio" name="icon" value="fa fa-briefcase fa-fw"><i class="fa fa-briefcase fa-2x" aria-hidden="true"></i></div>
+        </div>
           </div>
           <!-- modal foot -->
           <div class="modal-footer">

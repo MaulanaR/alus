@@ -9,11 +9,11 @@
         </div>
         <div class="form-group">
                 <label >Password</label>
-            <input type="password" name="password" class="form-control" placeholder="Password" value="">
+            <input type="password" name="password" class="form-control" placeholder="Password" value="" id="chpw">
         </div>
         <div class="form-group">
                 <label >Re-type Password</label>
-            <input type="password" name="password_confirm" class="form-control" placeholder="Re-typePassword" value="">
+            <input type="password" name="password_confirm" class="form-control" placeholder="Re-typePassword" value="" id="rechpw">
         </div>
         <label>Profile</label>
         <hr style="margin-bottom:5px;margin-top:1px;">
@@ -71,7 +71,7 @@
               ?>
               <tr>
                 <td class="text-right">
-                    <input type="checkbox" name="groups[]" class="" value="<?php echo $group['id'];?>"<?php echo $checked;?>>
+                    <input type="checkbox" name="groups[]" class="editgroup" value="<?php echo $group['id'];?>"<?php echo $checked;?>>
                 </td>
                 <td>
                     <?php echo htmlspecialchars($group['name'],ENT_QUOTES,'UTF-8');?>      
