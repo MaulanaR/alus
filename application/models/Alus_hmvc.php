@@ -87,7 +87,7 @@ const login_attempt = 'login_attempts';
       
       // HTML wrapper for the menu (open)
       $this->html[] = '<ul class="nav navbar-nav">';
-      $this->html[] = '<li><a href="dashboard" target="" >Home</a></li>';
+      $this->html[] = '<li><a href="'.base_url().'dashboard" target="" >Home</a></li>';
       
       while ( $loop && ( ( $option = each( $children[$parent] ) ) || ( $parent > $root_menu_id ) ) )
       {
@@ -131,7 +131,7 @@ const login_attempt = 'login_attempts';
          else
             // HTML for menu item with no children (aka "leaf") 
             $this->html[] = sprintf(
-               '%1$s<li><a href="%2$s" target="%4$s">%3$s</a></li>',
+               '%1$s<li><a href="'.base_url().'%2$s" target="%4$s">%3$s</a></li>',
                str_repeat( "\t", ( count( $parent_stack ) + 1 ) * 2 - 1 ),   // %1$s = tabulation
                $option['value']['menu_uri'],   // %2$s = menu_uri (URL)
                $option['value']['menu_nama'],   // %3$s = menu_nama
