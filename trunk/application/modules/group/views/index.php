@@ -146,19 +146,16 @@ function tutuphak()
   </script>
 
 	<?php if($this->session->flashdata('message')!="" ){?>
-       <script>
-          $("#notif").show("slow").delay(3000).hide(100);
-        </script>
+    <script>
+      $("#notif").show("slow").delay(3000).hide(100);
+    </script>
         <br/>
-        <div class="panel panel-warning" id="notif" style="display: none;">
-        <div class="panel-heading">
-            <span class="panel-title"> Pemberitahuan ! 
-              <button type="button" class="close" data-dismiss="alert" data-target="#notif" aria-hidden="true" style="color:#ffffff;">
-                  <span class="pficon pficon-close"></span>
-              </button>
-            </span>
-        </div> 
-        <div class="panel-body"><?php echo $this->session->flashdata('message'); ?></div>
+        <div class="toast-pf toast-pf-max-width toast-pf-top-right alert alert-warning alert-dismissable" id="notif" style="display:none;">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+            <span class="pficon pficon-close"></span>
+          </button>
+          <span class="pficon pficon-ok"></span>
+           <strong> Pemberitahuan ! </strong><?php echo $this->session->flashdata('message'); ?>
         </div>
     <?php } ?> 
      <div id="openhak" style="display:none; overflow-y: hidden;" >

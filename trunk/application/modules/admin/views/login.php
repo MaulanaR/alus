@@ -58,7 +58,7 @@
                             <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Password" tabindex="2" required>
                           </div>
                         </div>
-                        <hr/>
+                        <hr style="margin: 0px 0px 10px 0px;">
                         <!-- captcha -->
                         <div id="capt" style="display:none">
                         <div class="form-group">
@@ -73,7 +73,6 @@
                           <span class="input-group-addon"><i class="fa fa-key"></i></span>
                             <input type="text" name="captcha" class="form-control" id="inputCaptcha" placeholder="Isikan seperti yang terlihat di gambar" tabindex="2"  required>
                           </div>
-
                         </div>
                         <!-- end div hide-->
                         </div>
@@ -84,6 +83,9 @@
                           <div class="col-xs-4 col-sm-4 col-md-4 submit">
                             <button type="submit" class="btn btn-primary btn-lg" style="background:rgb(56, 56, 56) none repeat scroll 0% 0%;" tabindex="4" id="submit-form" >Log In</button>
                           </div>
+                          <div>
+                            <p><a href="<?php echo base_url();?>Forgot_password/">Forgot Password ?</a></p>
+                        </div>
                         </div>
                       </form>
                     </div><!--/.col-*-->
