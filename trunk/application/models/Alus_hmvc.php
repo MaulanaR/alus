@@ -86,8 +86,8 @@ const login_attempt = 'login_attempts';
       $parent_stack = array();
       
       // HTML wrapper for the menu (open)
-      $this->html[] = '<ul class="nav navbar-nav">';
-      $this->html[] = '<li><a href="'.base_url().'dashboard" target="" >Home</a></li>';
+      $this->html[] = '<ul class="nav navbar-nav navbar-primary">';
+      $this->html[] = '<li><a href="'.base_url().'dashboard" target="" ><i class="fa fa-home fa-fw" aria-hidden="true"></i> Home</a></li>';
       
       while ( $loop && ( ( $option = each( $children[$parent] ) ) || ( $parent > $root_menu_id ) ) )
       {
@@ -105,21 +105,23 @@ const login_attempt = 'login_attempts';
             if(count($parent_stack) == 1)
             {
                $this->html[] = sprintf(
-               '%1$s<li class="dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">%3$s</a>',
+               '%1$s<li class="dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="%5$s" aria-hidden="true"></i> %3$s</a>',
                $tab,   // %1$s = tabulation
                $option['value']['menu_uri'],   // %2$s = menu_uri (URL)
                $option['value']['menu_nama'],   // %3$s = menu_nama
-               $option['value']['menu_target']   // %4$s = menu_target
+               $option['value']['menu_target'],   // %4$s = menu_target
+               $option['value']['menu_icon']   // %5$s = menu_target
             );   
             }else{
                // HTML for menu item containing childrens (open)
 
             $this->html[] = sprintf(
-               '%1$s<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">%3$s<b class="caret"></b></a>',
+               '%1$s<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="%5$s" aria-hidden="true"></i> %3$s<b class="caret"></b></a>',
                $tab,   // %1$s = tabulation
                $option['value']['menu_uri'],   // %2$s = menu_uri (URL)
                $option['value']['menu_nama'],   // %3$s = menu_nama
-               $option['value']['menu_target']   // %4$s = menu_target
+               $option['value']['menu_target'],   // %4$s = menu_target
+               $option['value']['menu_icon']   // %5$s = menu_target
             );    
             }
             
@@ -131,11 +133,12 @@ const login_attempt = 'login_attempts';
          else
             // HTML for menu item with no children (aka "leaf") 
             $this->html[] = sprintf(
-               '%1$s<li><a href="'.base_url().'%2$s" target="%4$s">%3$s</a></li>',
+               '%1$s<li><a href="'.base_url().'%2$s" target="%4$s"><i class="%5$s" aria-hidden="true"></i> %3$s</a></li>',
                str_repeat( "\t", ( count( $parent_stack ) + 1 ) * 2 - 1 ),   // %1$s = tabulation
                $option['value']['menu_uri'],   // %2$s = menu_uri (URL)
                $option['value']['menu_nama'],   // %3$s = menu_nama
-               $option['value']['menu_target']   // %4$s = menu_target
+               $option['value']['menu_target'],   // %4$s = menu_target
+               $option['value']['menu_icon']   // %5$s = menu_target
             );
       }
       
