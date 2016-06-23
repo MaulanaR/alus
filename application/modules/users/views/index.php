@@ -106,16 +106,19 @@ function kill(id)
   var form=$("#NewEdit");
   var count = $(".editgroup").filter(":checked").length ;
 
-  if($("#chpw").val().length < 8)
-  {
-    alert("Password Minimal terdiri dari 8 karakter");
-    return false;
+  if($("#chpw").val() != ""){
+      if($("#chpw").val().length < 8)
+      {
+        alert("Password Minimal terdiri dari 8 karakter");
+        return false;
+       }
+     if($("#rechpw").val() != $("#chpw").val())
+    {
+      alert("Re-Type Password tidak sesuai !");
+      return false;
+    }  
   }
-  if($("#rechpw").val() != $("#chpw").val())
-  {
-    alert("Re-Type Password tidak sesuai !");
-    return false;
-  }
+  
   if(count == 0)
   {
     alert("Minimal 1 group harus diceklis !!");
