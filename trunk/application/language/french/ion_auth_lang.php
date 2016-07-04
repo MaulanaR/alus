@@ -8,7 +8,7 @@
 * Updated by: Gwenaël Gallon
 * 			  github@dev-ggallon
 *
-* Location: http://github.com/benedmunds/ion_auth/
+* Location: http://github.com/benedmunds/alus_auth/
 *
 * Created:  03.23.2010
 * Updated:  22.10.2014

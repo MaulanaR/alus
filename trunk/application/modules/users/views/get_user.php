@@ -5,7 +5,7 @@
         </div>
         <div class="form-group">
                 <label >Email</label>
-            <input type="text" name="email" class="form-control" placeholder="Email" value="<?php echo $user->email;?>" disabled>
+            <input type="text" name="email" class="form-control" placeholder="Email" value="<?php echo $user->abc;?>" disabled>
         </div>
         <div class="form-group">
                 <label >Password</label>

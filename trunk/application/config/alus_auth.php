@@ -27,10 +27,12 @@
 | -------------------------------------------------------------------------
 | Database table names.
 */
-$config['tables']['users']           = 'alus_users';
-$config['tables']['groups']          = 'alus_groups';
-$config['tables']['users_groups']    = 'alus_users_groups';
-$config['tables']['login_attempts']  = 'login_attempts';
+$config['alus']['alus_u']   = 'alus_u';
+$config['alus']['alus_g']   = 'alus_g';
+$config['alus']['alus_ug']  = 'alus_ug';
+$config['alus']['alus_la']  = 'alus_la';
+$config['alus']['alus_mg']  = 'alus_mg';
+$config['alus']['alus_mga']  = 'alus_mga';
 
 /*
  | Users table column and Group table column you want to join WITH.
@@ -78,7 +80,7 @@ $config['salt_prefix']    = version_compare(PHP_VERSION, '5.3.7', '<') ? '$2a$' 
  | Authentication options.
  | -------------------------------------------------------------------------
  | maximum_login_attempts: This maximum is not enforced by the library, but is
- | used by $this->ion_auth->is_max_login_attempts_exceeded().
+ | used by $this->alus_auth->is_max_login_attempts_exceeded().
  | The controller should check this function and act
  | appropriately. If this variable set to 0, there is no maximum.
  */
@@ -86,7 +88,7 @@ $config['site_title']                 = "Example.com";       // Site Title, exam
 $config['admin_email']                = "admin@example.com"; // Admin Email, admin@example.com
 $config['default_group']              = 'members';           // Default group, use name
 $config['admin_group']                = 'admin';             // Default administrators group, use name
-$config['identity']                   = 'email';             // You can use any unique column in your table as identity column. The values in this column, alongside password, will be used for login purposes
+$config['identity']                   = 'abc';             // You can use any unique column in your table as identity column. The values in this column, alongside password, will be used for login purposes
 $config['min_password_length']        = 8;                   // Minimum Required Length of Password
 $config['max_password_length']        = 20;                  // Maximum Allowed Length of Password
 $config['email_activation']           = FALSE;               // Email Activation for registration
@@ -167,8 +169,8 @@ $config['email_forgot_password_complete'] = 'new_password.tpl.php';
  | default password, 'password', changes to
  | fbaa5e216d163a02ae630ab1a43372635dd374c0 with default salt.
  */
-$config['salt_length'] = 22;
-$config['store_salt']  = FALSE;
+$config['salt_length'] = 16;
+$config['store_salt']  = TRUE;
 
 /*
  | -------------------------------------------------------------------------
@@ -181,5 +183,5 @@ $config['message_end_delimiter']   = '</p>'; 	// Message end delimiter
 $config['error_start_delimiter']   = '<p>';		// Error message start delimiter
 $config['error_end_delimiter']     = '</p>';	// Error message end delimiter
 
-/* End of file ion_auth.php */
-/* Location: ./application/config/ion_auth.php */
+/* End of file alus_auth.php */
+/* Location: ./application/config/alus_auth.php */

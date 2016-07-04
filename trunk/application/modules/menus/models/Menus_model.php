@@ -9,17 +9,17 @@ class Menus_model extends CI_Model {
 	public function __construct()
 	{
 		parent::__construct();
-		
+		$this->alus_co = $this->alus_auth->alus_co();
 	}
 
 	public function all()
 	{
-		return $this->db->get('alus_menu_group');
+		return $this->db->get($this->alus_co['alus_mg']);
 	}
 
 	public function all_tree()
 	{
-		$nodes = $this->db->get('alus_menu_group')->result();
+		$nodes = $this->db->get($this->alus_co['alus_mg'])->result();
 		return $this->getChildren($nodes, 0, 0);
 	}
 
@@ -47,25 +47,25 @@ class Menus_model extends CI_Model {
 
 	function save($data)
 	{
-		$this->db->insert('alus_menu_group', $data);
+		$this->db->insert($this->alus_co['alus_mg'], $data);
 		return $this->db->affected_rows();
 	}
 	function delete_menu($id)
 	{
 		$this->db->where('menu_id', $id);
-		$this->db->delete('alus_menu_group');
+		$this->db->delete($this->alus_co['alus_mg']);
 		return $this->db->affected_rows();
 	}
 	function get_detail($id)
 	{
 		$this->db->where('menu_id', $id);
 		$this->db->limit(1);
-		return $this->db->get('alus_menu_group');
+		return $this->db->get($this->alus_co['alus_mg']);
 	}
 	function update_menu($id,$data)
 	{
 		$this->db->where('menu_id', $id);
-		$this->db->update('alus_menu_group', $data);
+		$this->db->update($this->alus_co['alus_mg'], $data);
 		return $this->db->affected_rows();
 	}
 }

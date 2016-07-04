@@ -79,5 +79,5 @@ $lang['email_new_password_subject']          = 'Nieuw wachtwoord';
 $lang['email_new_password_heading']    = 'Nieuw wachtwoord voor %s';
 $lang['email_new_password_subheading'] = 'Uw wachtwoord is aangepast naar: %s';
 
-/* End of file ion_auth_lang.php */
-/* Location: ./system/application/language/dutch/ion_auth_lang.php */
+/* End of file alus_auth_lang.php */
+/* Location: ./system/application/language/dutch/alus_auth_lang.php */

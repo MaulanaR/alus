@@ -13,7 +13,7 @@ class Menus extends CI_Controller {
 		//load model
 		$this->load->model('menus/Menus_model','model');
 
-		if(!$this->ion_auth->logged_in())
+		if(!$this->alus_auth->logged_in())
 		{
 			redirect('admin/Login','refresh');
 		}
@@ -31,7 +31,7 @@ class Menus extends CI_Controller {
 	public function index()
 	{
 	
-		if($this->ion_auth->logged_in())
+		if($this->alus_auth->logged_in())
          {
          	$head['head'] = $this->Alus_hmvc->get_menu();
 
@@ -54,7 +54,7 @@ class Menus extends CI_Controller {
 	public function table_menus()
 	{
 	
-		if($this->ion_auth->logged_in())
+		if($this->alus_auth->logged_in())
          {
          	
          	$data['list'] = $this->model->all();

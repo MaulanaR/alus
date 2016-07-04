@@ -51,5 +51,5 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'admin/Login';
 $route['recovery_password'] = 'Forgot_password/recov/';
-$route['404_override'] = '';
+$route['404_override'] = 'Dashboard/error404/';
 $route['translate_uri_dashes'] = FALSE;

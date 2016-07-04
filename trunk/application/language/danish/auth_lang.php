@@ -9,7 +9,7 @@
 * Author: Daniel Davis
 *         daniel@kyokodaniel.com
 *
-* Location: http://github.com/benedmunds/ion_auth/
+* Location: http://github.com/benedmunds/alus_auth/
 *
 * Created:  05.09.2013
 *

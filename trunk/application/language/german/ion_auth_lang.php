@@ -9,7 +9,7 @@
 *
 *
 *
-* Location:     http://github.com/benedmunds/ion_auth/
+* Location:     http://github.com/benedmunds/alus_auth/
 *
 * Created:  04.02.2010
 * Last-Edit: 22.02.2014

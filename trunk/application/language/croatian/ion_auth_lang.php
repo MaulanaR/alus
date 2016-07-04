@@ -9,7 +9,7 @@
 * Translation: primjeri
 *		info@primjeri.com
 *
-* Location: http://github.com/benedmunds/ion_auth/
+* Location: http://github.com/benedmunds/alus_auth/
 *
 * Created:  03.14.2010
 *

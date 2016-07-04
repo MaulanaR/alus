@@ -20,9 +20,9 @@
     <script src="<?php echo base_url();?>Assets/dist/js/patternfly.min.js"></script>
     <script src="<?php echo base_url();?>Assets/dist/js/jquery.chained.min.js"></script>
     <script src="<?php echo base_url();?>Assets/dist/js/bootstrap-combobox.js"></script>
+    <!-- Datatables , jika tidak digunakan silahkan dihapus -->
     <script src="<?php echo base_url();?>Assets/components/datatables/media/js/dataTables.bootstrap.min.js"></script>
     <script src="<?php echo base_url();?>Assets/components/datatables/Buttons/js/dataTables.buttons.min.js"></script>
-
     <script src="<?php echo base_url();?>Assets/components/datatables/Buttons/js/buttons.flash.min.js"></script>
     <script src="<?php echo base_url();?>Assets/components/datatables/jszip/dist/jszip.min.js"></script>
     <script src="<?php echo base_url();?>Assets/components/datatables/Buttons/js/buttons.html5.min.js"></script>
@@ -31,17 +31,27 @@
     <script src="<?php echo base_url();?>Assets/components/datatables/pdfmake/build/vfs_fonts.js"></script>
     
     <!-- baru -->
-
+<style>
+/* ubah warna atas modal */
+.modal-header{
+  background:<?php echo $this->alus_auth->get_theme_modal('header');?>;
+  color:<?php echo $this->alus_auth->get_theme_modal('text');?>;
+}
+/* ubah warna tanda x pada modal */
+.close{
+  color: <?php echo $this->alus_auth->get_theme_modal('close');?>;
+}
+</style>
     
 
 </head>
  
 <body>
 <div class="load_ajax" id="load_ajax" style="display:none">
-  <img src="<?php echo base_url();?>Assets/dist/img/bigspin.gif" id="load_img" >
+  <img src="<?php echo base_url();?>Assets/dist/img/bigspin.gif" >
   <h2 style="color:white;">Loading</h2>
 </div>
-<nav class="navbar navbar-default navbar-pf" role="navigation">
+<nav class="navbar navbar-default navbar-pf" role="navigation" style="background:<?php echo $this->alus_auth->get_theme_header();?>">
         <div class="navbar-header">
           <a class="navbar-brand" href="#">
             <img src="<?php echo base_url(); ?>Assets/dist/img/logo.png" width=90px; height=20px; alt="PatternFly Enterprise Application" />

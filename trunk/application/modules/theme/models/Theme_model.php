@@ -2,20 +2,19 @@
 /**
  * @author 		Maulana Rahman <maulana.code@gmail.com>
 */
-class Users_model extends CI_Model {
-
+class Theme_model extends CI_Model {
 
 	public function __construct()
 	{
 		parent::__construct();
-		$this->alus_co = $this->alus_auth->alus_co();
+		
 	}
 
-	public function all()
+	public function update($data)
 	{
-		return $this->db->get($this->alus_co['alus_u']);
+		$this->db->update('themes', $data);
+		return $this->db->affected_rows();
 	}
-
 }
 
 /* End of file  */

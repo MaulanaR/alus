@@ -10,7 +10,7 @@
 * 		  ghasem.shahabi@gmail.com
 * 		  @GhasemShahabi
 *
-* Location: http://github.com/benedmunds/ion_auth/
+* Location: http://github.com/benedmunds/alus_auth/
 *
 * Created:  10.24.2012
 * Modified: 11.20.2012

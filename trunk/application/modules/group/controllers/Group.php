@@ -13,7 +13,7 @@ class Group extends CI_Controller {
 		//load model
 		$this->load->model('group/Group_model','model');
 
-		if(!$this->ion_auth->logged_in())
+		if(!$this->alus_auth->logged_in())
 		{
 			redirect('admin/Login','refresh');
 		}
@@ -31,7 +31,7 @@ class Group extends CI_Controller {
 	public function index()
 	{
 	
-		if($this->ion_auth->logged_in())
+		if($this->alus_auth->logged_in())
          {
          	$head['head'] = $this->Alus_hmvc->get_menu();
 
@@ -54,7 +54,7 @@ class Group extends CI_Controller {
 	public function table_group()
 	{
 	
-		if($this->ion_auth->logged_in())
+		if($this->alus_auth->logged_in())
          {
          	
          	$data['group'] = $this->model->all()->result();
@@ -89,7 +89,7 @@ class Group extends CI_Controller {
 			$name = $this->input->post('group_nama', TRUE);
 			$desc = $this->input->post('des_group', TRUE);
 		
-			$proces = 	$this->ion_auth->create_group($name,$desc);
+			$proces = 	$this->alus_auth->create_group($name,$desc);
 			if($proces)
 			{
 				$this->session->set_flashdata('message','Berhasil ditambah');
@@ -132,7 +132,7 @@ class Group extends CI_Controller {
 			$name = $this->input->post('group_nama_edit', TRUE);
 			$desc = $this->input->post('des_group_edit', TRUE);
 		
-			$proces = $this->ion_auth->update_group($id, $name, $desc);
+			$proces = $this->alus_auth->update_group($id, $name, $desc);
 			if($proces)
 			{
 				$this->session->set_flashdata('message','Berhasil diubah');
@@ -156,6 +156,8 @@ class Group extends CI_Controller {
 	public function hak_akses($id)
 	{
 		$data['id'] = $id;
+		$data['sql'] = $this->model->hak_akses_mod($id);
+		$data['result'] = $this->model->all_tree();
 		$this->load->view('group/hak_akses',$data);
 	}
 
@@ -179,7 +181,7 @@ class Group extends CI_Controller {
 			foreach($mlist AS $key=>$val){
 						if($val){
 							//delete hak sebelumnya clear all 
-							$this->db->delete('alus_menu_group_akses', array('id_group' => $id_group)); 
+							$this->model->del_ga($id_group);
 							//buat baru
 							$result[] = array(
 							"id_group" => $id_group,
@@ -192,7 +194,7 @@ class Group extends CI_Controller {
 						}			
 			}
 
-			$a = $this->db->insert_batch('alus_menu_group_akses', $result);
+			$a = $this->model->upres($result);
 			if($a)
 			{
 				$this->session->set_flashdata('message','Berhasil Mengubah Hak akses');	
@@ -216,7 +218,7 @@ class Group extends CI_Controller {
 			redirect('group/table_group');
 		}
 
-		$proces = $this->ion_auth->delete_group($id);
+		$proces = $this->alus_auth->delete_group($id);
 		if($proces)
 			{
 				$this->session->set_flashdata('message','Berhasil dihapus');
