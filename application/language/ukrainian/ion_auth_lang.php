@@ -8,7 +8,7 @@
 * Translation:  Petrosyan R.
 *             for@petrosyan.rv.ua
 *
-* Location: http://github.com/benedmunds/ion_auth/
+* Location: http://github.com/benedmunds/alus_auth/
 *
 * Created:  03.27.2010
 *

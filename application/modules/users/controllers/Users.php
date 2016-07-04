@@ -13,7 +13,7 @@ class Users extends CI_Controller {
 		//load model
 		$this->load->model('users/Users_model','model');
 
-		if(!$this->ion_auth->logged_in())
+		if(!$this->alus_auth->logged_in())
 		{
 			redirect('admin/Login','refresh');
 		}
@@ -31,14 +31,14 @@ class Users extends CI_Controller {
 	public function index()
 	{
 	
-		if($this->ion_auth->logged_in())
+		if($this->alus_auth->logged_in())
          {
          	$head['head'] = $this->Alus_hmvc->get_menu();
 
-         	$data['users'] = $this->ion_auth->users()->result();
+         	$data['users'] = $this->alus_auth->users()->result();
 			foreach ($data['users'] as $k => $user)
 			{
-				$data['users'][$k]->groups = $this->ion_auth->get_users_groups($user->id)->result();
+				$data['users'][$k]->groups = $this->alus_auth->get_users_groups($user->id)->result();
 			}
          	$data['can_add'] = $this->privilege['can_add'];
      		$data['can_edit'] = $this->privilege['can_edit'];
@@ -57,13 +57,13 @@ class Users extends CI_Controller {
 	public function table_users()
 	{
 	
-		if($this->ion_auth->logged_in())
+		if($this->alus_auth->logged_in())
          {
          	
-         	$data['users'] = $this->ion_auth->users()->result();
+         	$data['users'] = $this->alus_auth->users()->result();
 			foreach ($data['users'] as $k => $user)
 			{
-				$data['users'][$k]->groups = $this->ion_auth->get_users_groups($user->id)->result();
+				$data['users'][$k]->groups = $this->alus_auth->get_users_groups($user->id)->result();
 			}
          	$data['can_add'] = $this->privilege['can_add'];
      		$data['can_edit'] = $this->privilege['can_edit'];
@@ -88,7 +88,7 @@ class Users extends CI_Controller {
 
 		$this->form_validation->set_rules('username', 'Username', 'required|trim');
 		$this->form_validation->set_rules('password', 'Password', 'required|trim');
-		$this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[alus_users.email]');
+		$this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[alus_u.abc]');
 		$this->form_validation->set_rules('first_name', 'First Name', 'required|trim');
 		$this->form_validation->set_rules('last_name', 'Last Name', 'trim');
 		$this->form_validation->set_rules('phone', 'Phone', 'numeric');
@@ -110,7 +110,7 @@ class Users extends CI_Controller {
 								'phone' => $this->input->post('phone', TRUE),
 								'active' => $this->input->post('active', TRUE)
 								);
-			$proces = 	$this->ion_auth->register($username, $password, $email, $additional_data,$group);
+			$proces = 	$this->alus_auth->register($username, $password, $email, $additional_data,$group);
 		
 			if($proces)
 			{
@@ -141,7 +141,7 @@ class Users extends CI_Controller {
 			redirect('users/table_users');	
 		}
 
-		$proces = $this->ion_auth->delete_user($id);
+		$proces = $this->alus_auth->delete_user($id);
 		if($proces)
 			{
 				$this->session->set_flashdata('message','Berhasil dihapus');
@@ -157,9 +157,9 @@ class Users extends CI_Controller {
 
 	function get_data_user($id)
 	{
-		$user = $this->ion_auth->user($id)->row();
-		$groups=$this->ion_auth->groups()->result_array();
-		$currentGroups = $this->ion_auth->get_users_groups($id)->result();
+		$user = $this->alus_auth->user($id)->row();
+		$groups=$this->alus_auth->groups()->result_array();
+		$currentGroups = $this->alus_auth->get_users_groups($id)->result();
 
 		// pass the user to the view
 		$this->data['user'] = $user;
@@ -192,7 +192,7 @@ class Users extends CI_Controller {
 
 		if ($this->input->post('password'))
 			{
-				$this->form_validation->set_rules('password', $this->lang->line('edit_user_validation_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
+				$this->form_validation->set_rules('password', $this->lang->line('edit_user_validation_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'alus_auth') . ']|max_length[' . $this->config->item('max_password_length', 'alus_auth') . ']|matches[password_confirm]');
 				$this->form_validation->set_rules('password_confirm', $this->lang->line('edit_user_validation_password_confirm_label'), 'required');
 			}
 
@@ -215,12 +215,12 @@ class Users extends CI_Controller {
 				}
 				$groupData = $this->input->post('groups');
 				if (isset($groupData) && !empty($groupData)) {
-						$this->ion_auth->remove_from_group('', $id);
+						$this->alus_auth->remove_from_group('', $id);
 						foreach ($groupData as $grp) {
-							$this->ion_auth->add_to_group($grp, $id);
+							$this->alus_auth->add_to_group($grp, $id);
 						}
 					}
-				if($this->ion_auth->update($id, $data))
+				if($this->alus_auth->update($id, $data))
 			    {
 			    	$this->session->set_flashdata('message','Berhasil');
 					redirect('users/table_users');	

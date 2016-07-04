@@ -5,19 +5,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 class Alus_hmvc extends CI_Model {
 
-const table_user = 'alus_users';
-const table_group = 'alus_groups';
-const table_menus = 'alus_menu_group';
-const table_group_akses = 'alus_menu_group_akses';
-const table_users_groups = 'alus_users_groups';
-const table_group_dataset = 'alus_group_dataset';
-const login_attempt = 'login_attempts';
+const table_user = 'alus_u';
+const table_group = 'alus_g';
+const table_menus = 'alus_mg';
+const table_group_akses = 'alus_mga';
+const table_users_groups = 'alus_ug';
+const table_group_dataset = 'alus_gd';
+const login_attempt = 'alus_la';
 
 	
 	public function get_menu()
    		{
 
-   		if($this->ion_auth->logged_in())
+   		if($this->alus_auth->logged_in())
          { 
 
          	if($this->session->userdata('menus') != "")
@@ -34,16 +34,18 @@ const login_attempt = 'login_attempts';
 	         		$this->db->distinct('id_menu');
 	   				$this->db->from(self::table_group_akses);
 	   		   		foreach ($group as $key){
-	   					$this->db->or_where('id_group',$key->id);
+	   					$grup[] = $key->id;
 	   				}
+                  $this->db->where_in('id_group',$grup);  
 	   				$this->db->where('can_view','1');
 	
 	   		   	$result = $this->db->get();
 	   		   	if($result->num_rows()>0)
 	   		   	{
                      foreach ($result->result() as $key) {
-                        $this->db->or_where('menu_id', $key->id_menu);
+                        $menuid[] = $key->id_menu;
                      }
+                     $this->db->where_in('menu_id',$menuid);  
                      $this->db->order_by('menu_parent', 'desc');
                      $this->db->order_by('order_num', 'ASC');
                   $nodes = $this->db->get(self::table_menus);
@@ -86,7 +88,7 @@ const login_attempt = 'login_attempts';
       $parent_stack = array();
       
       // HTML wrapper for the menu (open)
-      $this->html[] = '<ul class="nav navbar-nav navbar-primary">';
+      $this->html[] = '<ul class="nav navbar-nav navbar-primary" style="background:'.$this->alus_auth->get_theme_menu().'">';
       $this->html[] = '<li><a href="'.base_url().'dashboard" target="" ><i class="fa fa-home fa-fw" aria-hidden="true"></i> Home</a></li>';
       
       while ( $loop && ( ( $option = each( $children[$parent] ) ) || ( $parent > $root_menu_id ) ) )
@@ -155,8 +157,9 @@ const login_attempt = 'login_attempts';
    		if($id)
    		{
    			foreach ($group as $key){
-	   			$this->db->or_where('id_group',$key->id);
+	   			$grup[] = $key->id;
 	   		}
+            $this->db->where_in('id_group',$grup);   
    			$this->db->where('id_menu', $id);
    			$hak = $this->db->get(self::table_group_akses);
    			if($hak->num_rows() > 0)
@@ -233,6 +236,7 @@ const login_attempt = 'login_attempts';
    		$this->db->where('menu_uri', $menu_uri);
    		$this->db->limit(1);
    		$menu = $this->db->get();
+         $idmenus = $menu->row();
    		if($menu->num_rows() < 1)
    		{
    			return false;
@@ -240,16 +244,17 @@ const login_attempt = 'login_attempts';
    		//-------------------cari privilege----------------//
 	   	$this->db->from(self::table_group_akses);
 	   		foreach ($group as $key){
-	   			$this->db->or_where('id_group',$key->id);
+	   			$grup[] = $key->id;
 	   		}
-	   	$this->db->where('id_menu', $menu->row()->menu_id);	
+         $this->db->where_in('id_group',$grup);   
+	   	$this->db->where('id_menu', $idmenus->menu_id);	
 	   	$result = $this->db->get();
 	   	if($result->num_rows() > 0)
 	   	{
 	   		foreach ($result->result() as $key) {
 	   			$can_view[] = $key->can_view ;
 	   		}	
-	   		if(in_array('1', $can_view))
+	   		if(in_array(1, $can_view))
 	   		{
 	   			return true;
 	   		}else

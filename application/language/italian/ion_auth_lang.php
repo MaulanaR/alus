@@ -6,7 +6,7 @@
 *         ben.edmunds@gmail.com
 *         @benedmunds
 *
-* Location: http://github.com/benedmunds/ion_auth/
+* Location: http://github.com/benedmunds/alus_auth/
 *
 * Created:  07.08.2010
 *

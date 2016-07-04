@@ -10,7 +10,7 @@ class Dashboard extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		if(!$this->ion_auth->logged_in())
+		if(!$this->alus_auth->logged_in())
 		{
 			redirect('admin/Login','refresh');
 		}
@@ -28,13 +28,9 @@ class Dashboard extends CI_Controller {
 	public function index()
 	{
 	
-		if($this->ion_auth->logged_in())
+		if($this->alus_auth->logged_in())
          {
          	$head['head'] = $this->Alus_hmvc->get_menu();
-//         	$data['can_add'] = $this->Alus_hmvc->fill(array_column($this->privilege, 'can_add'));
-//     		$data['can_edit'] = $this->Alus_hmvc->fill(array_column($this->privilege, 'can_edit'));
-//     		$data['can_delete'] = $this->Alus_hmvc->fill(array_column($this->privilege, 'can_delete'));
-//     		$data['can_view'] = $this->Alus_hmvc->fill(array_column($this->privilege, 'can_delete'));
 
 		 	$this->load->view('template/header',$head);
 		 	$this->load->view('dashboard/index');
@@ -44,6 +40,23 @@ class Dashboard extends CI_Controller {
 			redirect('admin/Login','refresh');
 		}
 	}
+
+	function error404()
+	{
+	
+		if($this->alus_auth->logged_in())
+         {
+         	$head['head'] = $this->Alus_hmvc->get_menu();
+
+		 	$this->load->view('template/header',$head);
+		 	$this->load->view('template/404page');
+		 	$this->load->view('template/footer');
+		}else
+		{
+			redirect('admin/Login','refresh');
+		}
+	}
+
 
 }
 

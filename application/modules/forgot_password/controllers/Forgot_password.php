@@ -16,7 +16,7 @@ class Forgot_password extends CI_Controller {
 	public function index()
 	{
 	
-		if($this->ion_auth->logged_in())
+		if($this->alus_auth->logged_in())
          {
          	redirect('admin/Login','refresh');
 		}else
@@ -27,11 +27,12 @@ class Forgot_password extends CI_Controller {
 
 	public function actiongo()
 	{
-		$email = $this->input->post('fp_email', TRUE);
+		$emai = $this->input->post('fp_email', TRUE);
+		$email = $this->alus_auth->encrypt($emai);
 		$cek = $this->model->cek($email);
 		if($cek->num_rows() > 0)
 		{
-			$forgotten = $this->ion_auth->forgotten_password($email);
+			$forgotten = $this->alus_auth->forgotten_password($email);
 				if ($forgotten) { 
 					$row = $this->model->get_forgot_act($email);
 				//	$this->load->library('email');
@@ -44,7 +45,7 @@ class Forgot_password extends CI_Controller {
 						$isi .= '<p align="left">Kami menerima permohonan bahwa Anda lupa kata sandi dan ingin mendapatkan kata sandi Anda kembali.</p>';
 						$isi .= '<p align="left">Apabila benar Anda telah mengirimkan permohonan ini, silakan klik link ini, atau salin URL di bawah ke Internet Browser Anda.</p>';
 						$isi .= '<p align="left"><strong>URL</strong> : </p>';
-						$isi .= '<p align="left"><strong><a href="'.base_url().'recovery_password?activation_key='.$row->forgotten_password_code.'">KLIK DISINI </a></strong></p>';
+						$isi .= '<p align="left"><strong><a href="'.base_url().'recovery_password?activation_key='.$row->jkl.'">KLIK DISINI </a></strong></p>';
 						$isi .= '<br/>';
 						$isi .= '<hr/>';
 						$isi .= '<p align="left">Untuk pertanyaan lebih lanjut, silahkan kirim email ke </p>';
@@ -83,15 +84,15 @@ class Forgot_password extends CI_Controller {
 		}else{
 			
 			$code = $_GET['activation_key'];
-			$reset = $this->ion_auth->forgotten_password_complete($code);
+			$reset = $this->alus_auth->forgotten_password_complete($code);
 			if ($reset) {
 
 				$data['new'] = $reset;
-				$data['message'] =  $this->ion_auth->messages();
+				$data['message'] =  $this->alus_auth->messages();
 				$this->load->view('recov',$data);	
 			}
 			else{
-				$this->session->set_flashdata('message', $this->ion_auth->messages());
+				$this->session->set_flashdata('message', $this->alus_auth->messages());
 				redirect('admin/Login');	
 			}
 		}

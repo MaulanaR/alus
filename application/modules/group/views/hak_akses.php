@@ -28,8 +28,6 @@
 				<?php 
 				$no = 1;
 				$ar = 0;
-				//get data sebelumnya 
-				$sql = $this->db->query("Select * from alus_menu_group_akses where id_group = $id");
 				foreach ($sql->result() as $oo) {
 					$menus[] = $oo->id_menu;
 					$canad[] = $oo->can_add;
@@ -39,10 +37,7 @@
 				}
 
 				//get list menu 
-				$this->db->from('alus_menu_group');
-   				$result = $this->db->get();
-
-   				foreach ($result->result() as $rows) {
+   				foreach ($result as $rows) {
    					if(empty($menus[$ar])){$menus[$ar] = 0;}
    					if(empty($canad[$ar]))
    					{

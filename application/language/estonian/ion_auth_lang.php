@@ -6,7 +6,7 @@
  *         esko@tsoon.com
  *         @eskolehtme
  *
- * Location: http://github.com/benedmunds/ion_auth/
+ * Location: http://github.com/benedmunds/alus_auth/
  *
  * Created:  01.09.2011
  *

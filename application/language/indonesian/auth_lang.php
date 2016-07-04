@@ -9,7 +9,7 @@
 *
 * 
 *
-* Location: http://github.com/daengdoang/ion_auth/
+* Location: http://github.com/daengdoang/alus_auth/
 *
 * Created:  21.06.2013
 *

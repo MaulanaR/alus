@@ -11,7 +11,7 @@ if (! defined('BASEPATH')) {
  *         appleboy.tw@gmail.com
  *         @taiwan
  *
- * Location: http://github.com/benedmunds/ion_auth/
+ * Location: http://github.com/benedmunds/alus_auth/
  *
  * Created:  03.14.2011
  *

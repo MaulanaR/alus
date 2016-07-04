@@ -6,7 +6,7 @@
 * 		  contacto@wilfridogarcia.com
 *         @wilfridogarcia
 *
-* Location: http://github.com/benedmunds/ion_auth/
+* Location: http://github.com/benedmunds/alus_auth/
 *
 * Created:  05.04.2010
 *

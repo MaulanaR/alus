@@ -9,7 +9,7 @@
 * Author: Benjamin Neu (benny@duxu.de)
 *         
 *
-* Location: http://github.com/benedmunds/ion_auth/
+* Location: http://github.com/benedmunds/alus_auth/
 *
 * Created:  29.07.2013
 * Last-Edit: 22.02.2014

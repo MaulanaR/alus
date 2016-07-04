@@ -7,21 +7,21 @@ class Forgot_model extends CI_Model {
 	public function __construct()
 	{
 		parent::__construct();
-		
+		$this->alus_co = $this->alus_auth->alus_co();
 	}
 
-	public function cek($email)
+	public function cek($abc)
 	{
-		$this->db->where('email', $email);
+		$this->db->where('abc', $abc);
 		$this->db->limit(1);
-		return $this->db->get('alus_users');
+		return $this->db->get($this->alus_co['alus_u']);
 	}
 
-	public function get_forgot_act($email)
+	public function get_forgot_act($abc)
 	{
-		$this->db->where('email', $email);
+		$this->db->where('abc', $abc);
 		$this->db->limit(1);
-		$a = $this->db->get('alus_users')->row();
+		$a = $this->db->get($this->alus_co['alus_u'])->row();
 
 		return $a;
 

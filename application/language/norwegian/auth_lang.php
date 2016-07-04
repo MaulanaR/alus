@@ -13,7 +13,7 @@
 * 		  yngve.hoiseth@gmail.com
 *         @yhoiseth
 *
-* Location: http://github.com/benedmunds/ion_auth/
+* Location: http://github.com/benedmunds/alus_auth/
 *
 * Created:   03.09.2013
 * Last-Edit: 16.11.2014

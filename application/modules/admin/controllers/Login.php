@@ -15,7 +15,7 @@ class Login extends CI_Controller {
 	public function index()
 	{
 	
-		if($this->ion_auth->logged_in())
+		if($this->alus_auth->logged_in())
          {
 		 redirect('dashboard/','refresh');
 		}else
@@ -62,9 +62,9 @@ class Login extends CI_Controller {
 	{
 		$this->data['title'] = "Login";
 		//login attemp . jika sudah melampaui kesempatan ( jumlah kesempatan ada di config ) maka dilempar kembali ke halaman login . 
-		if ($this->ion_auth->is_max_login_attempts_exceeded($this->input->post('identity')))
+		if ($this->alus_auth->is_max_login_attempts_exceeded($this->input->post('identity')))
 		{
-				if($this->ion_auth->is_time_locked_out($this->input->post('identity')))
+				if($this->alus_auth->is_time_locked_out($this->input->post('identity')))
 				{
 					$this->session->set_flashdata('message', 'You have too many login attempts. please wait 5 minutes and try again');
 					redirect('admin/Login/');
@@ -91,13 +91,13 @@ class Login extends CI_Controller {
 					redirect('admin/Login/', 'refresh');
 				}
 
-			if ($this->ion_auth->login($this->input->post('identity'), $this->input->post('password')))
+			if ($this->alus_auth->login($this->input->post('identity'), $this->input->post('password')))
 			{
 				//if the login is successful
 				//redirect them back to the home page
 				// mereset kesemepatan login
-				$this->ion_auth->clear_login_attempts($this->input->post('identity'));
-				$this->session->set_flashdata('message', $this->ion_auth->messages());
+				$this->alus_auth->clear_login_attempts($this->input->post('identity'));
+				$this->session->set_flashdata('message', $this->alus_auth->messages());
 				
 				redirect('dashboard/','refresh');
 			}
@@ -106,7 +106,7 @@ class Login extends CI_Controller {
 				// if the login was un-successful
 				// redirect them back to the login page
 				// saat gagal login, mengurangi sisa kesempatan .
-				$this->session->set_flashdata('message', $this->ion_auth->errors());
+				$this->session->set_flashdata('message', $this->alus_auth->errors());
 				redirect('admin/Login/', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
 			}
 		}
@@ -123,10 +123,10 @@ class Login extends CI_Controller {
 	public function logout()
 	{
 		// log the user out
-		$logout = $this->ion_auth->logout();
+		$logout = $this->alus_auth->logout();
 
 		// redirect them to the login page
-		$this->session->set_flashdata('message', $this->ion_auth->messages());
+		$this->session->set_flashdata('message', $this->alus_auth->messages());
 		redirect('admin/Login','refresh');
 	}
 

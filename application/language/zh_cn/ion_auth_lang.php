@@ -6,7 +6,7 @@
 * 		  Lkaihua@gmail.com
 *         @China
 *
-* Location: http://github.com/benedmunds/ion_auth/
+* Location: http://github.com/benedmunds/alus_auth/
 *
 * Created:  10.24.2011
 *

@@ -6,7 +6,7 @@
 * 		  ivan.kolev@gmail.com
 *
 *
-* Location: http://github.com/benedmunds/ion_auth/
+* Location: http://github.com/benedmunds/alus_auth/
 *
 * Created:  01.22.2013
 *

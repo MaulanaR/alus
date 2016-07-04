@@ -12,7 +12,7 @@
 * Translation: Bruce Huang
 *         	   @libruce
 *
-* Location: http://github.com/benedmunds/ion_auth/
+* Location: http://github.com/benedmunds/alus_auth/
 *
 * Created:  03.09.2013
 *

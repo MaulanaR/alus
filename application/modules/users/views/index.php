@@ -184,7 +184,7 @@ function kill(id)
 					<td class="text-center"><?php echo $no; ?></td>
 					<td><?php echo htmlspecialchars($user->first_name,ENT_QUOTES,'UTF-8');?></td>
 					<td><?php echo htmlspecialchars($user->last_name,ENT_QUOTES,'UTF-8');?></td>
-          <td><?php echo htmlspecialchars($user->email,ENT_QUOTES,'UTF-8');?></td>
+          <td><?php echo htmlspecialchars($user->abc,ENT_QUOTES,'UTF-8');?></td>
           <td>
               <?php foreach ($user->groups as $group):?>
               <?php echo htmlspecialchars($group->name,ENT_QUOTES,'UTF-8');?><br />
@@ -263,7 +263,7 @@ function kill(id)
                         </tr>
                       </thead>
                     <tbody>
-            <?php $asd = $this->db->query("select * from alus_groups ORDER BY name ASC"); 
+            <?php $asd = $this->db->query("select * from alus_g ORDER BY name ASC"); 
                 foreach ($asd->result() as $key) {
                  ?>
                  <tr>

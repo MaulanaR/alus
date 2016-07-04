@@ -6,7 +6,7 @@
 * 		  trungdq88@gmail.com
 *         @trungdq88
 *
-* Location: http://github.com/benedmunds/ion_auth/
+* Location: http://github.com/benedmunds/alus_auth/
 *
 * Created:  01.17.2015
 *

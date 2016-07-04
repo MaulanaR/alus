@@ -9,7 +9,7 @@
 * Translation: Piotr Fuz
 *         piotr.fuz@gmail.com
 *
-* Location: http://github.com/benedmunds/ion_auth/
+* Location: http://github.com/benedmunds/alus_auth/
 *
 * Created:    03.09.2013
 * Translated: 09.02.2014

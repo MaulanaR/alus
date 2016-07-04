@@ -6,7 +6,7 @@
 * 		  sople1@snooey.net
 *         @sople1
 *
-* Location: http://github.com/benedmunds/ion_auth/
+* Location: http://github.com/benedmunds/alus_auth/
 *
 * Created:  2013-07-03
 *

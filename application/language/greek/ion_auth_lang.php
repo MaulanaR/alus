@@ -5,7 +5,7 @@
 * Author: Vagelis Papaloukas
 * 		  vagelispapalou@yahoo.gr
 *
-* Location: http://github.com/benedmunds/ion_auth/
+* Location: http://github.com/benedmunds/alus_auth/
 *
 * Created:  02.04.2011
 *

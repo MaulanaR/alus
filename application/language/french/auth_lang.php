@@ -11,7 +11,7 @@
 *
 * Adjustments by ggallon
 *
-* Location: http://github.com/benedmunds/ion_auth/
+* Location: http://github.com/benedmunds/alus_auth/
 *
 * Created:  14.02.2014
 *
