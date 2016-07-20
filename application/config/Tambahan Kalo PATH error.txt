@@ -1,0 +1,2 @@
+$config['sess_driver'] = 'database';
+$config['sess_save_path'] = 'ci_sessions';
