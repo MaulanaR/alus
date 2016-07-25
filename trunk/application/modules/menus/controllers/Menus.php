@@ -11,7 +11,7 @@ class Menus extends CI_Controller {
 	{
 		parent::__construct();
 		//load model
-		$this->load->model('menus/Menus_model','model');
+		$this->load->model('menus_model','model');
 
 		if(!$this->alus_auth->logged_in())
 		{
@@ -35,13 +35,9 @@ class Menus extends CI_Controller {
          {
          	$head['head'] = $this->Alus_hmvc->get_menu();
 
-         	$data['list'] = $this->model->all();
          	$data['tree'] = $this->model->all_tree();
          	$data['can_add'] = $this->privilege['can_add'];
-     		$data['can_edit'] = $this->privilege['can_edit'];
-     		$data['can_delete'] = $this->privilege['can_delete'];
-     		$data['can_view'] = $this->privilege['can_view'];
-     		
+    		
 		 	$this->load->view('template/header',$head);
 		 	$this->load->view('menus/index.php',$data);
 		 	$this->load->view('template/footer');
@@ -51,154 +47,102 @@ class Menus extends CI_Controller {
 		}
 	}
 
-	public function table_menus()
-	{
-	
-		if($this->alus_auth->logged_in())
-         {
-         	
-         	$data['list'] = $this->model->all();
-         	$data['tree'] = $this->model->all_tree();
-         	$data['can_add'] = $this->privilege['can_add'];
-     		$data['can_edit'] = $this->privilege['can_edit'];
-     		$data['can_delete'] = $this->privilege['can_delete'];
-     		$data['can_view'] = $this->privilege['can_view'];
-     		
-		 	$this->load->view('menus/index.php',$data);
-		}else
-		{
-			redirect('admin/Login','refresh');
-		}
-	}
+	/* Server Side Data */
+	/* Modified by : Maulana.code@gmail.com */
+	public function ajax_list()
+    {
+        $list = $this->model->get_datatables();
+        $data = array();
+        $no = $_POST['start'];
+        foreach ($list as $person) {
+            $no++;
+            $row = array();
+            $row[] = $person->menu_nama;
+            $row[] = $person->menu_uri;
+            $row[] = $person->order_num;
+ 			if($this->privilege['can_edit'] == 1 && $this->privilege['can_delete'] == 1)
+        	{
+        		$row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit" onclick="edit_person('."'".$person->menu_id."'".')"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
+                  <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_person('."'".$person->menu_id."'".')"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
+        	}
 
+        	if($this->privilege['can_edit'] == 1 && $this->privilege['can_delete'] == 0)
+        	{
+        		$row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit" onclick="edit_person('."'".$person->menu_id."'".')"><i class="glyphicon glyphicon-pencil"></i> Edit</a>';
+        	}
 
-	public function new_menus()
-	{
-		if($this->privilege['can_add'] == 0)
-		{
-			$this->session->set_flashdata('message','Anda tidak memiliki akses untuk menambahkan user');
-			redirect('menus/table_menus');
-		}
+        	if($this->privilege['can_edit'] == 0 && $this->privilege['can_delete'] == 1)
+        	{
+        		$row[] = '<a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_person('."'".$person->menu_id."'".')"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
+        	}
+            //add html for action
+            $data[] = $row;
+        }
+ 
+        $output = array(
+                        "draw" => $_POST['draw'],
+                        "recordsTotal" => $this->model->count_all(),
+                        "recordsFiltered" => $this->model->count_filtered(),
+                        "data" => $data,
+                );
+        //output to json format
+        echo json_encode($output);
+    }
 
-		$this->form_validation->set_rules('name', 'Nama Menu', 'required|trim');
-		$this->form_validation->set_rules('uri', 'URI Menu', 'required|trim');
-		$this->form_validation->set_rules('parent', 'Parent Menu', 'required');
-
-		if ($this->form_validation->run() == true)
+    public function ajax_edit($id)
+    {
+        $data = $this->model->get_by_id($id);
+        echo json_encode($data);
+    }
+ 
+    public function ajax_add()
+    {
+    	if($this->privilege['can_add'] == 0)
 		{
-			
-			$data = array(
-								'menu_parent' => $this->input->post('parent'),
-								'menu_nama' => $this->input->post('name'),
-								'menu_uri' => $this->input->post('uri'),
-								'menu_target' => $this->input->post('target'),
-								'menu_icon' => $this->input->post('icon'),
-								'order_num' => $this->input->post('order')
-								
-								);
-			$proces = $this->model->save($data);
-		
-			if($proces)
-			{
-				$this->session->set_flashdata('message','Berhasil ditambah');
-				redirect('menus/table_menus');
-			}
-			else
-			{
-				$this->session->set_flashdata('message','Gagal menambahkan menu');	
-				redirect('menus/table_menus');
-			}
-			
-		}
-		else
-		{
-			$this->session->set_flashdata('message',validation_errors());		
-			redirect('menus/table_menus');
+			echo json_encode(array("status" => FALSE,"msg" => "You Dont Have Permission"));
 		}
 
-	}
-
-	function delete_menus($id)
-	{
-		
-		//re-check hak akses
-		if($this->privilege['can_delete'] == 0)
+        $data = array(
+                'menu_parent' => $this->input->post('parent'),
+				'menu_nama' => $this->input->post('name'),
+				'menu_uri' => $this->input->post('uri'),
+				'menu_target' => $this->input->post('target'),
+				'menu_icon' => $this->input->post('icon'),
+				'order_num' => $this->input->post('order'),
+            );
+        $insert = $this->model->save($data);
+        echo json_encode(array("status" => TRUE));
+    }
+ 
+    public function ajax_update()
+    {
+    	if($this->privilege['can_edit'] == 0)
 		{
-			$this->session->set_flashdata('message','Anda tidak memiliki hak untuk action ini');
-			redirect('menus/table_menus');	
+			echo json_encode(array("status" => FALSE,"msg" => "You Dont Have Permission"));
 		}
 
-		$proces = $this->model->delete_menu($id);
-		if($proces)
-			{
-				$this->session->set_flashdata('message','Berhasil dihapus');
-				redirect('menus/table_menus');
-			}
-			else
-			{
-				$this->session->set_flashdata('message','Gagal menghapus menu');	
-				redirect('menus/table_menus');
-			}
-
-	}
-
-	function get_data_menu($id)
-	{
-		$menu = $this->model->get_detail($id)->row();
-
-		$data['tree'] = $this->model->all_tree();
-		$data['nama'] = $menu->menu_nama;
-		$data['uri'] = $menu->menu_uri;
-		$data['order'] = $menu->order_num;
-		$data['target'] = $menu->menu_target;
-		$data['parent'] = $menu->menu_parent;
-		$data['icon'] = $menu->menu_icon;
-		$data['id'] = $id ;
-
-		$this->load->view('menus/get_menu',$data);
-
-	}
-	function edit_data_menus()
-	{
-		if($this->privilege['can_edit'] == 0)
+        $data = array(
+                'menu_parent' => $this->input->post('parent'),
+				'menu_nama' => $this->input->post('name'),
+				'menu_uri' => $this->input->post('uri'),
+				'menu_target' => $this->input->post('target'),
+				'menu_icon' => $this->input->post('icon'),
+				'order_num' => $this->input->post('order')
+            );
+        $this->model->update(array('menu_id' => $this->input->post('id')), $data);
+        echo json_encode(array("status" => TRUE));
+    }
+ 
+    public function ajax_delete($id)
+    {
+    	if($this->privilege['can_delete'] == 0)
 		{
-			$this->session->set_flashdata('message','Anda tidak memiliki akses untuk menambahkan user');
-			redirect('menus/table_menus');
+			echo json_encode(array("status" => FALSE,"msg" => "You Dont Have Permission"));
 		}
 
-		$this->form_validation->set_rules('name', 'Nama Menu', 'required|trim');
-		$this->form_validation->set_rules('uri', 'URI Menu', 'required|trim');
-		$this->form_validation->set_rules('parent', 'Parent Menu', 'required');
-
-		if ($this->form_validation->run() === TRUE)
-			{
-				$id = $this->input->post('id', TRUE);
-				$data = array(
-								'menu_parent' => $this->input->post('parent'),
-								'menu_nama' => $this->input->post('name'),
-								'menu_uri' => $this->input->post('uri'),
-								'menu_target' => $this->input->post('target'),
-								'menu_icon' => $this->input->post('icon'),
-								'order_num' => $this->input->post('order')
-								
-								);
-
-				$proces = $this->model->update_menu($id,$data);
-				if($proces)
-				{
-			    	$this->session->set_flashdata('message','Berhasil');
-					redirect('menus/table_menus');
-			    }else
-			    {
-			    	$this->session->set_flashdata('message','Gagal mengubah menu');	
-					redirect('menus/table_menus');
-			    }
-			}
-		else{
-				$this->session->set_flashdata('message',validation_errors());		
-				redirect('menus/table_menus');
-			}
-	}
+        $this->model->delete_by_id($id);
+        echo json_encode(array("status" => TRUE));
+    }
 }
 
 /* End of file  Home.php */
