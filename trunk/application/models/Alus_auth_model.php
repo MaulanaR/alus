@@ -947,28 +947,57 @@ class alus_auth_model extends CI_Model
 
 		return (isset($id)) ? $id : FALSE;
 	}
-	/* encrypt email */
-	public static function encrypt($message, $encode = true)
+	/* encrypt NAMA USER */
+    public static function encrypt($message, $encode = true)
     {
+        $key = hex2bin('1234567890');
         $nonceSize = openssl_cipher_iv_length(self::METHOD);
-        //$nonce = openssl_random_pseudo_bytes($nonceSize);
-        $key = "ALUS";
+        $nonce = '1234567890123456';
+
         $ciphertext = openssl_encrypt(
             $message,
             self::METHOD,
             $key,
             OPENSSL_RAW_DATA,
-            '1234567890123456'
+            $nonce
         );
 
         // Now let's pack the IV and the ciphertext together
         // Naively, we can just concatenate
         if ($encode) {
-            return base64_encode($ciphertext);
+            return base64_encode($nonce.$ciphertext);
         }
-        return $ciphertext;
+        return $nonce.$ciphertext;
     }
-    /* end encrypt email */
+    /* end */
+    
+    /* decrypt nama */
+    public static function decrypt($message, $encoded = true)
+    {
+        $key = hex2bin('1234567890');
+
+        if ($encoded) {
+            $message = base64_decode($message, true);
+            if ($message === false) {
+                throw new Exception('Encryption failure');
+            }
+        }
+
+        $nonceSize = openssl_cipher_iv_length(self::METHOD);
+        $nonce = mb_substr($message, 0, $nonceSize, '8bit');
+        $ciphertext = mb_substr($message, $nonceSize, null, '8bit');
+
+        $plaintext = openssl_decrypt(
+            $ciphertext,
+            self::METHOD,
+            $key,
+            OPENSSL_RAW_DATA,
+            $nonce
+        );
+
+        return $plaintext;
+    }
+    /* end decrypt email */
 
     /* encrypt NAMA USER */
     public static function encrypt2($message, $key, $encode = true)
@@ -992,32 +1021,7 @@ class alus_auth_model extends CI_Model
         return $nonce.$ciphertext;
     }
     /* end */
-    /* decrypt email */
-    public static function decrypt($message, $encoded = true)
-    {
-    	$key = "ALUS";
-        if ($encoded) {
-            $message = base64_decode($message, true);
-            if ($message === false) {
-                throw new Exception('Encryption failure');
-            }
-        }
-
-        $nonceSize = openssl_cipher_iv_length(self::METHOD);
-        $nonce = mb_substr($message, 0, $nonceSize, '8bit');
-        $ciphertext = mb_substr($message, $nonceSize, null, '8bit');
-
-        $plaintext = openssl_decrypt(
-            $ciphertext,
-            self::METHOD,
-            $key,
-            OPENSSL_RAW_DATA,
-            $nonce
-        );
-
-        return $plaintext;
-    }
-    /* end decrypt email */
+    
     /* decrypt nama */
     public static function decrypt2($message,$key, $encoded = true)
     {
@@ -1043,6 +1047,7 @@ class alus_auth_model extends CI_Model
         return $plaintext;
     }
     /* end decrypt email */
+    
 	/**
 	 * login
 	 *
