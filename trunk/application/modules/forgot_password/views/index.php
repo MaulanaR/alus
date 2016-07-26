@@ -1,10 +1,10 @@
 
-<link rel="shortcut icon" href="<?php echo base_url(); ?>Assets/img/favicon.png">
+<link rel="shortcut icon" href="<?php echo base_url(); ?>assets/img/favicon.png">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="<?php echo base_url();?>Assets/dist/css/forgor_password.css">
-<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>Assets/dist/css/loadercss.css" >
+<link rel="stylesheet" href="<?php echo base_url();?>assets/dist/css/forgor_password.css">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/dist/css/loadercss.css" >
 <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
-<script src="<?php echo base_url()?>Assets/dist/js/jquery-2.1.4.min.js"></script>
+<script src="<?php echo base_url()?>assets/dist/js/jquery-2.1.4.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 <script type="text/javascript">
 base_url = '<?php echo base_url();?>';
@@ -42,7 +42,7 @@ base_url = '<?php echo base_url();?>';
 </script>
 <title>Forgot Password</title>
 <div class="load_ajax" id="load_ajax" style="display:none">
-  <img src="<?php echo base_url();?>Assets/dist/img/bigspin.gif" id="load_img" >
+  <img src="<?php echo base_url();?>assets/dist/img/bigspin.gif" id="load_img" >
   <h2 style="color:white;">Loading</h2>
 </div>
 

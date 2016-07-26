@@ -3,7 +3,7 @@ echo " INI Halaman awal, semua yang tidak punya akses menu akan di redirect ke h
 ?>
 <?php 
 echo "<br/>";
-echo $this->session->userdata('identity');
+echo $this->alus_auth->decrypt($this->session->userdata('identity'))."cara decrypt emailnya gini : \$this->alus_auth->decrypt(email)";
 echo "<br/>";
 echo $this->session->userdata('username');
 echo "<br/>";
@@ -19,9 +19,5 @@ print_r($this->session->userdata('group'));
 echo "<br/>";
 echo $this->session->userdata('job');
 echo "<br/>";
-
-
-
-
 
 ?>
