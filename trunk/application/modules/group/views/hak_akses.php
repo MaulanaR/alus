@@ -1,4 +1,4 @@
-	<h1>Hak Akses</h1>
+	<h1 class="text-center">Hak Akses</h1>
 	<?php function is_not_null($var)
 		{ return !is_null($var); } 
 		?>
