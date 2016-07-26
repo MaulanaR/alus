@@ -22,6 +22,21 @@
         </table>
     </div>
 
+    
+    <!-- Datatables , jika tidak digunakan silahkan dihapus -->
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>Assets/components/datatables/media/css/jquery.dataTables.min.css" >
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>Assets/components/datatables/media/css/dataTables.bootstrap.min.css" >
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>Assets/components/datatables/Buttons/css/buttons.dataTables.min.css" >
+    <script src="<?php echo base_url();?>Assets/components/datatables/media/js/dataTables.bootstrap.min.js"></script>
+    <script src="<?php echo base_url();?>Assets/components/datatables/Buttons/js/dataTables.buttons.min.js"></script>
+    <script src="<?php echo base_url();?>Assets/components/datatables/Buttons/js/buttons.flash.min.js"></script>
+    <script src="<?php echo base_url();?>Assets/components/datatables/jszip/dist/jszip.min.js"></script>
+    <script src="<?php echo base_url();?>Assets/components/datatables/Buttons/js/buttons.html5.min.js"></script>
+    <script src="<?php echo base_url();?>Assets/components/datatables/Buttons/js/buttons.colVis.min.js"></script>
+    <script src="<?php echo base_url();?>Assets/components/datatables/pdfmake/build/pdfmake.min.js"></script>
+    <script src="<?php echo base_url();?>Assets/components/datatables/pdfmake/build/vfs_fonts.js"></script>
+    <!-- End Data tables -->
+
 <script type="text/javascript">
  
 var save_method; //for save method string
@@ -309,5 +324,3 @@ function popup(ms = null) {
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <!-- End Bootstrap modal -->
-</body>
-</html>

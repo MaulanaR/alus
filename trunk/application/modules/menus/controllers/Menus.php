@@ -102,7 +102,13 @@ class Menus extends CI_Controller {
 			echo json_encode(array("status" => FALSE,"msg" => "You Dont Have Permission"));
 		}
 
-        $data = array(
+        $this->form_validation->set_rules('name', 'Nama Menu', 'required');
+        $this->form_validation->set_rules('uri', 'URI', 'required');
+        $this->form_validation->set_rules('parent', 'Parent Menu', 'required');
+
+        if ($this->form_validation->run() == true)
+        {
+            $data = array(
                 'menu_parent' => $this->input->post('parent'),
 				'menu_nama' => $this->input->post('name'),
 				'menu_uri' => $this->input->post('uri'),
@@ -110,8 +116,12 @@ class Menus extends CI_Controller {
 				'menu_icon' => $this->input->post('icon'),
 				'order_num' => $this->input->post('order'),
             );
-        $insert = $this->model->save($data);
-        echo json_encode(array("status" => TRUE));
+            $insert = $this->model->save($data);
+            echo json_encode(array("status" => TRUE));
+        }else{
+            echo json_encode(array("status" => FALSE,"msg" => validation_errors() ));
+        }
+        
     }
  
     public function ajax_update()
@@ -121,7 +131,13 @@ class Menus extends CI_Controller {
 			echo json_encode(array("status" => FALSE,"msg" => "You Dont Have Permission"));
 		}
 
-        $data = array(
+        $this->form_validation->set_rules('name', 'Nama Menu', 'required');
+        $this->form_validation->set_rules('uri', 'URI', 'required');
+        $this->form_validation->set_rules('parent', 'Parent Menu', 'required');
+
+        if ($this->form_validation->run() == true)
+        {
+            $data = array(
                 'menu_parent' => $this->input->post('parent'),
 				'menu_nama' => $this->input->post('name'),
 				'menu_uri' => $this->input->post('uri'),
@@ -129,8 +145,12 @@ class Menus extends CI_Controller {
 				'menu_icon' => $this->input->post('icon'),
 				'order_num' => $this->input->post('order')
             );
-        $this->model->update(array('menu_id' => $this->input->post('id')), $data);
-        echo json_encode(array("status" => TRUE));
+            $this->model->update(array('menu_id' => $this->input->post('id')), $data);
+            echo json_encode(array("status" => TRUE));
+        }else{
+            echo json_encode(array("status" => FALSE,"msg" => validation_errors()));
+        }
+        
     }
  
     public function ajax_delete($id)
