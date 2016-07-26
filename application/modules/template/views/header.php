@@ -5,19 +5,19 @@
 
   
   <!-- Load material css and js-->
-  <link rel="shortcut icon" href="<?php echo base_url(); ?>Assets/img/favicon.png">
-  <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>Assets/dist/css/patternfly.min.css" >
-  <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>Assets/dist/css/loadercss.css" >
-  <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>Assets/dist/css/toasty.css" >
-  <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>Assets/dist/css/patternfly-additions.min.css" >
+  <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/img/favicon.png">
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/dist/css/patternfly.min.css" >
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/dist/css/loadercss.css" >
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/dist/css/toasty.css" >
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/dist/css/patternfly-additions.min.css" >
   
     
 
-    <script src="<?php echo base_url()?>Assets/dist/js/jquery-2.1.4.min.js"></script>  
-    <script src="<?php echo base_url();?>Assets/dist/js/toasty.js"></script>
-    <script src="<?php echo base_url();?>Assets/components/datatables/media/js/jquery.dataTables.min.js"></script>
-    <script src="<?php echo base_url();?>Assets/dist/js/bootstrap.min.js"></script>
-    <script src="<?php echo base_url();?>Assets/dist/js/patternfly.min.js"></script>
+    <script src="<?php echo base_url()?>assets/dist/js/jquery-2.1.4.min.js"></script>  
+    <script src="<?php echo base_url();?>assets/dist/js/toasty.js"></script>
+    <script src="<?php echo base_url();?>assets/components/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="<?php echo base_url();?>assets/dist/js/bootstrap.min.js"></script>
+    <script src="<?php echo base_url();?>assets/dist/js/patternfly.min.js"></script>
 
 
 <style>
@@ -37,13 +37,13 @@
  
 <body>
 <div class="load_ajax" id="load_ajax" style="display:none">
-  <img src="<?php echo base_url();?>Assets/dist/img/bigspin.gif" >
+  <img src="<?php echo base_url();?>assets/dist/img/bigspin.gif" >
   <h2 style="color:white;">Loading</h2>
 </div>
 <nav class="navbar navbar-default navbar-pf" role="navigation" style="background:<?php echo $this->alus_auth->get_theme_header();?>">
         <div class="navbar-header">
           <a class="navbar-brand" href="#">
-            <img src="<?php echo base_url(); ?>Assets/dist/img/logo.png" width=90px; height=20px; alt="PatternFly Enterprise Application" />
+            <img src="<?php echo base_url(); ?>assets/dist/img/logo.png" width=90px; height=20px; alt="PatternFly Enterprise Application" />
           </a>
         </div>
         

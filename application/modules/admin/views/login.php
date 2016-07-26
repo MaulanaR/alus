@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="<?php echo base_url(); ?>Assets/img/favicon.png">
+    <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/img/favicon.png">
    
-    <link rel="stylesheet" href="<?php echo base_url(); ?>Assets/dist/css/patternfly.min.css" >
-    <link rel="stylesheet" href="<?php echo base_url(); ?>Assets/dist/css/patternfly-additions.min.css" >
-    <script src="<?php echo base_url()?>Assets/dist/js/jquery-2.1.4.min.js"></script>  
-    <script src="<?php echo base_url();?>Assets/dist/js/bootstrap.min.js"></script>
-    <script src="<?php echo base_url(); ?>Assets/dist/js/patternfly.min.js"></script>
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/dist/css/patternfly.min.css" >
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/dist/css/patternfly-additions.min.css" >
+    <script src="<?php echo base_url()?>assets/dist/js/jquery-2.1.4.min.js"></script>  
+    <script src="<?php echo base_url();?>assets/dist/js/bootstrap.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets/dist/js/patternfly.min.js"></script>
      <script>
         $(document).ready(function() { 
             
@@ -22,7 +22,7 @@
 
   </head>
 
-  <body style="background: url('<?php echo base_url(); ?>Assets/dist/img/bg-login.jpg');">
+  <body style="background: url('<?php echo base_url(); ?>assets/dist/img/bg-login.jpg');">
         <div class="row" style="margin:0px;padding:0px;">
         <div>
            <?php if($this->session->flashdata('message') != ''){ ?>
@@ -34,9 +34,9 @@
             <div style="width:300px;margin:auto;margin-top:100px">
            
                 <div class="col-sm-12" style="padding:7px;">
-                        <img src="<?php echo base_url();?>Assets/dist/img/logo.png" width="100%" height="100px">
+                        <img src="<?php echo base_url();?>assets/dist/img/logo.png" width="100%" height="100px">
                 </div>
-                <div class="col-sm-12" style="padding:7px;padding-top:11px;background:url('<?php echo base_url(); ?>Assets/dist/img/header-login.jpg');border-radius:5px 5px 0px 0px;color:#fff;font-weight:bold;">
+                <div class="col-sm-12" style="padding:7px;padding-top:11px;background:url('<?php echo base_url(); ?>assets/dist/img/header-login.jpg');border-radius:5px 5px 0px 0px;color:#fff;font-weight:bold;">
                     <center><span>Login Base App ALUS.co</span></center>
                 </div>
                 <div class="col-sm-12" style="padding:20px;background:#fff;box-shadow: 0px 0px 3px #c1c1c1;border-radius:0px 0px 5px 5px;">

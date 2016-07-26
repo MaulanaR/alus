@@ -57,9 +57,9 @@ class Group extends CI_Controller {
 		if($this->privilege['can_edit'] == 0)
 		{
 			echo json_encode(array("status" => FALSE,"msg" => "You Dont Have Permission"));
-		}
-
-		$this->form_validation->set_rules('bot[]', 'Menu', 'required');
+		}else
+		{
+			$this->form_validation->set_rules('bot[]', 'Menu', 'required');
 		if ($this->form_validation->run() == true)
 		{
 
@@ -93,6 +93,7 @@ class Group extends CI_Controller {
 			}
 			}else{
 			echo json_encode(array("status" => FALSE,"msg" => "ERROR[ID NOT FOUND]"));
+		}
 		}
 	}
 	/* SERVER SIDE */
@@ -155,9 +156,9 @@ class Group extends CI_Controller {
     	if($this->privilege['can_add'] == 0)
 		{
 			echo json_encode(array("status" => FALSE,"msg" => "You Dont Have Permission"));
-		}
-
-		$this->form_validation->set_rules('group_nama', 'Nama Group', 'required');
+		}else
+		{
+			$this->form_validation->set_rules('group_nama', 'Nama Group', 'required');
 		if ($this->form_validation->run() == true)
 		{
         	$data = array(
@@ -169,6 +170,7 @@ class Group extends CI_Controller {
     	}else{
     		echo json_encode(array("status" => FALSE,"msg" => validation_errors() ));
     	}
+		}
         
     }
  
@@ -177,7 +179,8 @@ class Group extends CI_Controller {
     	if($this->privilege['can_edit'] == 0)
 		{
 			echo json_encode(array("status" => FALSE,"msg" => "You Dont Have Permission"));
-		}
+		}else
+		{
 
 		$this->form_validation->set_rules('group_nama', 'Nama Group', 'required');
 		if ($this->form_validation->run() == true)
@@ -191,6 +194,7 @@ class Group extends CI_Controller {
         }else{
         	echo json_encode(array("status" => FALSE,"msg" => validation_errors() ));
         }
+		}
     }
  
     public function ajax_delete($id)
@@ -198,10 +202,11 @@ class Group extends CI_Controller {
     	if($this->privilege['can_delete'] == 0)
 		{
 			echo json_encode(array("status" => FALSE,"msg" => "You Dont Have Permission"));
+		}else{
+			$this->model->delete_by_id($id);
+        	echo json_encode(array("status" => TRUE));	
 		}
-
-        $this->model->delete_by_id($id);
-        echo json_encode(array("status" => TRUE));
+        
     }
 
 }

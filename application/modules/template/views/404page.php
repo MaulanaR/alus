@@ -1,7 +1,7 @@
 <html>
 <style type="text/css">
 html {
-  background-image: url('<?php echo base_url()?>Assets/img/404.jpg');
+  background-image: url('<?php echo base_url()?>assets/img/404.jpg');
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center; 

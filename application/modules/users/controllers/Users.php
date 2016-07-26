@@ -10,7 +10,6 @@ class Users extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		//load model
 		$this->load->model('users/Users_model','model');
 
 		if(!$this->alus_auth->logged_in())
@@ -19,10 +18,10 @@ class Users extends CI_Controller {
 		}
 		if(! $this->Alus_hmvc->cek_view_privilege($this->uri->segment(1)))
 		{
-			//jika tidak punya akses can_view 
+
 			echo "<script type='text/javascript'>alert('You dont have permission to access this menu');</script>";
 			redirect('dashboard','refresh');
-			//langsung redirect saja 
+
 		}
 		$this->privilege = $this->Alus_hmvc->cek_privilege($this->uri->segment(1));
 	}
@@ -35,18 +34,11 @@ class Users extends CI_Controller {
          {
          	$head['head'] = $this->Alus_hmvc->get_menu();
 
-         	$data['users'] = $this->alus_auth->users()->result();
-			foreach ($data['users'] as $k => $user)
-			{
-				$data['users'][$k]->groups = $this->alus_auth->get_users_groups($user->id)->result();
-			}
+         	$data['list'] = $this->model->groupdpt();
          	$data['can_add'] = $this->privilege['can_add'];
-     		$data['can_edit'] = $this->privilege['can_edit'];
-     		$data['can_delete'] = $this->privilege['can_delete'];
-     		$data['can_view'] = $this->privilege['can_view'];
      		
 		 	$this->load->view('template/header',$head);
-		 	$this->load->view('users/index.php',$data);
+		 	$this->load->view('index.php',$data);
 		 	$this->load->view('template/footer');
 		}else
 		{
@@ -54,186 +46,201 @@ class Users extends CI_Controller {
 		}
 	}
 
-	public function table_users()
-	{
 	
-		if($this->alus_auth->logged_in())
-         {
-         	
-         	$data['users'] = $this->alus_auth->users()->result();
-			foreach ($data['users'] as $k => $user)
-			{
-				$data['users'][$k]->groups = $this->alus_auth->get_users_groups($user->id)->result();
-			}
-         	$data['can_add'] = $this->privilege['can_add'];
-     		$data['can_edit'] = $this->privilege['can_edit'];
-     		$data['can_delete'] = $this->privilege['can_delete'];
-     		$data['can_view'] = $this->privilege['can_view'];
-     		
-		 	$this->load->view('users/index.php',$data);
-		}else
+	/* Server Side Data */
+	/* Modified by : Maulana.code@gmail.com */
+	public function ajax_list()
+    {
+        $list = $this->model->get_datatables();
+        $data = array();
+        $no = $_POST['start'];
+        foreach ($list as $person) {
+			$no++;
+
+        	$list_g = $this->alus_auth->get_users_groups($person->id)->result();
+        	foreach ($list_g as $grp) {
+        		$grps[$no][] = $grp->name;
+        	}
+            $row = array();
+            $row[] = $person->first_name;
+            $row[] = $person->last_name;
+            //$row[] = $this->alus_auth->decrypt2($person->abc,$person->def);
+            $row[] = ' s';
+            $row[] = ' '.implode("|", $grps[$no]).'';
+ 			if($this->privilege['can_edit'] == 1 && $this->privilege['can_delete'] == 1)
+        	{
+        		$row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit" onclick="edit_person('."'".$person->id."'".')"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
+                  <a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_person('."'".$person->id."'".')"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
+        	}
+
+        	if($this->privilege['can_edit'] == 1 && $this->privilege['can_delete'] == 0)
+        	{
+        		$row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit" onclick="edit_person('."'".$person->id."'".')"><i class="glyphicon glyphicon-pencil"></i> Edit</a>';
+        	}
+
+        	if($this->privilege['can_edit'] == 0 && $this->privilege['can_delete'] == 1)
+        	{
+        		$row[] = '<a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_person('."'".$person->id."'".')"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
+        	}
+            //add html for action
+            $data[] = $row;
+        }
+ 
+        $output = array(
+                        "draw" => $_POST['draw'],
+                        "recordsTotal" => $this->model->count_all(),
+                        "recordsFiltered" => $this->model->count_filtered(),
+                        "data" => $data,
+                );
+        //output to json format
+        echo json_encode($output);
+    }
+
+    public function ajax_edit($id)
+    {	
+    	$currentGroups = $this->alus_auth->get_users_groups($id)->result();
+    	foreach ($currentGroups as $cur) {
+    		$current[] = $cur->id;
+    	}
+        $data = $this->model->get_by_id($id);
+        $email = $this->alus_auth->decrypt($data->abc);
+        $arr = array(
+        	'data' => $data,
+        	'grup' => $current,
+        	'email' => $email
+        	);
+        echo json_encode($arr);
+    }
+ 
+    public function ajax_add()
+    {
+    	if($this->privilege['can_add'] == 0)
 		{
-			redirect('admin/Login','refresh');
+			echo json_encode(array("status" => FALSE,"msg" => "You Dont Have Permission"));
 		}
-	}
-
-
-	public function new_user()
-	{
-		if($this->privilege['can_add'] == 0)
-		{
-			$this->session->set_flashdata('message','Anda tidak memiliki akses untuk menambahkan user');
-			redirect('users/table_users');
-		}
-
+		else{
 		$this->form_validation->set_rules('username', 'Username', 'required|trim');
-		$this->form_validation->set_rules('password', 'Password', 'required|trim');
-		$this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[alus_u.abc]');
-		$this->form_validation->set_rules('first_name', 'First Name', 'required|trim');
-		$this->form_validation->set_rules('last_name', 'Last Name', 'trim');
-		$this->form_validation->set_rules('phone', 'Phone', 'numeric');
-		$this->form_validation->set_rules('group[]', 'Group', 'required');
+        $this->form_validation->set_rules('password', 'Password', 'required|trim|callback__notMatch[re_password]|min_length[' . $this->config->item('min_password_length', 'alus_auth') . ']|max_length[' . $this->config->item('max_password_length', 'alus_auth') . ']');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[alus_u.abc]');
+        $this->form_validation->set_rules('first_name', 'First Name', 'required|trim');
+        $this->form_validation->set_rules('last_name', 'Last Name', 'trim');
+        $this->form_validation->set_rules('phone', 'Phone', 'numeric');
+        $this->form_validation->set_rules('group[]', 'Group', 'required');
 
-		if ($this->form_validation->run() == true)
+        if ($this->form_validation->run() == true)
+        {
+            $username = $this->input->post('username', TRUE);
+            $password = $this->input->post('password', TRUE);
+            $email = $this->input->post('email', TRUE);
+            foreach ($this->input->post('group') as $key) {
+                $group[] = $key;
+             };
+            $additional_data = array(
+                                'username' => $this->input->post('username'),
+                                'job_title' => $this->input->post('job'),
+                                'first_name' => $this->input->post('first_name', TRUE),
+                                'last_name' => $this->input->post('last_name', TRUE),
+                                'phone' => $this->input->post('phone', TRUE),
+                                'active' => $this->input->post('active', TRUE)
+                                );
+            $proces =   $this->alus_auth->register($username, $password, $email, $additional_data,$group);
+
+            echo json_encode(array("status" => TRUE));
+        }else{
+            echo json_encode(array("status" => FALSE,"msg" => validation_errors() ));
+        }
+		} 
+    }
+ 
+    public function ajax_update()
+    {
+    	if($this->privilege['can_edit'] == 0)
 		{
-			$username = $this->input->post('username', TRUE);
-			$password = $this->input->post('password', TRUE);
-			$email = $this->input->post('email', TRUE);
-			foreach ($this->input->post('group') as $key) {
-			 	$group[] = $key;
-			 };
-			$additional_data = array(
-								'username' => $this->input->post('username'),
-								'job_title' => $this->input->post('job'),
-								'first_name' => $this->input->post('first_name', TRUE),
-								'last_name' => $this->input->post('last_name', TRUE),
-								'phone' => $this->input->post('phone', TRUE),
-								'active' => $this->input->post('active', TRUE)
-								);
-			$proces = 	$this->alus_auth->register($username, $password, $email, $additional_data,$group);
-		
-			if($proces)
-			{
-				$this->session->set_flashdata('message','Berhasil ditambah');
-				redirect('users/table_users');	
-			}
-			else
-			{
-				$this->session->set_flashdata('message','Gagal menambahkan user');	
-				redirect('users/table_users');	
-			}
-			
+			echo json_encode(array("status" => FALSE,"msg" => "You Dont Have Permission"));
 		}
 		else
 		{
-			$this->session->set_flashdata('message',validation_errors());		
-			redirect('users/table_users');	
-		}
 
-	}
-	function delete_user($id)
-	{
-		
-		//re-check hak akses
-		if($this->privilege['can_delete'] == 0)
+        $this->form_validation->set_rules('id', 'id', 'required');
+        $this->form_validation->set_rules('username', 'Username', 'required|trim');
+        //$this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[alus_u.abc]');
+        $this->form_validation->set_rules('first_name', 'First Name', 'required|trim');
+        $this->form_validation->set_rules('last_name', 'Last Name', 'trim');
+        $this->form_validation->set_rules('phone', 'Phone', 'numeric');
+        $this->form_validation->set_rules('group[]', 'Group', 'required');
+        $this->form_validation->set_rules('salt', 'Salt', 'required');
+        if($this->input->post('password') != "")
+        {
+        	 $this->form_validation->set_rules('password', 'Password', 'required|trim|callback__notMatch[re_password]|min_length[' . $this->config->item('min_password_length', 'alus_auth') . ']|max_length[' . $this->config->item('max_password_length', 'alus_auth') . ']');
+        }
+
+        if ($this->form_validation->run() == true)
+        {
+           		$id = $this->input->post('id', TRUE);
+           		$email = $this->alus_auth->encrypt($this->input->post('email'));
+                $data = array(
+                	'username' => $this->input->post('username'),
+                    'job_title' => $this->input->post('job'),
+                    'abc' => $email,
+                    'first_name' => $this->input->post('first_name'),
+                    'last_name'  => $this->input->post('last_name'),
+                    'phone'      => $this->input->post('phone'),
+                    'active'     => $this->input->post('active')
+                    
+                );
+                // update the password if it was posted
+                if ($this->input->post('password') != "")
+                {
+                    $data['ghi'] = $this->input->post('password');
+                }
+                $groupData = $this->input->post('group');
+                if (isset($groupData) && !empty($groupData)) {
+                        $this->alus_auth->remove_from_group('', $id);
+                        foreach ($groupData as $grp) {
+                            $this->alus_auth->add_to_group($grp, $id);
+                        }
+                    }
+
+                $this->alus_auth->update($id, $data);
+
+            	echo json_encode(array("status" => TRUE));
+        }else{
+            echo json_encode(array("status" => FALSE,"msg" => validation_errors()));
+        }
+
+		}
+        
+    }
+ 
+    public function ajax_delete($id)
+    {
+    	if($this->privilege['can_delete'] == 0)
 		{
-			$this->session->set_flashdata('message','Anda tidak memiliki hak untuk action ini');
-			redirect('users/table_users');	
-		}
+			echo json_encode(array("status" => FALSE,"msg" => "You Dont Have Permission"));
 
-		$proces = $this->alus_auth->delete_user($id);
-		if($proces)
-			{
-				$this->session->set_flashdata('message','Berhasil dihapus');
-				redirect('users/table_users');	
-			}
-			else
-			{
-				$this->session->set_flashdata('message','Gagal menghapus user');	
-				redirect('users/table_users');	
-			}
-
-	}
-
-	function get_data_user($id)
-	{
-		$user = $this->alus_auth->user($id)->row();
-		$groups=$this->alus_auth->groups()->result_array();
-		$currentGroups = $this->alus_auth->get_users_groups($id)->result();
-
-		// pass the user to the view
-		$this->data['user'] = $user;
-		$this->data['groups'] = $groups;
-		$this->data['currentGroups'] = $currentGroups;
-
-		$this->data['job_title'] = $user->job_title;
-		$this->data['first_name'] = $user->first_name;
-		$this->data['last_name'] = $user->last_name;
-		$this->data['company'] = $user->company;
-		$this->data['phone'] = $user->phone;
-
-		$this->load->view('users/get_user',$this->data);
-
-	}
-	function edit_data_users()
-	{
-		if($this->privilege['can_edit'] == 0)
+		}else
 		{
-			$this->session->set_flashdata('message','Anda tidak memiliki akses untuk action ini');
-			redirect('users/table_users');
+
+			if($this->session->userdata('user_id') == $id)
+			{
+				echo json_encode(array("status" => FALSE,"msg" => "You Cant kill yourself bro xD"));
+			}else
+			{
+				$proces = $this->alus_auth->delete_user($id);
+        		echo json_encode(array("status" => TRUE));			
+			}
 		}
 
-		$this->form_validation->set_rules('id', "ID", 'required|trim');
-		$this->form_validation->set_rules('first_name', $this->lang->line('edit_user_validation_fname_label'), 'required');
-		$this->form_validation->set_rules('last_name', $this->lang->line('edit_user_validation_lname_label'), 'required');
-		$this->form_validation->set_rules('phone', $this->lang->line('edit_user_validation_phone_label'), 'required');
-		$this->form_validation->set_rules('company', $this->lang->line('edit_user_validation_company_label'), 'required');
 		
 
-		if ($this->input->post('password'))
-			{
-				$this->form_validation->set_rules('password', $this->lang->line('edit_user_validation_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'alus_auth') . ']|max_length[' . $this->config->item('max_password_length', 'alus_auth') . ']|matches[password_confirm]');
-				$this->form_validation->set_rules('password_confirm', $this->lang->line('edit_user_validation_password_confirm_label'), 'required');
-			}
+    }
 
-		if ($this->form_validation->run() === TRUE)
-			{
-				$id = $this->input->post('id', TRUE);
-				$data = array(
-					'first_name' => $this->input->post('first_name'),
-					'last_name'  => $this->input->post('last_name'),
-					'company'    => $this->input->post('company'),
-					'phone'      => $this->input->post('phone'),
-					'active'	 => $this->input->post('active')
-					
-				);
-
-				// update the password if it was posted
-				if ($this->input->post('password'))
-				{
-					$data['password'] = $this->input->post('password');
-				}
-				$groupData = $this->input->post('groups');
-				if (isset($groupData) && !empty($groupData)) {
-						$this->alus_auth->remove_from_group('', $id);
-						foreach ($groupData as $grp) {
-							$this->alus_auth->add_to_group($grp, $id);
-						}
-					}
-				if($this->alus_auth->update($id, $data))
-			    {
-			    	$this->session->set_flashdata('message','Berhasil');
-					redirect('users/table_users');	
-			    }else
-			    {
-			    	$this->session->set_flashdata('message','Gagal mengubah user');	
-					redirect('users/table_users');	
-			    }
-			}
-		else{
-				$this->session->set_flashdata('message',validation_errors());		
-				redirect('users/table_users');	
-			}
+    function _notMatch($book2Value, $book1FieldName){
+   		if($book2Value != $this->input->post($book1FieldName)){
+   		    $this->form_validation->set_message('_notMatch', 'Password dan Re-password tidak sesuai');
+   		    return false;
+   		};
+   		return true;
 	}
 }
 

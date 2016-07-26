@@ -101,6 +101,8 @@ class Menus extends CI_Controller {
 		{
 			echo json_encode(array("status" => FALSE,"msg" => "You Dont Have Permission"));
 		}
+        else
+        {
 
         $this->form_validation->set_rules('name', 'Nama Menu', 'required');
         $this->form_validation->set_rules('uri', 'URI', 'required');
@@ -110,16 +112,17 @@ class Menus extends CI_Controller {
         {
             $data = array(
                 'menu_parent' => $this->input->post('parent'),
-				'menu_nama' => $this->input->post('name'),
-				'menu_uri' => $this->input->post('uri'),
-				'menu_target' => $this->input->post('target'),
-				'menu_icon' => $this->input->post('icon'),
-				'order_num' => $this->input->post('order'),
+                'menu_nama' => $this->input->post('name'),
+                'menu_uri' => $this->input->post('uri'),
+                'menu_target' => $this->input->post('target'),
+                'menu_icon' => $this->input->post('icon'),
+                'order_num' => $this->input->post('order'),
             );
             $insert = $this->model->save($data);
             echo json_encode(array("status" => TRUE));
         }else{
             echo json_encode(array("status" => FALSE,"msg" => validation_errors() ));
+        }
         }
         
     }
@@ -129,7 +132,7 @@ class Menus extends CI_Controller {
     	if($this->privilege['can_edit'] == 0)
 		{
 			echo json_encode(array("status" => FALSE,"msg" => "You Dont Have Permission"));
-		}
+		}else{
 
         $this->form_validation->set_rules('name', 'Nama Menu', 'required');
         $this->form_validation->set_rules('uri', 'URI', 'required');
@@ -139,16 +142,17 @@ class Menus extends CI_Controller {
         {
             $data = array(
                 'menu_parent' => $this->input->post('parent'),
-				'menu_nama' => $this->input->post('name'),
-				'menu_uri' => $this->input->post('uri'),
-				'menu_target' => $this->input->post('target'),
-				'menu_icon' => $this->input->post('icon'),
-				'order_num' => $this->input->post('order')
+                'menu_nama' => $this->input->post('name'),
+                'menu_uri' => $this->input->post('uri'),
+                'menu_target' => $this->input->post('target'),
+                'menu_icon' => $this->input->post('icon'),
+                'order_num' => $this->input->post('order')
             );
             $this->model->update(array('menu_id' => $this->input->post('id')), $data);
             echo json_encode(array("status" => TRUE));
         }else{
             echo json_encode(array("status" => FALSE,"msg" => validation_errors()));
+        }
         }
         
     }
@@ -158,10 +162,11 @@ class Menus extends CI_Controller {
     	if($this->privilege['can_delete'] == 0)
 		{
 			echo json_encode(array("status" => FALSE,"msg" => "You Dont Have Permission"));
-		}
-
-        $this->model->delete_by_id($id);
-        echo json_encode(array("status" => TRUE));
+		}else
+        {
+            $this->model->delete_by_id($id);
+            echo json_encode(array("status" => TRUE));
+        }
     }
 }
 

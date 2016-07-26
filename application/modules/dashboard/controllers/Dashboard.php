@@ -14,14 +14,6 @@ class Dashboard extends CI_Controller {
 		{
 			redirect('admin/Login','refresh');
 		}
-//		if(! $this->Alus_hmvc->cek_view_privilege($this->uri->segment(1)))
-//		{
-//			
-//			echo "<script type='text/javascript'>alert('You dont have permission to access this menu');</script>";
-//			redirect('dashboard','refresh');
-//			
-//		}
-//		$this->privilege = $this->Alus_hmvc->cek_privilege($this->uri->segment(1));
 	}
 		
 

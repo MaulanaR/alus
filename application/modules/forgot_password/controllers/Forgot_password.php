@@ -39,7 +39,7 @@ class Forgot_password extends CI_Controller {
 					// proses kirim email
 						$isi = '<html>';
 						$isi .= '<div style="padding: 10px 100px 10px 100px;">';
-						$isi .= '<P align="middle"><img src="'.base_url().'Assets/dist/img/logo.png" alt="Alus" width="255" height="100"></P>';
+						$isi .= '<P align="middle"><img src="'.base_url().'assets/dist/img/logo.png" alt="Alus" width="255" height="100"></P>';
 						$isi .= '<h1>Recovery Password Akun</h1>';
 						$isi .= '<p align="left">Hi '.$row->first_name." ".$row->last_name.'</p>'; 
 						$isi .= '<p align="left">Kami menerima permohonan bahwa Anda lupa kata sandi dan ingin mendapatkan kata sandi Anda kembali.</p>';
