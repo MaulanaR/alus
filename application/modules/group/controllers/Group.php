@@ -10,8 +10,7 @@ class Group extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		//load model
-		$this->load->model('group/Group_model','model');
+		$this->load->model('Group_model','model');
 
 		if(!$this->alus_auth->logged_in())
 		{
@@ -19,10 +18,8 @@ class Group extends CI_Controller {
 		}
 		if(! $this->Alus_hmvc->cek_view_privilege($this->uri->segment(1)))
 		{
-			
 			echo "<script type='text/javascript'>alert('You dont have permission to access this menu');</script>";
 			redirect('dashboard','refresh');
-			
 		}
 		$this->privilege = $this->Alus_hmvc->cek_privilege($this->uri->segment(1));
 	}
@@ -35,15 +32,10 @@ class Group extends CI_Controller {
          {
          	$head['head'] = $this->Alus_hmvc->get_menu();
 
-         	$data['group'] = $this->model->all()->result();
-			
          	$data['can_add'] = $this->privilege['can_add'];
-     		$data['can_edit'] = $this->privilege['can_edit'];
-     		$data['can_delete'] = $this->privilege['can_delete'];
-     		$data['can_view'] = $this->privilege['can_view'];
      		
 		 	$this->load->view('template/header',$head);
-		 	$this->load->view('group/index.php',$data);
+		 	$this->load->view('index.php',$data);
 		 	$this->load->view('template/footer');
 		}else
 		{
@@ -51,107 +43,6 @@ class Group extends CI_Controller {
 		}
 	}
 
-	public function table_group()
-	{
-	
-		if($this->alus_auth->logged_in())
-         {
-         	
-         	$data['group'] = $this->model->all()->result();
-			
-         	$data['can_add'] = $this->privilege['can_add'];
-     		$data['can_edit'] = $this->privilege['can_edit'];
-     		$data['can_delete'] = $this->privilege['can_delete'];
-     		$data['can_view'] = $this->privilege['can_view'];
-     		
-		 	$this->load->view('group/index.php',$data);
-
-		}else
-		{
-			redirect('admin/Login','refresh');
-		}
-	}
-
-
-	public function new_group()
-	{
-		if($this->privilege['can_add'] == 0)
-		{
-			$this->session->set_flashdata('message','Anda tidak memiliki hak untuk action ini');
-			redirect('group/table_group');
-		}
-
-		$this->form_validation->set_rules('group_nama', 'Nama', 'required|trim');
-		$this->form_validation->set_rules('des_group', 'Deskripsi', 'trim');
-
-		if ($this->form_validation->run() == true)
-		{
-			$name = $this->input->post('group_nama', TRUE);
-			$desc = $this->input->post('des_group', TRUE);
-		
-			$proces = 	$this->alus_auth->create_group($name,$desc);
-			if($proces)
-			{
-				$this->session->set_flashdata('message','Berhasil ditambah');
-				redirect('group/table_group');
-			}
-			else
-			{
-				$this->session->set_flashdata('message','Gagal menambahkan group');	
-				redirect('group/table_group');
-			}
-			
-		}
-		else
-		{
-			$this->session->set_flashdata('message',validation_errors());		
-			redirect('group/table_group');
-		}
-	}
-
-	function get_group($id)
-	{
-		$data = $this->model->get_group($id)->result_array();
-		header('Content-Type: application/json');
-		print json_encode($data);
-	}
-
-	public function edit_group()
-	{
-		if($this->privilege['can_edit'] == 0)
-		{
-			$this->session->set_flashdata('message','Anda tidak memiliki hak untuk action ini');
-			redirect('group/table_group');
-		}
-
-		$this->form_validation->set_rules('group_nama_edit', 'Nama', 'required|trim');
-		$this->form_validation->set_rules('des_group_edit', 'Deskripsi', 'trim');
-		if ($this->form_validation->run() == true)
-		{
-			$id = $this->input->post('idg', TRUE);
-			$name = $this->input->post('group_nama_edit', TRUE);
-			$desc = $this->input->post('des_group_edit', TRUE);
-		
-			$proces = $this->alus_auth->update_group($id, $name, $desc);
-			if($proces)
-			{
-				$this->session->set_flashdata('message','Berhasil diubah');
-				redirect('group/table_group');
-			}
-			else
-			{
-				$this->session->set_flashdata('message','Gagal mengubah group');	
-				redirect('group/table_group');
-			}
-			
-		}
-		else
-		{
-			$this->session->set_flashdata('message',validation_errors());		
-			redirect('group/table_group');
-		}
-
-	}
 
 	public function hak_akses($id)
 	{
@@ -165,11 +56,10 @@ class Group extends CI_Controller {
 	{
 		if($this->privilege['can_edit'] == 0)
 		{
-			$this->session->set_flashdata('message','Anda tidak memiliki hak untuk action ini');
-			redirect('group/table_group');
+			echo json_encode(array("status" => FALSE,"msg" => "You Dont Have Permission"));
 		}
-		$this->form_validation->set_rules('bot[]', 'Menu', 'required');
 
+		$this->form_validation->set_rules('bot[]', 'Menu', 'required');
 		if ($this->form_validation->run() == true)
 		{
 
@@ -197,40 +87,123 @@ class Group extends CI_Controller {
 			$a = $this->model->upres($result);
 			if($a)
 			{
-				$this->session->set_flashdata('message','Berhasil Mengubah Hak akses');	
-      			redirect('group/table_group');
+				echo json_encode(array("status" => TRUE));
 			}else{
-				$this->session->set_flashdata('message','Gagal Mengubah Hak akses');	
-      			redirect('group/table_group');
+				echo json_encode(array("status" => FALSE,"msg" => "Gagal update hak akses !"));
 			}
-		}else{
-			$this->session->set_flashdata('message',validation_errors());		
-			redirect('group/table_group');
+			}else{
+			echo json_encode(array("status" => FALSE,"msg" => "ERROR[ID NOT FOUND]"));
 		}
 	}
+	/* SERVER SIDE */
+	/* Server Side Data */
+	/* Modified by : Maulana.code@gmail.com */
+	public function ajax_list()
+    {
+        $list = $this->model->get_datatables();
+        $data = array();
+        $no = $_POST['start'];
+        foreach ($list as $person) {
+            $no++;
+            $row = array();
+            $row[] = $person->name;
+            $row[] = $person->description;
+ 			if($this->privilege['can_edit'] == 1 && $this->privilege['can_delete'] == 1)
+        	{
+        		$row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit Group" onclick="edit_person('."'".$person->id."'".')"><i class="glyphicon glyphicon-pencil"></i></a>';
 
-	function delete_group($id)
-	{
-		//re-check hak akses
-		if($this->privilege['can_delete'] == 0)
+        		$row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit Hak Akses" onclick="openform('."'".$person->id."'".')"><i class="glyphicon glyphicon-list-alt"></i></a>';
+
+        		$row[] = '<a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_person('."'".$person->id."'".')"><i class="glyphicon glyphicon-trash"></i></a>';
+
+        	}elseif($this->privilege['can_edit'] == 0 && $this->privilege['can_delete'] == 1)
+        	{
+        		$row[] ='';
+        		$row[] ='';
+        		$row[] = '<a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_person('."'".$person->id."'".')"><i class="glyphicon glyphicon-trash"></i></a>';
+
+        	}elseif($this->privilege['can_edit'] == 1 && $this->privilege['can_delete'] == 0)
+        	{
+        		$row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit Group" onclick="edit_person('."'".$person->id."'".')"><i class="glyphicon glyphicon-pencil"></i></a>';
+
+        		$row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit Hak Akses" onclick="openform('."'".$person->id."'".')"><i class="glyphicon glyphicon-list-alt"></i></a>';
+
+        		$row[] = '';
+        	}
+            //add html for action
+            $data[] = $row;
+        }
+ 
+        $output = array(
+                        "draw" => $_POST['draw'],
+                        "recordsTotal" => $this->model->count_all(),
+                        "recordsFiltered" => $this->model->count_filtered(),
+                        "data" => $data,
+                );
+        //output to json format
+        echo json_encode($output);
+    }
+
+    public function ajax_edit($id)
+    {
+        $data = $this->model->get_by_id($id);
+        echo json_encode($data);
+    }
+ 
+    public function ajax_add()
+    {
+    	if($this->privilege['can_add'] == 0)
 		{
-			$this->session->set_flashdata('message','Anda tidak memiliki hak untuk action ini');
-			redirect('group/table_group');
+			echo json_encode(array("status" => FALSE,"msg" => "You Dont Have Permission"));
 		}
 
-		$proces = $this->alus_auth->delete_group($id);
-		if($proces)
-			{
-				$this->session->set_flashdata('message','Berhasil dihapus');
-				redirect('group/table_group');
-			}
-			else
-			{
-				$this->session->set_flashdata('message','Gagal menghapus group');	
-				redirect('group/table_group');
-			}
+		$this->form_validation->set_rules('group_nama', 'Nama Group', 'required');
+		if ($this->form_validation->run() == true)
+		{
+        	$data = array(
+        	        'name' => $this->input->post('group_nama'),
+					'description' => $this->input->post('des_group'),
+        	    );
+        	$insert = $this->model->save($data);
+        	echo json_encode(array("status" => TRUE));
+    	}else{
+    		echo json_encode(array("status" => FALSE,"msg" => validation_errors() ));
+    	}
+        
+    }
+ 
+    public function ajax_update()
+    {
+    	if($this->privilege['can_edit'] == 0)
+		{
+			echo json_encode(array("status" => FALSE,"msg" => "You Dont Have Permission"));
+		}
 
-	}
+		$this->form_validation->set_rules('group_nama', 'Nama Group', 'required');
+		if ($this->form_validation->run() == true)
+		{
+        	$data = array(
+        	        'name' => $this->input->post('group_nama'),
+					'description' => $this->input->post('des_group'),
+        	    );
+        	$this->model->update(array('id' => $this->input->post('id')), $data);
+        	echo json_encode(array("status" => TRUE));
+        }else{
+        	echo json_encode(array("status" => FALSE,"msg" => validation_errors() ));
+        }
+    }
+ 
+    public function ajax_delete($id)
+    {
+    	if($this->privilege['can_delete'] == 0)
+		{
+			echo json_encode(array("status" => FALSE,"msg" => "You Dont Have Permission"));
+		}
+
+        $this->model->delete_by_id($id);
+        echo json_encode(array("status" => TRUE));
+    }
+
 }
 
 /* End of file  Home.php */

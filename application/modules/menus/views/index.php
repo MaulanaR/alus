@@ -309,31 +309,5 @@ function popup(ms = null) {
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <!-- End Bootstrap modal -->
-
-<!-- Start Bootstraps modal -->
-<div class="modal fade" id="myModalEdit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-        <!-- modal head -->
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Edit Menu</h4>
-      </div>
-      <!-- modal body -->
-     <form action="<?php echo base_url();?>menus/edit_data_menus" method="POST" id="NewEdit"> 
-      <div class="modal-body" id="Modaledit">
-    
-      </div>
-      
-      <!-- modal foot -->
-      <div class="modal-footer">
-      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-       <button type="submit" class="btn btn-primary" onclick="edit()" data-dismiss="modal">Update</button>
-      </div>
-      </form>
-      </div>
-    </div>
-</div>
-<!-- End modal -->
 </body>
 </html>
