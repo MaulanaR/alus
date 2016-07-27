@@ -116,7 +116,7 @@ function edit_person(id)
         success: function(data)
         {
             $('[name="id"]').val(data.data.id);
-            $('[name="salt"]').val(data.data.def);
+            $('[name="elama"]').val(data.email);
             $('[name="username"]').val(data.data.username);
             $('[name="job"]').val(data.data.job_title);
             $('[name="email"]').val(data.email);
@@ -234,7 +234,7 @@ function popup(ms = null) {
             <div class="modal-body form">
                 <form action="#" id="form" class="form-horizontal" name="formnih">
                     <input type="hidden" value="" name="id"/> 
-                    <input type="hidden" value="" name="salt"/> 
+                    <input type="hidden" value="" name="elama"/> 
                     <div class="form-body">
                         <div class="form-group">
                             <label class="control-label col-md-3">Username</label>
