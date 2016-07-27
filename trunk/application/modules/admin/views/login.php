@@ -84,7 +84,7 @@
                             <button type="submit" class="btn btn-primary btn-lg" style="background:rgb(56, 56, 56) none repeat scroll 0% 0%;" tabindex="4" id="submit-form" >Log In</button>
                           </div>
                           <div>
-                            <p><a href="<?php echo base_url();?>Forgot_password/">Forgot Password ?</a></p>
+                            <p><a href="<?php echo base_url();?>forgot_password/">Forgot Password ?</a></p>
                         </div>
                         </div>
                       </form>

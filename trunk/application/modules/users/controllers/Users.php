@@ -171,12 +171,14 @@ class Users extends CI_Controller {
 
         $this->form_validation->set_rules('id', 'id', 'required');
         $this->form_validation->set_rules('username', 'Username', 'required|trim');
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email|callback__emailUnique[email]');
         $this->form_validation->set_rules('first_name', 'First Name', 'required|trim');
         $this->form_validation->set_rules('last_name', 'Last Name', 'trim');
         $this->form_validation->set_rules('phone', 'Phone', 'numeric');
         $this->form_validation->set_rules('group[]', 'Group', 'required');
-        $this->form_validation->set_rules('salt', 'Salt', 'required');
+        if($this->input->post('email') != $this->input->post('elama'))
+        {
+            $this->form_validation->set_rules('email', 'Email', 'required|valid_email|callback__emailUnique[email]');
+        }
         if($this->input->post('password') != "")
         {
         	 $this->form_validation->set_rules('password', 'Password', 'required|trim|callback__notMatch[re_password]|min_length[' . $this->config->item('min_password_length', 'alus_auth') . ']|max_length[' . $this->config->item('max_password_length', 'alus_auth') . ']');

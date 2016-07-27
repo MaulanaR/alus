@@ -1,6 +1,6 @@
 
 <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/img/favicon.png">
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="<?php echo base_url();?>assets/dist/css/forgor_password.css">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/dist/css/loadercss.css" >
 <link href='http://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet' type='text/css'>
@@ -15,7 +15,7 @@ base_url = '<?php echo base_url();?>';
 		var form=$("#forgot-password-form");	
 		$.ajax({
         	type:"POST",
-        	url:base_url+"Forgot_password/actiongo/",
+        	url:base_url+"forgot_password/actiongo/",
         	data:form.serialize(),
         beforeSend: function() 
         	{ $("#load_ajax").show(); },
