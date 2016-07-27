@@ -21,7 +21,7 @@
 *
 */
 
-class alus_auth
+class Alus_auth
 {
 	/**
 	 * account status ('not_activated', etc ...)

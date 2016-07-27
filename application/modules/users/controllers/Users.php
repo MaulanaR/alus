@@ -46,7 +46,6 @@ class Users extends CI_Controller {
 		}
 	}
 
-	
 	/* Server Side Data */
 	/* Modified by : Maulana.code@gmail.com */
 	public function ajax_list()
@@ -55,7 +54,6 @@ class Users extends CI_Controller {
         $data = array();
         $no = $_POST['start'];
         foreach ($list as $person) {
-			$no++;
 
         	$list_g = $this->alus_auth->get_users_groups($person->id)->result();
         	foreach ($list_g as $grp) {
@@ -64,9 +62,14 @@ class Users extends CI_Controller {
             $row = array();
             $row[] = $person->first_name;
             $row[] = $person->last_name;
-            //$row[] = $this->alus_auth->decrypt2($person->abc,$person->def);
-            $row[] = ' s';
-            $row[] = ' '.implode("|", $grps[$no]).'';
+            $row[] = $this->alus_auth->decrypt($person->abc);
+            if(isset($grps[$no]))
+            {
+                $row[] = ' '.implode("|", $grps[$no]).'';    
+            }else{
+                $row[] = ' ';
+            }
+            
  			if($this->privilege['can_edit'] == 1 && $this->privilege['can_delete'] == 1)
         	{
         		$row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit" onclick="edit_person('."'".$person->id."'".')"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
@@ -82,8 +85,13 @@ class Users extends CI_Controller {
         	{
         		$row[] = '<a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_person('."'".$person->id."'".')"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
         	}
+            if($this->privilege['can_edit'] == 0 && $this->privilege['can_delete'] == 0)
+            {
+                $row[] = ' ';
+            }
             //add html for action
             $data[] = $row;
+            $no++;
         }
  
         $output = array(
@@ -163,7 +171,7 @@ class Users extends CI_Controller {
 
         $this->form_validation->set_rules('id', 'id', 'required');
         $this->form_validation->set_rules('username', 'Username', 'required|trim');
-        //$this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[alus_u.abc]');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email|callback__emailUnique[email]');
         $this->form_validation->set_rules('first_name', 'First Name', 'required|trim');
         $this->form_validation->set_rules('last_name', 'Last Name', 'trim');
         $this->form_validation->set_rules('phone', 'Phone', 'numeric');
@@ -242,6 +250,24 @@ class Users extends CI_Controller {
    		};
    		return true;
 	}
+
+     function _emailUnique($email){
+        $arr = array();
+        $users = $this->alus_auth->users()->result();
+        foreach ($users as $key) {
+            $arr[] = $this->alus_auth->decrypt($key->abc);
+        }
+        $b = $arr;
+        if (in_array($this->input->post('email'), $b))
+          {
+            $this->form_validation->set_message('_emailUnique', 'Email Sudah ada !! gunakan email lain');
+            return false;
+          }
+        else
+          {
+          return true;
+          }
+    }
 }
 
 /* End of file  Home.php */
