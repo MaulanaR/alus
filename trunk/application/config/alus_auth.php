@@ -33,6 +33,7 @@ $config['alus']['alus_ug']  = 'alus_ug';
 $config['alus']['alus_la']  = 'alus_la';
 $config['alus']['alus_mg']  = 'alus_mg';
 $config['alus']['alus_mga']  = 'alus_mga';
+$config['alus']['key']   = hex2bin('1234567890');
 
 /*
  | Users table column and Group table column you want to join WITH.

@@ -130,6 +130,8 @@ class Group extends CI_Controller {
         		$row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit Hak Akses" onclick="openform('."'".$person->id."'".')"><i class="glyphicon glyphicon-list-alt"></i></a>';
 
         		$row[] = '';
+        	}else{
+        		$row[] = ' ';
         	}
             //add html for action
             $data[] = $row;

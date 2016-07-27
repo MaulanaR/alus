@@ -50,6 +50,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 $route['default_controller'] = 'admin/Login';
-$route['recovery_password'] = 'Forgot_password/recov/';
-$route['404_override'] = 'Dashboard/error404/';
+$route['recovery_password'] = 'forgot_password/recov/';
+$route['404_override'] = 'dashboard/error404/';
 $route['translate_uri_dashes'] = FALSE;

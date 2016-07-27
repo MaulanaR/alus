@@ -75,6 +75,11 @@ class Menus extends CI_Controller {
         	{
         		$row[] = '<a class="btn btn-sm btn-danger" href="javascript:void(0)" title="Hapus" onclick="delete_person('."'".$person->menu_id."'".')"><i class="glyphicon glyphicon-trash"></i> Delete</a>';
         	}
+
+            if($this->privilege['can_edit'] == 0 && $this->privilege['can_delete'] == 0)
+            {
+                $row[] = ' ';
+            }
             //add html for action
             $data[] = $row;
         }

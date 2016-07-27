@@ -1048,6 +1048,57 @@ class alus_auth_model extends CI_Model
     }
     /* end decrypt email */
     
+    /* encrypt NAMA USER */
+    public static function encrypt3($message, $encode = true)
+    {
+        $key = $this->alus_co['key'];
+        $nonceSize = openssl_cipher_iv_length(self::METHOD);
+        $nonce = '1234567890123456';
+
+        $ciphertext = openssl_encrypt(
+            $message,
+            self::METHOD,
+            $key,
+            OPENSSL_RAW_DATA,
+            $nonce
+        );
+
+        // Now let's pack the IV and the ciphertext together
+        // Naively, we can just concatenate
+        if ($encode) {
+            return base64_encode($nonce.$ciphertext);
+        }
+        return $nonce.$ciphertext;
+    }
+    /* end */
+    
+    /* decrypt nama */
+    public static function decrypt3($message, $encoded = true)
+    {
+        $key = $this->alus_co['key'];
+        if ($encoded) {
+            $message = base64_decode($message, true);
+            if ($message === false) {
+                throw new Exception('Encryption failure');
+            }
+        }
+
+        $nonceSize = openssl_cipher_iv_length(self::METHOD);
+        $nonce = mb_substr($message, 0, $nonceSize, '8bit');
+        $ciphertext = mb_substr($message, $nonceSize, null, '8bit');
+
+        $plaintext = openssl_decrypt(
+            $ciphertext,
+            self::METHOD,
+            $key,
+            OPENSSL_RAW_DATA,
+            $nonce
+        );
+
+        return $plaintext;
+    }
+    /* end decrypt email */
+
 	/**
 	 * login
 	 *
