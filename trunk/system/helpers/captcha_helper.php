@@ -76,9 +76,9 @@ if ( ! function_exists('create_captcha'))
 			'pool'		=> '0',
 			'colors'	=> array(
 				'background'	=> array(255,255,255),
-				'border'	=> array(153,102,102),
-				'text'		=> array(204,153,153),
-				'grid'		=> array(255,182,182)
+				'border'	=> array(33, 119, 247),
+				'text'		=> array(33, 119, 247),
+				'grid'		=> array(181, 208, 247)
 			)
 		);
 

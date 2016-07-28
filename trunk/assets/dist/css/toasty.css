@@ -57,6 +57,7 @@
 }
 .toasty_toastMsg .toasty_message{
     margin: 10px;
+    color:black;
 }
 .toasty_toastMsg .toasty_head {
     position: relative;

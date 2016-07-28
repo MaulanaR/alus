@@ -21,7 +21,7 @@ class Login extends CI_Controller {
 		}else
 		{	
 			$data['captcha'] = $this->load_captcha();
-			$this->load->view('login',$data);
+			$this->load->view('login2',$data);
 		}
 	}
 
