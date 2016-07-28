@@ -243,23 +243,6 @@ button.outline:active,
   border-color: #80ced6;
   color: #b18d3c;
 }
-
-/* notif */
-.notif {
-  background-image: repeating-linear-gradient(-45deg, transparent, transparent 20px, rgba(255,255,255,0.1) 20px, rgba(255,255,255,0.1) 40px );
-  color: #fff;
-  text-shadow: 0 1px 0 rgba(0,0,0,0.2);
-  padding: 5px 10px;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.5);
-  border: 1px solid;
-  margin: 10px 0;
-}
-.error {
-  background-color: #f31;
-  border-color: #d10;
-}
-
-
 </style>
 <!DOCTYPE html>
   <head>
