@@ -19,7 +19,7 @@
         complete: function() 
         { $("#load_ajax").hide(); },
         success: function(msg){
-          $(".container").html(msg);
+          $("#container").html(msg);
         }
     });
   }
@@ -42,7 +42,7 @@
     <div class="panel panel-warning" id="showbntr" style="display: none;">
         <div class="panel-heading">
             <span class="panel-title"> Informasi ! 
-              <button type="button" class="close" data-dismiss="alert" data-target="#notif" aria-hidden="true" style="color:#ffffff;">
+              <button type="button" class="close" data-dismiss="alert" data-target="#showbntr" aria-hidden="true" style="color:#ffffff;">
                   <span class="pficon pficon-close"></span>
               </button>
             </span>
