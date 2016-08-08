@@ -16,14 +16,12 @@ class Users extends CI_Controller {
 		{
 			redirect('admin/Login','refresh');
 		}
-		if(! $this->Alus_hmvc->cek_view_privilege($this->uri->segment(1)))
-		{
-
-			echo "<script type='text/javascript'>alert('You dont have permission to access this menu');</script>";
-			redirect('dashboard','refresh');
-
-		}
 		$this->privilege = $this->Alus_hmvc->cek_privilege($this->uri->segment(1));
+        if($this->privilege['can_view'] == '0')
+        {
+            echo "<script type='text/javascript'>alert('You dont have permission to access this menu');</script>";
+            redirect('dashboard','refresh');
+        }
 	}
 		
 
@@ -69,7 +67,12 @@ class Users extends CI_Controller {
             }else{
                 $row[] = ' ';
             }
-            
+            if($person->ht == '1')
+            {
+                $row[] = '<i class="glyphicon glyphicon-ok"></i>';
+            }else{
+                $row[] = '<i class="glyphicon glyphicon-remove"></i>';
+            }
  			if($this->privilege['can_edit'] == 1 && $this->privilege['can_delete'] == 1)
         	{
         		$row[] = '<a class="btn btn-sm btn-primary" href="javascript:void(0)" title="Edit" onclick="edit_person('."'".$person->id."'".')"><i class="glyphicon glyphicon-pencil"></i> Edit</a>
@@ -124,6 +127,7 @@ class Users extends CI_Controller {
     {
     	if($this->privilege['can_add'] == 0)
 		{
+            header('Content-Type: application/json');
 			echo json_encode(array("status" => FALSE,"msg" => "You Dont Have Permission"));
 		}
 		else{
@@ -149,7 +153,8 @@ class Users extends CI_Controller {
                                 'first_name' => $this->input->post('first_name', TRUE),
                                 'last_name' => $this->input->post('last_name', TRUE),
                                 'phone' => $this->input->post('phone', TRUE),
-                                'active' => $this->input->post('active', TRUE)
+                                'active' => $this->input->post('active', TRUE),
+                                'ht' => $this->input->post('ht', TRUE)
                                 );
             $proces =   $this->alus_auth->register($username, $password, $email, $additional_data,$group);
 
@@ -164,6 +169,7 @@ class Users extends CI_Controller {
     {
     	if($this->privilege['can_edit'] == 0)
 		{
+            header('Content-Type: application/json');
 			echo json_encode(array("status" => FALSE,"msg" => "You Dont Have Permission"));
 		}
 		else
@@ -195,7 +201,8 @@ class Users extends CI_Controller {
                     'first_name' => $this->input->post('first_name'),
                     'last_name'  => $this->input->post('last_name'),
                     'phone'      => $this->input->post('phone'),
-                    'active'     => $this->input->post('active')
+                    'active'     => $this->input->post('active'),
+                    'ht'     => $this->input->post('ht')
                     
                 );
                 // update the password if it was posted
@@ -226,6 +233,7 @@ class Users extends CI_Controller {
     {
     	if($this->privilege['can_delete'] == 0)
 		{
+            header('Content-Type: application/json');
 			echo json_encode(array("status" => FALSE,"msg" => "You Dont Have Permission"));
 
 		}else

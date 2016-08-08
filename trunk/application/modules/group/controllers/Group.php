@@ -16,12 +16,12 @@ class Group extends CI_Controller {
 		{
 			redirect('admin/Login','refresh');
 		}
-		if(! $this->Alus_hmvc->cek_view_privilege($this->uri->segment(1)))
-		{
-			echo "<script type='text/javascript'>alert('You dont have permission to access this menu');</script>";
-			redirect('dashboard','refresh');
-		}
 		$this->privilege = $this->Alus_hmvc->cek_privilege($this->uri->segment(1));
+		if($this->privilege['can_view'] == '0')
+        {
+            echo "<script type='text/javascript'>alert('You dont have permission to access this menu');</script>";
+            redirect('dashboard','refresh');
+        }
 	}
 		
 
@@ -79,7 +79,11 @@ class Group extends CI_Controller {
 							"can_view" => $_POST['canview'][$val],
 							"can_edit" => $_POST['canedit'][$val],
 							"can_add" => $_POST['canadd'][$val],
-							"can_delete" => $_POST['candelete'][$val]
+							"can_delete" => $_POST['candelete'][$val],
+							"psv" => date('Y-m-d H:i:s' , strtotime($_POST['psv'][$val])),
+							"pev" => date('Y-m-d H:i:s' , strtotime($_POST['pev'][$val])),
+							"psed" => date('Y-m-d H:i:s' , strtotime($_POST['psed'][$val])),
+							"peed" => date('Y-m-d H:i:s' , strtotime($_POST['peed'][$val]))
 							);
 						}			
 			}
@@ -131,7 +135,9 @@ class Group extends CI_Controller {
 
         		$row[] = '';
         	}else{
-        		$row[] = ' ';
+        		$row[] = '';
+        		$row[] = '';
+        		$row[] = '';
         	}
             //add html for action
             $data[] = $row;

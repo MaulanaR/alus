@@ -15,6 +15,7 @@
                   <th class="text">Last Name</th>
                   <th class="text">Email</th>
                   <th class="text">Groups</th>
+                  <th class="text" width="1px">HT</th>
                   <th class="text-center" width="15%">Tools</th>
                 </tr>
             </thead>
@@ -34,7 +35,6 @@
     <script src="<?php echo base_url();?>assets/components/datatables/jszip/dist/jszip.min.js"></script>
     <script src="<?php echo base_url();?>assets/components/datatables/Buttons/js/buttons.html5.min.js"></script>
     <script src="<?php echo base_url();?>assets/components/datatables/Buttons/js/buttons.colVis.min.js"></script>
-    <script src="<?php echo base_url();?>assets/components/datatables/pdfmake/build/pdfmake.min.js"></script>
     <script src="<?php echo base_url();?>assets/components/datatables/pdfmake/build/vfs_fonts.js"></script>
     <!-- End Data tables -->
 
@@ -63,7 +63,13 @@ $(document).ready(function() {
         { 
             "targets": [ -1 ], //last column
             "orderable": false, //set not orderable
+            "className":"text-center",
         },
+        { 
+            "targets": [4], //last column
+            "className":"text-center",
+        },
+
         ],
         "lengthMenu" : [[10, 25, 100, 1000, -1], [10, 25, 100,1000, "All"]],
         "buttons" : [
@@ -125,6 +131,8 @@ function edit_person(id)
             $('[name="first_name"]').val(data.data.first_name);
             $('[name="last_name"]').val(data.data.last_name);
             $('[name="phone"]').val(data.data.phone);
+            $('[name="active"]').val(data.data.active);
+            $('[name="ht"]').val(data.data.ht);
             $('#form').find(':checkbox[name^="group"]').each(function () {
                     $(this).prop("checked", ($.inArray($(this).val(), data.grup) != -1));
                 });
@@ -296,6 +304,16 @@ function popup(ms = null) {
                             <label class="control-label col-md-3">Active</label>
                             <div class="col-md-9">
                             <select name="active" class="form-control">
+                                <option value="1">Active</option>
+                                <option value="0">Deactive</option>
+                            </select>
+                                <span class="help-block"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">HT</label>
+                            <div class="col-md-9">
+                            <select name="ht" class="form-control">
                                 <option value="1">Active</option>
                                 <option value="0">Deactive</option>
                             </select>

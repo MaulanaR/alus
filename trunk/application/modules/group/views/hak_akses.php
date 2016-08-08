@@ -1,3 +1,7 @@
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/dist/css/bootstrap-datetimepicker.css" >
+	<script src="<?php echo base_url();?>assets/dist/js/bootstrap-datetimepicker.js"></script>
+	
+	
 	<h1 class="text-center">Hak Akses</h1>
 	<?php function is_not_null($var)
 		{ return !is_null($var); } 
@@ -20,6 +24,10 @@
 					<td width="10%" class="bg-head">Can Add</td>
 					<td width="10%" class="bg-head">Can Edit</td>
 					<td width="10%" class="bg-head">Can Delete</td>
+					<td width="10%" class="bg-head text-center">Periode Awal View</td>
+					<td width="10%" class="bg-head text-center">Periode Akhir View</td>
+					<td width="10%" class="bg-head text-center">Periode Awal Edit/Del</td>
+					<td width="10%" class="bg-head text-center">Periode Akhir Edit/Del</td>
 					
 					
 				</tr>
@@ -34,6 +42,10 @@
 					$canedit[] = $oo->can_edit;
 					$candelet[] = $oo->can_delete;
 					$canview[] = $oo->can_view;
+					$psv[] = $oo->psv;
+					$pev[] = $oo->pev;
+					$psed[] = $oo->psed;
+					$peed[] = $oo->peed;
 				}
 
 				//get list menu 
@@ -54,6 +66,22 @@
    					if(empty($canview[$ar]))
    					{
    						$canview[$ar] = 0;
+   					}
+   					if(empty($psv[$ar]))
+   					{
+   						$psv[$ar] = '';
+   					}
+   					if(empty($pev[$ar]))
+   					{
+   						$pev[$ar] = '';
+   					}
+   					if(empty($psed[$ar]))
+   					{
+   						$psed[$ar] = '';
+   					}
+   					if(empty($peed[$ar]))
+   					{
+   						$peed[$ar] = '';
    					}
 				?>
 				<tr>
@@ -125,6 +153,38 @@
 					?>>
 
 					</td>
+					<td class="text-center">
+					<div class="input-group">
+					<input type="text" class="bootstrap-datepicker" name="psv[<?php echo $no; ?>]" value="<?php echo date('Y-m-d h:i:s',strtotime($psv[$ar]));?>" id="psv">
+					<span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                    </div>
+					</td>
+					<td class="text-center">
+					<div class="input-group">
+					<input type="text" class="bootstrap-datepicker" name="pev[<?php echo $no; ?>]" value="<?php echo date('Y-m-d h:i:s', strtotime($pev[$ar]));?>" id="pev">
+					<span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                    </div>
+					</td>
+					<td class="text-center">
+					<div class="input-group">
+					<input type="text" class="bootstrap-datepicker" name="psed[<?php echo $no; ?>]" value="<?php echo $psed[$ar];?>" id="psed">
+					<span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                    </div>
+					</td>
+					<td class="text-center">
+					<div class="input-group">
+					<input type="text" class="bootstrap-datepicker" name="peed[<?php echo $no; ?>]" value="<?php echo $peed[$ar];?>" id="peed">
+					<span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                    </div>
+					</td>
 				</tr>
 				<?php
 				$no++;
@@ -149,3 +209,11 @@
 				</div>
 		</form>
 </div>
+
+<script>
+  // Initialize Boostrap-Datepicker
+        $('.bootstrap-datepicker').datetimepicker({
+        	autoclose: true,
+        	todayBtn: true,
+        });
+</script>

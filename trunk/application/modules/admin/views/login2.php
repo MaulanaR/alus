@@ -284,7 +284,7 @@ button.outline:active,
         <input type="text" placeholder="Captcha" name="captcha" required><br>
         </div>
         <div>
-          <button type="submit" tabindex="4" id="submit-form" class="button outline">Log-in</button>
+          <button type="submit" id="submit-form" class="button outline">Log-in</button>
         </div>
           <p style="padding-top:10px;"><a href="<?php echo base_url();?>forgot_password/">Forgot Password ?</a></p>
       </form>

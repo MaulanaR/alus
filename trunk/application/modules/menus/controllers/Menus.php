@@ -17,14 +17,12 @@ class Menus extends CI_Controller {
 		{
 			redirect('admin/Login','refresh');
 		}
-		if(! $this->Alus_hmvc->cek_view_privilege($this->uri->segment(1)))
-		{
-			//jika tidak punya akses can_view 
-			echo "<script type='text/javascript'>alert('You dont have permission to access this menu');</script>";
-			redirect('dashboard','refresh');
-			//langsung redirect saja 
-		}
 		$this->privilege = $this->Alus_hmvc->cek_privilege($this->uri->segment(1));
+        if($this->privilege['can_view'] == '0')
+        {
+            echo "<script type='text/javascript'>alert('You dont have permission to access this menu');</script>";
+            redirect('dashboard','refresh');
+        }
 	}
 		
 
