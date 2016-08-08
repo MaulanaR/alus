@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * @author 		Maulana Rahman <maulana.code@gmail.com>
 */
-class Theme extends CI_Controller {
+class Themes extends CI_Controller {
 
 	private $privilege;
 
@@ -11,7 +11,7 @@ class Theme extends CI_Controller {
 	{
 		parent::__construct();
 		//load model
-		$this->load->model('theme/Theme_model','model');
+		$this->load->model('themes/Theme_model','model');
 
 		if(!$this->alus_auth->logged_in())
 		{
@@ -37,7 +37,7 @@ class Theme extends CI_Controller {
      		$data['can_view'] = $this->privilege['can_view'];
      		
 		 	$this->load->view('template/header',$head);
-		 	$this->load->view('theme/index.php',$data);
+		 	$this->load->view('themes/index.php',$data);
 		 	$this->load->view('template/footer');
 		}else
 		{
@@ -54,7 +54,7 @@ class Theme extends CI_Controller {
      		$data['can_edit'] = $this->privilege['can_edit'];
      		$data['can_view'] = $this->privilege['can_view'];
      		
-		 	$this->load->view('theme/index.php',$data);
+		 	$this->load->view('themes/index.php',$data);
 		}else
 		{
 			redirect('admin/Login','refresh');
@@ -72,37 +72,51 @@ class Theme extends CI_Controller {
 					'base_color' => $isi);
 				$this->model->update($data);
 				$this->session->set_flashdata('message','Berasil Silahkan login ulang untuk melihat perubahan');
-				redirect('Theme/refreshing');
+				redirect('themes/refreshing');
 		}elseif($tipe == 'navbar')
 		{
 					$data = array(
 					'base_menu' => $isi);
 				$this->model->update($data);
 				$this->session->set_flashdata('message','Berasil Silahkan login ulang untuk melihat perubahan');
-				redirect('Theme/refreshing');
+				redirect('themes/refreshing');
 		}elseif($tipe == 'headmodal')
 		{
 			$data = array(
 					'base_modal' => $isi);
 				$this->model->update($data);
 				$this->session->set_flashdata('message','Berasil Silahkan login ulang untuk melihat perubahan');
-				redirect('Theme/refreshing');
+				redirect('themes/refreshing');
 		}elseif($tipe == 'textmodal')
 		{
 				$data = array(
 					'base_text_modal_header' => $isi);
 				$this->model->update($data);
 				$this->session->set_flashdata('message','Berasil Silahkan login ulang untuk melihat perubahan');
-				redirect('Theme/refreshing');
+				redirect('themes/refreshing');
 		}elseif($tipe == 'closemodal')
 		{
 				$data = array(
 					'base_close_modal' => $isi);
 				$this->model->update($data);
 				$this->session->set_flashdata('message','Berasil Silahkan login ulang untuk melihat perubahan');
-				redirect('Theme/refreshing');
+				redirect('themes/refreshing');
+		}elseif($tipe == 'headtable')
+		{
+				$data = array(
+					'base_color_head_datatables' => $isi);
+				$this->model->update($data);
+				$this->session->set_flashdata('message','Berasil Silahkan login ulang untuk melihat perubahan');
+				redirect('themes/refreshing');
+		}elseif($tipe == 'colortable')
+		{
+				$data = array(
+					'base_color_text_datatables' => $isi);
+				$this->model->update($data);
+				$this->session->set_flashdata('message','Berasil Silahkan login ulang untuk melihat perubahan');
+				redirect('themes/refreshing');
 		}
-		redirect('Theme/refreshing');
+		redirect('themes/refreshing');
 	}
 }
 

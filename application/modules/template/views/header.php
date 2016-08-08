@@ -30,6 +30,16 @@
 .close{
   color: <?php echo $this->alus_auth->get_theme_modal('close');?>;
 }
+.table thead th {
+  background-color: <?php echo $this->alus_auth->get_theme_modal('headtable');?>;
+  background: <?php echo $this->alus_auth->get_theme_modal('headtable');?>;
+  color: <?php echo $this->alus_auth->get_theme_modal('colortable');?>;
+}
+.testaja{
+ background-color: <?php echo $this->alus_auth->get_theme_modal('headtable');?>;
+ background: <?php echo $this->alus_auth->get_theme_modal('headtable');?>;
+  color: <?php echo $this->alus_auth->get_theme_modal('colortable');?>; 
+}
 </style>
     
 

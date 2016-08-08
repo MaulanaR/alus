@@ -51,7 +51,7 @@
     </div>
 
     <h2 class="text-center">Theme</h2>
-        <form action="<?php echo base_url();?>Theme/update" method="POST" id="New">
+        <form action="<?php echo base_url();?>themes/update" method="POST" id="New">
         <div class="form-group">
                 <label>Base header color</label>
             <div class="form-group">
@@ -95,7 +95,7 @@
                 <label >Base Modal header color</label>
             <div class="form-group">
                 <div class="col-sm-10" style="padding: 0px; padding-right: 2px;">
-                    <input type="text" name="headmodal" class="form-control" value="<?php echo $this->alus_auth->get_theme_modal('header');?>" id="headmodal">
+                    <input type="text" name="headtable" class="form-control" value="<?php echo $this->alus_auth->get_theme_modal('header');?>" id="headmodal">
                 </div>
                 <div class="col-sm-2" style="padding: 0px; padding-left: 2px;">
                 <?php if($can_edit == 1)
@@ -112,7 +112,7 @@
         </div>
         <br/>
         <div class="form-group">
-                <label >BAse text header modal</label>
+                <label >Base text header modal</label>
             <div class="form-group">
                 <div class="col-sm-10" style="padding: 0px; padding-right: 2px;">
                     <input type="text" name="textmodal" class="form-control" value="<?php echo $this->alus_auth->get_theme_modal('text');?>" id="textmodal">
@@ -148,6 +148,46 @@
             <div class="form-group" > 
                 <div class="col-sm-3">Preview (Current)</div>
                 <div class="col-sm-9"><input class="form-control" style="background:<?php echo $this->alus_auth->get_theme_modal('close');?>;" readonly> </div>
+            </div>
+        </div>
+        <br/>
+         <div class="form-group">
+                <label >Header Color DataTables <b>*tidak bisa linear-gradient</b></label>
+            <div class="form-group">
+                <div class="col-sm-10" style="padding: 0px; padding-right: 2px;">
+                    <input type="text" name="headtable" class="form-control" value="<?php echo $this->alus_auth->get_theme_modal('headtable');?>" id="headtable">
+                </div>
+                <div class="col-sm-2" style="padding: 0px; padding-left: 2px;">
+                <?php if($can_edit == 1)
+                  { ?>
+                    <button class="btn btn-primary btn-xs" type="button" onclick="update('headtable')">Change !</button>
+                    <?php }?>
+                </div>
+            </div>
+
+            <div class="form-group" > 
+                <div class="col-sm-3">Preview (Current)</div>
+                <div class="col-sm-9"><input class="form-control" style="background:<?php echo $this->alus_auth->get_theme_modal('headtable');?>;" readonly> </div>
+            </div>
+        </div>
+        <br/>
+         <div class="form-group">
+                <label >Color Text header DataTables</label>
+            <div class="form-group">
+                <div class="col-sm-10" style="padding: 0px; padding-right: 2px;">
+                    <input type="text" name="colortable" class="form-control" value="<?php echo $this->alus_auth->get_theme_modal('colortable');?>" id="colortable">
+                </div>
+                <div class="col-sm-2" style="padding: 0px; padding-left: 2px;">
+                <?php if($can_edit == 1)
+                  { ?>
+                    <button class="btn btn-primary btn-xs" type="button" onclick="update('colortable')">Change !</button>
+                    <?php }?>
+                </div>
+            </div>
+
+            <div class="form-group" > 
+                <div class="col-sm-3">Preview (Current)</div>
+                <div class="col-sm-9"><input class="form-control" style="background:<?php echo $this->alus_auth->get_theme_modal('colortable');?>;" readonly> </div>
             </div>
         </div>
       </form>
