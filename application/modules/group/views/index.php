@@ -35,8 +35,9 @@
     <script src="<?php echo base_url();?>assets/components/datatables/jszip/dist/jszip.min.js"></script>
     <script src="<?php echo base_url();?>assets/components/datatables/Buttons/js/buttons.html5.min.js"></script>
     <script src="<?php echo base_url();?>assets/components/datatables/Buttons/js/buttons.colVis.min.js"></script>
-    <script src="<?php echo base_url();?>assets/components/datatables/pdfmake/build/pdfmake.min.js"></script>
     <script src="<?php echo base_url();?>assets/components/datatables/pdfmake/build/vfs_fonts.js"></script>
+
+    
     <!-- End Data tables -->
     
 <script type="text/javascript">
@@ -64,6 +65,7 @@ $(document).ready(function() {
         { 
             "targets": [ 2,3,4 ], //last column
             "orderable": false, //set not orderable
+            "className":"text-center",
         },
         ],
         "lengthMenu" : [[10, 25, 100, 1000, -1], [10, 25, 100,1000, "All"]],
@@ -89,7 +91,18 @@ $(document).ready(function() {
               ],
  
     });
-
+    $('#psv').change(function(){
+      $(this).attr('value', $('#psv').val());
+    });
+    $('#pev').change(function(){
+      $(this).attr('value', $('#pev').val());
+    });
+    $('#psed').change(function(){
+      $(this).attr('value', $('#psed').val());
+    });
+    $('#peed').change(function(){
+      $(this).attr('value', $('#peed').val());
+    });
 });
  
  function openform(id) {
