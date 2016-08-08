@@ -2455,6 +2455,12 @@ class alus_auth_model extends CI_Model
 				case 'text':
 					return $a->row()->base_text_modal_header;
 					break;
+				case 'headtable':
+					return $a->row()->base_color_head_datatables;
+					break;
+				case 'colortable':
+					return $a->row()->base_color_text_datatables;
+					break;
 				default:
 					return "";
 					break;
