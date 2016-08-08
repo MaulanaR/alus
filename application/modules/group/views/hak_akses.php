@@ -19,7 +19,7 @@
 				<tr>
 					<td width="1%" class="bg-head"></td>
 					<td width="1%" class="bg-head">No</td>
-					<td width="60%" class="bg-head">Nama Menu</td>
+					<td width="60%" class="bg-head">Nama Menu (URI)</td>
 					<td width="10%" class="bg-head">Can View</td>
 					<td width="10%" class="bg-head">Can Add</td>
 					<td width="10%" class="bg-head">Can Edit</td>
@@ -87,7 +87,7 @@
 				<tr>
 					<td><input type="hidden" name="bot[]" value="<?php echo $no; ?>"><input type="hidden" name="menu[<?php echo $no; ?>]" value="<?php echo $rows->menu_id; ?>"></td>	
 					<td><?php echo $no; ?></td>
-					<td><?php echo $rows->menu_nama; ?></td>
+					<td><?php echo $rows->menu_nama." ( ".$rows->menu_uri." )"; ?></td>
 
 					<td class="text-center">
 					
