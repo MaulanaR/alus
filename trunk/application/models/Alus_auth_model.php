@@ -183,6 +183,7 @@ class alus_auth_model extends CI_Model
 		$this->store_salt      = $this->config->item('store_salt', 'alus_auth');
 		$this->salt_length     = $this->config->item('salt_length', 'alus_auth');
 		$this->join			   = $this->config->item('join', 'alus_auth');
+		$this->password_count  = $this->config->item('max_password_count','alus_auth');
 
 
 		// initialize hash method options (Bcrypt)
@@ -947,10 +948,10 @@ class alus_auth_model extends CI_Model
 
 		return (isset($id)) ? $id : FALSE;
 	}
-	/* encrypt NAMA USER */
-    public static function encrypt($message, $encode = true)
+	/* magic function here */
+    public function encrypt($message, $encode = true)
     {
-        $key = hex2bin('1234567890');
+        $key = $this->password_count;
         $nonceSize = openssl_cipher_iv_length(self::METHOD);
         $nonce = '1234567890123456';
 
@@ -971,10 +972,10 @@ class alus_auth_model extends CI_Model
     }
     /* end */
     
-    /* decrypt nama */
-    public static function decrypt($message, $encoded = true)
+    /* unlock magic function here */
+    public function decrypt($message, $encoded = true)
     {
-        $key = hex2bin('1234567890');
+        $key = $this->password_count;
 
         if ($encoded) {
             $message = base64_decode($message, true);
@@ -997,10 +998,10 @@ class alus_auth_model extends CI_Model
 
         return $plaintext;
     }
-    /* end decrypt email */
+    /* end */
 
-    /* encrypt NAMA USER */
-    public static function encrypt2($message, $key, $encode = true)
+    /* magic function here */
+    public function encrypt2($message, $key, $encode = true)
     {
         $nonceSize = openssl_cipher_iv_length(self::METHOD);
         $nonce = openssl_random_pseudo_bytes($nonceSize);
@@ -1022,8 +1023,8 @@ class alus_auth_model extends CI_Model
     }
     /* end */
     
-    /* decrypt nama */
-    public static function decrypt2($message,$key, $encoded = true)
+    /* unlock magic function here */
+    public function decrypt2($message,$key, $encoded = true)
     {
         if ($encoded) {
             $message = base64_decode($message, true);
@@ -1046,12 +1047,12 @@ class alus_auth_model extends CI_Model
 
         return $plaintext;
     }
-    /* end decrypt email */
+    /* end */
     
-    /* encrypt NAMA USER */
-    public static function encrypt3($message, $encode = true)
+    /* magic function here */
+    public function encrypt3($message, $encode = true)
     {
-        $key = $this->alus_co['key'];
+        $key = $this->password_count;
         $nonceSize = openssl_cipher_iv_length(self::METHOD);
         $nonce = '1234567890123456';
 
@@ -1072,10 +1073,10 @@ class alus_auth_model extends CI_Model
     }
     /* end */
     
-    /* decrypt nama */
-    public static function decrypt3($message, $encoded = true)
+    /* unlock magic function here */
+    public function decrypt3($message, $encoded = true)
     {
-        $key = $this->alus_co['key'];
+        $key = $this->password_count;
         if ($encoded) {
             $message = base64_decode($message, true);
             if ($message === false) {
@@ -1097,7 +1098,7 @@ class alus_auth_model extends CI_Model
 
         return $plaintext;
     }
-    /* end decrypt email */
+    /* end */
 
 	/**
 	 * login

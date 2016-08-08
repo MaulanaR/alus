@@ -5,14 +5,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 class Alus_hmvc extends CI_Model {
 
-const table_user = 'alus_u';
-const table_group = 'alus_g';
-const table_menus = 'alus_mg';
-const table_group_akses = 'alus_mga';
-const table_users_groups = 'alus_ug';
-const table_group_dataset = 'alus_gd';
-const login_attempt = 'alus_la';
-
+   public function __construct()
+   {
+      parent::__construct();
+      $this->alus_co  = $this->config->item('alus', 'alus_auth');
+   }
 	
 	public function get_menu()
    		{
@@ -32,7 +29,7 @@ const login_attempt = 'alus_la';
 			   	}
 	         		
 	         		$this->db->distinct('id_menu');
-	   				$this->db->from(self::table_group_akses);
+	   				$this->db->from($this->alus_co['alus_mga']);
 	   		   		foreach ($group as $key){
 	   					$grup[] = $key->id;
 	   				}
@@ -48,7 +45,7 @@ const login_attempt = 'alus_la';
                      $this->db->where_in('menu_id',$menuid);  
                      $this->db->order_by('menu_parent', 'desc');
                      $this->db->order_by('order_num', 'ASC');
-                  $nodes = $this->db->get(self::table_menus);
+                  $nodes = $this->db->get($this->alus_co['alus_mg']);
                      foreach ($nodes->result_array() as $key) {
                         $assoc_all[] = $key;
                      } 
@@ -153,64 +150,155 @@ const login_attempt = 'alus_la';
    	function cek_privilege($menu_uri) //return array (can_add,can_edit,can_delete,can_view)
    	{
    		$group = $this->session->userdata('group');
-   		$id = $this->cek_id_menu($menu_uri);
-   		if($id)
-   		{
-   			foreach ($group as $key){
-	   			$grup[] = $key->id;
-	   		}
-            $this->db->where_in('id_group',$grup);   
-   			$this->db->where('id_menu', $id);
-   			$hak = $this->db->get(self::table_group_akses);
-   			if($hak->num_rows() > 0)
-   			{
-   				foreach ($hak->result() as $key) {
-   					$can_add[] = $key->can_add;
-   					$can_edit[] = $key->can_edit;
-   					$can_delete[] = $key->can_delete;
-   					$can_view[] = $key->can_view;
-   				}
-   				if(in_array('1', $can_add))
-	   				{
-	   					$add = 1;
-	   				}else
-	   				{
-	   					$add = 0;
-	   				}
-	   			if(in_array('1', $can_edit))
-	   				{
-	   					$edit = 1;
-	   				}else
-	   				{
-	   					$edit = 0;
-	   				}
-	   			if(in_array('1', $can_delete))
-	   				{
-	   					$delete = 1;
-	   				}else
-	   				{
-	   					$delete = 0;
-	   				}
-	   			if(in_array('1', $can_view))
-	   				{
-	   					$view = 1;
-	   				}else
-	   				{
-	   					$view = 0;
-	   				}
-	   			$privil = array('can_add'=>$add,'can_edit'=>$edit,'can_delete'=>$delete,'can_view'=>$view);
-	   			return $privil;
-   			}else
-   			{
-   				$privil = array('can_add'=>0,'can_edit'=>0,'can_delete'=>0,'can_view'=>0);
-   				return $privil;	
-   			}
+         //get ht user
+         $ht = $this->alus_auth->user($this->session->userdata('user_id'))->row()->ht;
+         if($ht == '1')
+         {
+            date_default_timezone_set('Asia/Jakarta');
+            $harini = date('Y-m-d H:i:s');
+            $id = $this->cek_id_menu($menu_uri);
+            if($id)
+            {
+               foreach ($group as $key){
+                  $grup[] = $key->id;
+               }
+               $this->db->where_in('id_group',$grup);   
+               $this->db->where('id_menu', $id);
+               $hak = $this->db->get($this->alus_co['alus_mga']);
+               if($hak->num_rows() > 0)
+               {
+                  foreach ($hak->result() as $key) {
+                     $can_add[] = $key->can_add;
+                     $can_edit[] = $key->can_edit;
+                     $can_delete[] = $key->can_delete;
+                     $can_view[] = $key->can_view;
+                     $psv  = date('Y-m-d H:i:s',strtotime($key->psv));
+                     $pev  = date('Y-m-d H:i:s',strtotime($key->pev));
+                     $psed = date('Y-m-d H:i:s',strtotime($key->psed));
+                     $peed = date('Y-m-d H:i:s',strtotime($key->peed));
+                  }
+                  // diantara period view
+                  if($harini >= $psv && $harini <= $pev)
+                  {
+                     if(in_array('1', $can_view))
+                     {
+                        $view = 1;
+                     }else
+                     {
+                        $view = 0;
+                     }
+                  }else
+                  {
+                     $view = 0;
+                  }
 
+                  if($harini >= $psed && $harini <= $peed)
+                  {
+                     if(in_array('1', $can_edit))
+                     {
+                        $edit = 1;
+                     }else
+                     {
+                        $edit = 0;
+                     }
+                     if(in_array('1', $can_delete))
+                     {
+                        $delete = 1;
+                     }else
+                     {
+                        $delete = 0;
+                     }
+                     if(in_array('1', $can_add))
+                     {
+                        $add = 1;
+                     }else
+                     {
+                        $add = 0;
+                     }
+                  }else{
+                     $edit = 0;
+                     $delete = 0;
+                     $add = 0;
+                  }
+                  $privil = array('can_add'=>$add,'can_edit'=>$edit,'can_delete'=>$delete,'can_view'=>$view);
+                  return $privil;
+               }else
+               {
+                  $privil = array('can_add'=>0,'can_edit'=>0,'can_delete'=>0,'can_view'=>0);
+                  return $privil;   
+               }
 
-   		}else{
-   			$privil = array('can_add'=>0,'can_edit'=>0,'can_delete'=>0,'can_view'=>0);
-   			return $privil;
-   		}
+            }else{
+               $privil = array('can_add'=>0,'can_edit'=>0,'can_delete'=>0,'can_view'=>0);
+               return $privil;
+            }
+
+         }elseif($ht == '0')
+         {
+            $id = $this->cek_id_menu($menu_uri);
+            if($id)
+            {
+               foreach ($group as $key){
+                  $grup[] = $key->id;
+               }
+               $this->db->where_in('id_group',$grup);   
+               $this->db->where('id_menu', $id);
+               $hak = $this->db->get($this->alus_co['alus_mga']);
+               if($hak->num_rows() > 0)
+               {
+                  foreach ($hak->result() as $key) {
+                     $can_add[] = $key->can_add;
+                     $can_edit[] = $key->can_edit;
+                     $can_delete[] = $key->can_delete;
+                     $can_view[] = $key->can_view;
+                  }
+                  if(in_array('1', $can_add))
+                     {
+                        $add = 1;
+                     }else
+                     {
+                        $add = 0;
+                     }
+                  if(in_array('1', $can_edit))
+                     {
+                        $edit = 1;
+                     }else
+                     {
+                        $edit = 0;
+                     }
+                  if(in_array('1', $can_delete))
+                     {
+                        $delete = 1;
+                     }else
+                     {
+                        $delete = 0;
+                     }
+                  if(in_array('1', $can_view))
+                     {
+                        $view = 1;
+                     }else
+                     {
+                        $view = 0;
+                     }
+                  $privil = array('can_add'=>$add,'can_edit'=>$edit,'can_delete'=>$delete,'can_view'=>$view);
+                  return $privil;
+               }else
+               {
+                  $privil = array('can_add'=>0,'can_edit'=>0,'can_delete'=>0,'can_view'=>0);
+                  return $privil;   
+               }
+
+            }else{
+               $privil = array('can_add'=>0,'can_edit'=>0,'can_delete'=>0,'can_view'=>0);
+               return $privil;
+            }
+
+         }else
+         {
+            echo '<script type="text/javascript">alert("Error Saat mendapatkan hak akses ! Hubungi Administrator");</script>';
+            redirect(base_url(),'refresh');
+         }
+
    	}
 
    	function cek_id_menu($menu_uri) //jika ada return angka ,  jika tidak return false
@@ -218,7 +306,7 @@ const login_attempt = 'alus_la';
    		$this->db->select('menu_id');
    		$this->db->where('menu_uri', $menu_uri);
    		$this->db->limit(1);
-   		$menu = $this->db->get(self::table_menus);
+   		$menu = $this->db->get($this->alus_co['alus_mg']);
    		if($menu->num_rows() < 1)
    		{
    			return false;
@@ -228,39 +316,58 @@ const login_attempt = 'alus_la';
    		}
    	}
    	function cek_view_privilege($menu_uri) // return boolean
-   	{
+   	{  
+
+         date_default_timezone_set('Asia/Jakarta');
+         $harini = date('Y-m-d H:i:s');
    		$group = $this->session->userdata('group');
-   		//-----------------cari id menu--------------------//
-   		$this->db->from(self::table_menus);
-   		$this->db->select('menu_id');
-   		$this->db->where('menu_uri', $menu_uri);
-   		$this->db->limit(1);
-   		$menu = $this->db->get();
-         $idmenus = $menu->row();
-   		if($menu->num_rows() < 1)
+   		$idmenus = $this->cek_id_menu($menu_uri);
+         if(!$idmenus)
    		{
    			return false;
    		}
-   		//-------------------cari privilege----------------//
-	   	$this->db->from(self::table_group_akses);
+
+	   	$this->db->from($this->alus_co['alus_mga']);
 	   		foreach ($group as $key){
 	   			$grup[] = $key->id;
 	   		}
          $this->db->where_in('id_group',$grup);   
-	   	$this->db->where('id_menu', $idmenus->menu_id);	
+	   	$this->db->where('id_menu', $idmenus);	
 	   	$result = $this->db->get();
 	   	if($result->num_rows() > 0)
 	   	{
 	   		foreach ($result->result() as $key) {
-	   			$can_view[] = $key->can_view ;
-	   		}	
-	   		if(in_array(1, $can_view))
-	   		{
-	   			return true;
-	   		}else
-	   		{
-	   			return false;
+	   			$can_view[] = $key->can_view;
+               $psv  = date('Y-m-d H:i:s',strtotime($key->psv));
+               $pev  = date('Y-m-d H:i:s',strtotime($key->pev));
 	   		}
+            $ht = $this->alus_auth->user($this->session->userdata('user_id'))->row()->ht;
+            if($ht == '1')
+            {
+                  if($harini >= $psv && $harini <= $pev)
+                  {
+                     if(in_array('1', $can_view))
+                     {
+                        return true;
+                     }else
+                     {
+                        return false;
+                     }
+                  }else
+                  {
+                     return false;
+                  }
+               
+            }else
+            {
+               if(in_array('1', $can_view))
+               {
+                  return true;
+               }else
+               {
+                  return false;
+               }
+            }
 
 	   	}else
 	   	{
