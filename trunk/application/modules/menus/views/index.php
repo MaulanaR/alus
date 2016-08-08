@@ -22,7 +22,6 @@
         </table>
     </div>
 
-    
     <!-- Datatables , jika tidak digunakan silahkan dihapus -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/components/datatables/media/css/jquery.dataTables.min.css" >
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/components/datatables/media/css/dataTables.bootstrap.min.css" >
@@ -70,7 +69,8 @@ $(document).ready(function() {
         ],
         "lengthMenu" : [[10, 25, 100, 1000, -1], [10, 25, 100,1000, "All"]],
         "buttons" : [
-                {   extend: 'excelFlash',
+                {   extend: 'excel',
+                  className: 'testaja',
                   text: 'Eksport Excel(E)',
                   key: { key: 'e', altkey: true },
                   title:"Data Menus",
