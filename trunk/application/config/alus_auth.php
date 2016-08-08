@@ -32,6 +32,7 @@ $config['alus']['alus_g']   = 'alus_g';
 $config['alus']['alus_ug']  = 'alus_ug';
 $config['alus']['alus_la']  = 'alus_la';
 $config['alus']['alus_mg']  = 'alus_mg';
+$config['alus']['alus_gd']  = 'alus_gd';
 $config['alus']['alus_mga']  = 'alus_mga';
 $config['alus']['key']   = hex2bin('1234567890');
 
@@ -92,6 +93,7 @@ $config['admin_group']                = 'admin';             // Default administ
 $config['identity']                   = 'abc';             // You can use any unique column in your table as identity column. The values in this column, alongside password, will be used for login purposes
 $config['min_password_length']        = 8;                   // Minimum Required Length of Password
 $config['max_password_length']        = 20;                  // Maximum Allowed Length of Password
+$config['max_password_count'] 		  = hex2bin('1234567890'); // Maximum count of password
 $config['email_activation']           = FALSE;               // Email Activation for registration
 $config['manual_activation']          = FALSE;               // Manual Activation for registration
 $config['remember_users']             = TRUE;                // Allow users to be remembered and enable auto-login
