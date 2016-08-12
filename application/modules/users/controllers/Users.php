@@ -133,7 +133,7 @@ class Users extends CI_Controller {
 		else{
 		$this->form_validation->set_rules('username', 'Username', 'required|trim');
         $this->form_validation->set_rules('password', 'Password', 'required|trim|callback__notMatch[re_password]|min_length[' . $this->config->item('min_password_length', 'alus_auth') . ']|max_length[' . $this->config->item('max_password_length', 'alus_auth') . ']');
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[alus_u.abc]');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email|callback__emailUnique[email]');
         $this->form_validation->set_rules('first_name', 'First Name', 'required|trim');
         $this->form_validation->set_rules('last_name', 'Last Name', 'trim');
         $this->form_validation->set_rules('phone', 'Phone', 'numeric');

@@ -18,7 +18,7 @@
     display:inline-block;
     position:fixed;
     text-align:left;
-    z-index: 1000;
+    z-index: 9999;
     text-align: left;
 }
 .toasty_msgContainer.br{ right: 0px; bottom: 0; }
