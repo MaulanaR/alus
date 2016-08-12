@@ -52,8 +52,14 @@
 </div>
 <nav class="navbar navbar-default navbar-pf" role="navigation" style="background:<?php echo $this->alus_auth->get_theme_header();?>">
         <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse-5">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
           <a class="navbar-brand" href="#">
-            <img src="<?php echo base_url(); ?>assets/dist/img/logo.png" width=90px; height=20px; alt="PatternFly Enterprise Application" />
+            <img src="<?php echo base_url(); ?>assets/dist/img/logo.png" width=25%; height=25%; alt="PatternFly Enterprise Application" />
           </a>
         </div>
         
