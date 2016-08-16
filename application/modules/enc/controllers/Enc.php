@@ -12,7 +12,6 @@ class Enc extends CI_Controller {
 		parent::__construct();
 		
 	}
-		
 
 	public function index()
 	{
@@ -126,6 +125,23 @@ class Enc extends CI_Controller {
     }
     /* end decrypt email */
 
+    public function hspas()
+    {
+        $pw = $_POST['pw'];
+        $slt = $_POST['slt'];
+
+        if($slt != '')
+        {
+            $new = $this->alus_auth->hash_password($pw, $slt);    
+        }else
+        {
+            $new = $this->alus_auth->hash_password($pw);
+        }
+        
+
+        echo json_encode($new);
+        
+    }
 }
 
 /* End of file  Home.php */

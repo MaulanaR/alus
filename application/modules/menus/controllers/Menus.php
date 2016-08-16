@@ -168,6 +168,7 @@ class Menus extends CI_Controller {
 		}else
         {
             $this->model->delete_by_id($id);
+            $this->model->delete_detail_grupakses($id);
             echo json_encode(array("status" => TRUE));
         }
     }
