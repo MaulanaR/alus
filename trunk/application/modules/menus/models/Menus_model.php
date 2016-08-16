@@ -5,6 +5,7 @@
 class Menus_model extends CI_Model {
 
 	var $table = 'alus_mg';
+    var $table_aks = 'alus_mga';
     var $column_order = array('menu_nama','menu_uri','menu_id','order_num',null);
     var $column_search = array('menu_nama','menu_uri');
     var $order = array('menu_id' => 'desc'); 
@@ -131,6 +132,12 @@ class Menus_model extends CI_Model {
     {
         $this->db->where('menu_id', $id);
         $this->db->delete($this->table);
+    }
+
+    public function delete_detail_grupakses($id)
+    {
+        $this->db->where('id_menu', $id);
+        $this->db->delete($this->table_aks);
     }
 
 }

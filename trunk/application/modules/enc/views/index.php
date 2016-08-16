@@ -33,6 +33,22 @@
           }
       });
     }
+
+    function hash()
+    {
+      var pw = $("#pw").val();
+      var slt = $("#slt").val();
+     $.ajax({
+          type:"POST",
+          url: "<?php echo base_url('enc/hspas')?>",
+          data:{"pw":pw, "slt":slt},
+          dataType:"JSON",
+          success: function(s){
+            $("#hslpw").val(s)
+          }
+      });
+    }
+
 </script>
 <input type="text" name="encrypt" id="enc" ><button onclick="encg()">ENCRYPT</button>
 
@@ -40,5 +56,11 @@
 <button onclick="decs()">dec</button>
 
 <input type="text" name="hsl" id="hsl">
+
+<hr/>
+<input type="text" name="pw" id="pw" >
+<input type="text" name="slt" id="slt" ><button onclick="hash()">HASH</button>
+
+<input type="text" name="hslpw" id="hslpw">
 </body>
 </html>
