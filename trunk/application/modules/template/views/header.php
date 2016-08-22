@@ -8,16 +8,15 @@
   <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/img/favicon.png">
   <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/dist/css/patternfly.min.css" >
   <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/dist/css/loadercss.css" >
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/dist/css/imagezoom.css" >
   <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/dist/css/toasty.css" >
   <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/dist/css/patternfly-additions.min.css" >
   
-    
-
-    <script src="<?php echo base_url()?>assets/dist/js/jquery-2.1.4.min.js"></script>  
-    <script src="<?php echo base_url();?>assets/dist/js/toasty.js"></script>
-    <script src="<?php echo base_url();?>assets/components/datatables/media/js/jquery.dataTables.min.js"></script>
-    <script src="<?php echo base_url();?>assets/dist/js/bootstrap.min.js"></script>
-    <script src="<?php echo base_url();?>assets/dist/js/patternfly.min.js"></script>
+  <script src="<?php echo base_url()?>assets/dist/js/jquery-2.1.4.min.js"></script>  
+  <script src="<?php echo base_url();?>assets/dist/js/toasty.js"></script>
+  <script src="<?php echo base_url();?>assets/components/datatables/media/js/jquery.dataTables.min.js"></script>
+  <script src="<?php echo base_url();?>assets/dist/js/bootstrap.min.js"></script>
+  <script src="<?php echo base_url();?>assets/dist/js/patternfly.min.js"></script>
 
 
 <style>
@@ -40,6 +39,11 @@
  background: <?php echo $this->alus_auth->get_theme_modal('headtable');?>;
   color: <?php echo $this->alus_auth->get_theme_modal('colortable');?>; 
 }
+.bgcrumb{
+  background:rgb(246, 246, 246) none repeat scroll 0% 0%;
+  padding:10px 10px 10px 10px;margin-top:10px;
+  font-weight: bold;  
+}
 </style>
     
 
@@ -59,7 +63,7 @@
       <span class="icon-bar"></span>
     </button>
           <a class="navbar-brand" href="#">
-            <img src="<?php echo base_url(); ?>assets/dist/img/logo.png" width=25%; height=25%; alt="PatternFly Enterprise Application" />
+            <img src="<?php echo base_url(); ?>assets/dist/img/logo.png" width=25%; height=25%; alt="" />
           </a>
         </div>
         

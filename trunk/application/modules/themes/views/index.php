@@ -1,4 +1,10 @@
-	<script type="text/javascript">
+	<!-- breadcrumb -->
+        <ol class="breadcrumb bgcrumb">
+            <li><a href="#">Home</a></li>
+            <li>Themes</li>
+        </ol>
+        <!-- end breadcrumb -->
+    <script type="text/javascript">
     not = "<?php echo $this->session->flashdata('message');?>";
 		base_url = '<?php echo base_url();?>';
     $(document).ready(function() {

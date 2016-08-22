@@ -253,19 +253,7 @@ button.outline:active,
     <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/img/favicon.png">
   </head>
   <body>
-   <script type="text/javascript">
-   $( document ).ready(function() {
-     var msg = '<?php echo $this->session->flashdata('message');?>';
-      if(msg != "")
-      {
-        $().toasty({
-          message: msg,
-          autoHide: 3000
-        }); 
-      }
-  });
-    </script>
-
+  
     <div class="body"></div>
     <div class="grad"></div>
 
@@ -276,18 +264,18 @@ button.outline:active,
     <br>
 
     <div class="login">
-      <form action="<?php echo base_url();?>admin/Login/login" method="post" autocomplete="off">
-        <input type="text" placeholder="username" name="identity" required><br>
-        <input type="password" placeholder="password" name="password" required><br>
+      <form action="<?php echo base_url();?>admin/Login/login" method="post" autocomplete="off" id="form">
+        <input type="text" placeholder="Email" id="emailn" name="identity" required><br>
+        <input type="password" placeholder="password" id="passn" name="password" required><br>
         <div id="cap">
         <div style="padding-left:18%; padding-top:3%; padding-bottom:3%;"><?php echo $captcha ;?></div>
-        <input type="text" placeholder="Captcha" name="captcha" required><br>
+        <input type="text" placeholder="Captcha" name="captcha" id="captn" required><br>
         </div>
         <div>
-          <button type="submit" id="submit-form" class="button outline">Log-in</button>
+          <button type="button" id="submitform" class="button outline">Log-in</button>
         </div>
           <p style="padding-top:10px;"><a href="<?php echo base_url();?>forgot_password/">Forgot Password ?</a></p>
       </form>
     </div>    
-
+  <script src="<?php echo base_url();?>assets/dist/js/master.js"></script>
   </body>

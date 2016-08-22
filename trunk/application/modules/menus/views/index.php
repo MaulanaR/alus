@@ -1,6 +1,11 @@
-    </div>
-    <div class="container-fluid">
-        <h1 style="font-size:20pt" class="text-center">Manajemen Menu</h1>
+      <!-- breadcrumb -->
+        <ol class="breadcrumb bgcrumb">
+            <li><a href="#">Home</a></li>
+            <li>Manajemen Menus</li>
+        </ol>
+        <!-- end breadcrumb -->
+
+        <h1 style="font-size:20pt" class="text-center">Manajemen Menus</h1>
         <br />
         <?php if($can_add == 1){?>
         <button class="btn btn-success" onclick="add_person()"><i class="glyphicon glyphicon-plus"></i> Tambah Menu</button>
