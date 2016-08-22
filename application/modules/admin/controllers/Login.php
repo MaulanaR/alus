@@ -67,11 +67,10 @@ class Login extends CI_Controller {
 				if($this->alus_auth->is_time_locked_out($this->input->post('identity')))
 				{
 					$this->session->set_flashdata('message', 'You have too many login attempts. please wait 5 minutes and try again');
-					redirect('admin/Login/');
+					echo json_encode(array("status" => FALSE,"msg" => "You have too many login attempts. please wait 5 minutes and try again" ));
+
 				}
 		}
-
-		
 
 		//validate form input
 		$this->form_validation->set_rules('identity', 'Identity', 'required');
@@ -84,22 +83,19 @@ class Login extends CI_Controller {
 			$captcha = $this->input->post('captcha');
 			//cek captcha
 				$captchacek = $this->check_captcha($captcha);
-
-				if($captchacek == false)
-				{
-					$this->session->set_flashdata('message',"Kode Captcha tidak sesuai");
-					redirect('admin/Login/', 'refresh');
-				}
-
-			if ($this->alus_auth->login($this->input->post('identity'), $this->input->post('password')))
+			if($captchacek == false)
+			{
+				$this->session->set_flashdata('message',"Kode Captcha tidak sesuai");
+				echo json_encode(array("status" => FALSE,"msg" => "Kode Captcha tidak sesuai" ));
+				
+			}elseif($this->alus_auth->login($this->input->post('identity'), $this->input->post('password')))
 			{
 				//if the login is successful
 				//redirect them back to the home page
 				// mereset kesemepatan login
 				$this->alus_auth->clear_login_attempts($this->input->post('identity'));
 				$this->session->set_flashdata('message', $this->alus_auth->messages());
-				
-				redirect('dashboard/','refresh');
+				echo json_encode(array("status" => TRUE,"redirect" => base_url('dashboard'), "msg" => "Selamat Datang"));
 			}
 			else
 			{
@@ -107,7 +103,7 @@ class Login extends CI_Controller {
 				// redirect them back to the login page
 				// saat gagal login, mengurangi sisa kesempatan .
 				$this->session->set_flashdata('message', $this->alus_auth->errors());
-				redirect('admin/Login/', 'refresh'); // use redirects instead of loading views for compatibility with MY_Controller libraries
+				echo json_encode(array("status" => FALSE,"msg" => $this->alus_auth->errors() ));
 			}
 		}
 		else
@@ -116,7 +112,7 @@ class Login extends CI_Controller {
 			// set the flash data error message if there is one
 			$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
 			$this->session->set_flashdata('message', $this->data['message']);
-			redirect('admin/Login');
+			echo json_encode(array("status" => FALSE,"msg" => $this->data['message']));
 		}
 	}
 

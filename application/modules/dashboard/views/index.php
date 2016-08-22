@@ -47,16 +47,16 @@ echo "<br/>";*/
             <h2 class="h5">ADMIN</h2>
           </div>
           <ul class="list-group">
-              <li class="list-group-item"><a href="#"><img src="<?php echo base_url(); ?>theme/img/country/indonesia.png" alt="" style="width:50px; margin-right:10px;" /> INDONESIA</a></li>
-	          <li class="list-group-item"><a href="#"><img src="<?php echo base_url(); ?>theme/img/country/thailand.png" alt="" style="width:50px; margin-right:10px;" /> THAILAND</a></li>
-	          <li class="list-group-item"><a href="#"><img src="<?php echo base_url(); ?>theme/img/country/myanmar.png" alt="" style="width:50px; margin-right:10px;" /> MYANMAR</a></li>
-	          <li class="list-group-item"><a href="#"><img src="<?php echo base_url(); ?>theme/img/country/kamboja.png" alt="" style="width:50px; margin-right:10px;" /> CAMBODIA</a></li>
-	          <li class="list-group-item"><a href="#"><img src="<?php echo base_url(); ?>theme/img/country/laos.png" alt="" style="width:50px; margin-right:10px;" /> LAOS</a></li>
-	          <li class="list-group-item"><a href="#"><img src="<?php echo base_url(); ?>theme/img/country/singapore.png" alt="" style="width:50px; margin-right:10px;" /> SINGAPORE</a></li>
-	          <li class="list-group-item"><a href="#"><img src="<?php echo base_url(); ?>theme/img/country/philipina.png" alt="" style="width:50px; margin-right:10px;" /> PHILIPINES</a></li>
-	          <li class="list-group-item"><a href="#"><img src="<?php echo base_url(); ?>theme/img/country/malaysia.png" alt="" style="width:50px; margin-right:10px;" /> MALAYSIA</a></li>
-	          <li class="list-group-item"><a href="#"><img src="<?php echo base_url(); ?>theme/img/country/vietnam.png" alt="" style="width:50px; margin-right:10px;" /> VIETNAM</a></li>
-	          <li class="list-group-item"><a href="#"><img src="<?php echo base_url(); ?>theme/img/country/brunei.png" alt="" style="width:50px; margin-right:10px;" /> BRUNEI DARUSSALAM</a></li>
+              <li class="list-group-item"><a href="#"><img class="zoom" src="<?php echo base_url(); ?>theme/img/country/indonesia.png" alt="" style="width:50px; margin-right:10px;" /> INDONESIA</a></li>
+	          <li class="list-group-item"><a href="#"><img class="zoom" src="<?php echo base_url(); ?>theme/img/country/thailand.png" alt="" style="width:50px; margin-right:10px;" /> THAILAND</a></li>
+	          <li class="list-group-item"><a href="#"><img class="zoom" src="<?php echo base_url(); ?>theme/img/country/myanmar.png" alt="" style="width:50px; margin-right:10px;" /> MYANMAR</a></li>
+	          <li class="list-group-item"><a href="#"><img class="zoom" src="<?php echo base_url(); ?>theme/img/country/kamboja.png" alt="" style="width:50px; margin-right:10px;" /> CAMBODIA</a></li>
+	          <li class="list-group-item"><a href="#"><img class="zoom" src="<?php echo base_url(); ?>theme/img/country/laos.png" alt="" style="width:50px; margin-right:10px;" /> LAOS</a></li>
+	          <li class="list-group-item"><a href="#"><img class="zoom" src="<?php echo base_url(); ?>theme/img/country/singapore.png" alt="" style="width:50px; margin-right:10px;" /> SINGAPORE</a></li>
+	          <li class="list-group-item"><a href="#"><img class="zoom" src="<?php echo base_url(); ?>theme/img/country/philipina.png" alt="" style="width:50px; margin-right:10px;" /> PHILIPINES</a></li>
+	          <li class="list-group-item"><a href="#"><img class="zoom" src="<?php echo base_url(); ?>theme/img/country/malaysia.png" alt="" style="width:50px; margin-right:10px;" /> MALAYSIA</a></li>
+	          <li class="list-group-item"><a href="#"><img class="zoom" src="<?php echo base_url(); ?>theme/img/country/vietnam.png" alt="" style="width:50px; margin-right:10px;" /> VIETNAM</a></li>
+	          <li class="list-group-item"><a href="#"><img class="zoom" src="<?php echo base_url(); ?>theme/img/country/brunei.png" alt="" style="width:50px; margin-right:10px;" /> BRUNEI DARUSSALAM</a></li>
           </ul>
         </div><!-- /col -->
       </div><!-- /row -->

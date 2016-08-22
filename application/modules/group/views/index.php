@@ -1,8 +1,12 @@
-    </div>
-    <div class="container-fluid">
+    <!-- breadcrumb -->
+        <ol class="breadcrumb bgcrumb">
+            <li><a href="#">Home</a></li>
+            <li>Manajemen Groups</li>
+        </ol>
+        <!-- end breadcrumb -->
      <div id="openhak" style="display:none; overflow-y: hidden;" >
     </div>
-        <h1 style="font-size:20pt" class="text-center">Manajemen Group</h1>
+        <h1 style="font-size:20pt" class="text-center">Manajemen Groups</h1>
         <br />
         <?php if($can_add == 1){?>
         <button class="btn btn-success" onclick="add_person()"><i class="glyphicon glyphicon-plus"></i> Tambah Group</button>

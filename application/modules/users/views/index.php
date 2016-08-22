@@ -1,5 +1,9 @@
-    </div>
-    <div class="container-fluid">
+        <!-- breadcrumb -->
+        <ol class="breadcrumb bgcrumb">
+            <li><a href="#">Home</a></li>
+            <li>Manajemen Users</li>
+        </ol>
+        <!-- end breadcrumb -->
         <h1 style="font-size:20pt" class="text-center">Manajemen Users</h1>
         <br />
         <?php if($can_add == 1){?>
