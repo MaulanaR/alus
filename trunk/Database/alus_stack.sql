@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50621
 File Encoding         : 65001
 
-Date: 2016-08-12 17:31:46
+Date: 2016-08-16 14:03:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -104,16 +104,16 @@ CREATE TABLE `alus_mg` (
   `menu_icon` varchar(25) DEFAULT NULL,
   `order_num` int(5) DEFAULT NULL,
   PRIMARY KEY (`menu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of alus_mg
 -- ----------------------------
 INSERT INTO `alus_mg` VALUES ('11', '0', 'Menus', 'menus', '', 'fa fa-cubes fa-fw', '1');
 INSERT INTO `alus_mg` VALUES ('12', '0', 'Group', 'group', '', 'fa fa-diamond fa-fw', '2');
-INSERT INTO `alus_mg` VALUES ('13', '0', 'User', 'users', '', 'fa fa-user-secret fa-fw', '3');
-INSERT INTO `alus_mg` VALUES ('14', '0', 'Themes', 'themes', '', 'fa fa-laptop fa-fw', '99');
+INSERT INTO `alus_mg` VALUES ('13', '0', 'User', 'users', '', 'fa fa-user-plus fa-fw', '3');
 INSERT INTO `alus_mg` VALUES ('25', '0', 'encrypt', 'enc', '', 'fa fa-warning fa-fw', '1');
+INSERT INTO `alus_mg` VALUES ('26', '0', 'Themes', 'themes', '', 'fa fa-eye fa-fw', '99');
 
 -- ----------------------------
 -- Table structure for alus_mga
@@ -132,21 +132,20 @@ CREATE TABLE `alus_mga` (
   `psed` datetime DEFAULT NULL,
   `peed` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2348 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2363 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of alus_mga
 -- ----------------------------
-INSERT INTO `alus_mga` VALUES ('2253', '82', '11', '1', '1', '1', '0', null, null, null, null);
-INSERT INTO `alus_mga` VALUES ('2254', '82', '12', '1', '1', '1', '0', null, null, null, null);
-INSERT INTO `alus_mga` VALUES ('2255', '82', '13', '0', '0', '0', '0', null, null, null, null);
-INSERT INTO `alus_mga` VALUES ('2256', '82', '14', '0', '0', '0', '0', null, null, null, null);
-INSERT INTO `alus_mga` VALUES ('2257', '82', '25', '0', '0', '0', '0', null, null, null, null);
-INSERT INTO `alus_mga` VALUES ('2343', '1', '11', '1', '1', '1', '1', '2016-08-08 12:05:00', '2016-08-08 12:05:00', '2016-08-08 12:06:00', '2016-08-08 12:06:00');
-INSERT INTO `alus_mga` VALUES ('2344', '1', '12', '1', '1', '1', '1', '2016-08-08 12:05:00', '2016-08-09 12:05:00', '2016-08-08 12:06:00', '2016-08-09 12:06:00');
-INSERT INTO `alus_mga` VALUES ('2345', '1', '13', '1', '1', '1', '1', '2016-08-08 12:05:00', '2016-08-09 13:50:00', '2016-08-08 12:06:00', '2016-08-09 13:50:00');
-INSERT INTO `alus_mga` VALUES ('2346', '1', '14', '1', '1', '0', '1', '2016-08-08 12:05:00', '2016-08-08 12:06:00', '1970-01-01 01:00:00', '1970-01-01 01:00:00');
-INSERT INTO `alus_mga` VALUES ('2347', '1', '25', '1', '1', '1', '1', '1970-01-01 01:00:00', '1970-01-01 01:00:00', '1970-01-01 01:00:00', '1970-01-01 01:00:00');
+INSERT INTO `alus_mga` VALUES ('2348', '82', '11', '1', '1', '1', '0', '1970-01-01 01:00:00', '1970-01-01 01:00:00', '1970-01-01 01:00:00', '1970-01-01 01:00:00');
+INSERT INTO `alus_mga` VALUES ('2349', '82', '12', '1', '1', '1', '0', '1970-01-01 01:00:00', '1970-01-01 01:00:00', '1970-01-01 01:00:00', '1970-01-01 01:00:00');
+INSERT INTO `alus_mga` VALUES ('2350', '82', '13', '1', '1', '1', '0', '1970-01-01 01:00:00', '1970-01-01 01:00:00', '1970-01-01 01:00:00', '1970-01-01 01:00:00');
+INSERT INTO `alus_mga` VALUES ('2352', '82', '25', '0', '0', '0', '0', '1970-01-01 01:00:00', '1970-01-01 01:00:00', '1970-01-01 01:00:00', '1970-01-01 01:00:00');
+INSERT INTO `alus_mga` VALUES ('2358', '1', '11', '1', '1', '1', '1', '2016-08-08 12:05:00', '2016-08-08 12:05:00', '2016-08-08 12:06:00', '2016-08-08 12:06:00');
+INSERT INTO `alus_mga` VALUES ('2359', '1', '12', '1', '1', '1', '1', '2016-08-08 12:05:00', '2016-08-09 12:05:00', '2016-08-08 12:06:00', '2016-08-09 12:06:00');
+INSERT INTO `alus_mga` VALUES ('2360', '1', '13', '1', '1', '1', '1', '2016-08-08 12:05:00', '2016-08-09 01:50:00', '2016-08-08 12:06:00', '2016-08-09 13:50:00');
+INSERT INTO `alus_mga` VALUES ('2361', '1', '25', '1', '1', '1', '1', '1970-01-01 01:00:00', '1970-01-01 01:00:00', '1970-01-01 01:00:00', '1970-01-01 01:00:00');
+INSERT INTO `alus_mga` VALUES ('2362', '1', '26', '1', '1', '1', '1', '1970-01-01 01:00:00', '1970-01-01 01:00:00', '1970-01-01 01:00:00', '1970-01-01 01:00:00');
 
 -- ----------------------------
 -- Table structure for alus_u
@@ -175,13 +174,13 @@ CREATE TABLE `alus_u` (
   PRIMARY KEY (`id`),
   KEY `sys_users_idx1` (`id`) USING BTREE,
   KEY `sys_users_idx2` (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=66 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of alus_u
 -- ----------------------------
-INSERT INTO `alus_u` VALUES ('64', 'admins', 'admins', 'MTIzNDU2Nzg5MDEyMzQ1Nvqvv5U+5Kixew57njDPeg==', '::1', '$2y$08$.sbsuXatbF/d4/RvUy77GeeX/Nw48XoXXS/3Xurj7O/ujoQu3KGzK', 'xEfWFClsAdO4BnNm', null, null, null, null, '1469523580', '1470649200', '1', 'admin', 'master', null, '11', '0');
-INSERT INTO `alus_u` VALUES ('65', 'test', 'test', 'MTIzNDU2Nzg5MDEyMzQ1Nu+uoYgQxa24fwk70zzN', '::1', '$2y$08$arl2m5l8HIyvdodqYRqDpOEHW/4hhd1.WPmfHq.aDVrpIM/LfHXLG', 'FfzX8RJ0USwRhey2', null, null, '1469609410', null, '1469609395', '1469609454', '0', 'test', 'tes', null, '12', '0');
+INSERT INTO `alus_u` VALUES ('64', 'admins', 'admins', 'MTIzNDU2Nzg5MDEyMzQ1Nvqvv5U+5Kixew57njDPeg==', '::1', '$2y$08$.sbsuXatbF/d4/RvUy77GeeX/Nw48XoXXS/3Xurj7O/ujoQu3KGzK', 'xEfWFClsAdO4BnNm', null, null, null, null, '1469523580', '1471235149', '1', 'admin', 'master', null, '11', '0');
+INSERT INTO `alus_u` VALUES ('68', 'admin2', 'admin', 'MTIzNDU2Nzg5MDEyMzQ1Nvqvv5U+lom0cgp83n3DeFY=', '::1', '$2y$08$yIRex/yyJ.6ZR9d.OFvHxOzbC9nKOWf0Qyi3RBdK.WxBgsfhDMiIm', 'IAG6tL1CMEuh4ewg', null, null, null, null, '1471000460', '1471000511', '1', 'Admin', 'Ke-dua', null, '2', '1');
 
 -- ----------------------------
 -- Table structure for alus_ug
@@ -197,13 +196,13 @@ CREATE TABLE `alus_ug` (
   KEY `fk_users_groups_groups1_idx` (`group_id`),
   CONSTRAINT `fk_users_groups_groups1` FOREIGN KEY (`group_id`) REFERENCES `alus_g` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION,
   CONSTRAINT `fk_users_groups_users1` FOREIGN KEY (`user_id`) REFERENCES `alus_u` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=97 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of alus_ug
 -- ----------------------------
 INSERT INTO `alus_ug` VALUES ('96', '64', '1');
-INSERT INTO `alus_ug` VALUES ('93', '65', '1');
+INSERT INTO `alus_ug` VALUES ('99', '68', '82');
 
 -- ----------------------------
 -- Table structure for themes

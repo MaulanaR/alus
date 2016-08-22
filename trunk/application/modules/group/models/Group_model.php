@@ -19,6 +19,7 @@ class Group_model extends CI_Model {
 	{
 		$this->db->delete($this->alus_co['alus_mga'], array('id_group' => $id)); 
 	}
+    
 	function upres($res)
 	{
 		return $this->db->insert_batch($this->alus_co['alus_mga'], $res);

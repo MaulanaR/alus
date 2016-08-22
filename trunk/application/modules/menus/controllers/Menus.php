@@ -55,8 +55,8 @@ class Menus extends CI_Controller {
         foreach ($list as $person) {
             $no++;
             $row = array();
-            $row[] = $person->menu_nama;
-            $row[] = $person->menu_uri;
+            $row[] = $this->alus_auth->decrypt($person->menu_nama);
+            $row[] = $this->alus_auth->decrypt($person->menu_uri);
             $row[] = $person->order_num;
  			if($this->privilege['can_edit'] == 1 && $this->privilege['can_delete'] == 1)
         	{
@@ -95,7 +95,13 @@ class Menus extends CI_Controller {
     public function ajax_edit($id)
     {
         $data = $this->model->get_by_id($id);
-        echo json_encode($data);
+        $m_nama = $this->alus_auth->decrypt($data->menu_nama);
+        $m_uri =  $this->alus_auth->decrypt($data->menu_uri);
+        $arr = array('data' => $data,
+                     'nama' => $m_nama,
+                     'uri' => $m_uri
+                     );
+        echo json_encode($arr);
     }
  
     public function ajax_add()
@@ -115,8 +121,8 @@ class Menus extends CI_Controller {
         {
             $data = array(
                 'menu_parent' => $this->input->post('parent'),
-                'menu_nama' => $this->input->post('name'),
-                'menu_uri' => $this->input->post('uri'),
+                'menu_nama' => $this->alus_auth->encrypt($this->input->post('name')),
+                'menu_uri' => $this->alus_auth->encrypt($this->input->post('uri')),
                 'menu_target' => $this->input->post('target'),
                 'menu_icon' => $this->input->post('icon'),
                 'order_num' => $this->input->post('order'),
@@ -145,8 +151,8 @@ class Menus extends CI_Controller {
         {
             $data = array(
                 'menu_parent' => $this->input->post('parent'),
-                'menu_nama' => $this->input->post('name'),
-                'menu_uri' => $this->input->post('uri'),
+                'menu_nama' => $this->alus_auth->encrypt($this->input->post('name')),
+                'menu_uri' => $this->alus_auth->encrypt($this->input->post('uri')),
                 'menu_target' => $this->input->post('target'),
                 'menu_icon' => $this->input->post('icon'),
                 'order_num' => $this->input->post('order')

@@ -26,9 +26,9 @@
 
     
     <!-- Datatables , jika tidak digunakan silahkan dihapus -->
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/components/datatables/media/css/jquery.dataTables.min.css" >
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/components/datatables/media/css/dataTables.bootstrap.min.css" >
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/components/datatables/media/css/jquery.dataTables.min.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/components/datatables/Buttons/css/buttons.dataTables.min.css" >
+
     <script src="<?php echo base_url();?>assets/components/datatables/media/js/dataTables.bootstrap.min.js"></script>
     <script src="<?php echo base_url();?>assets/components/datatables/Buttons/js/dataTables.buttons.min.js"></script>
     <script src="<?php echo base_url();?>assets/components/datatables/Buttons/js/buttons.flash.min.js"></script>
