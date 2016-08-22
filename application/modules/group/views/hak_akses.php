@@ -87,7 +87,7 @@
 				<tr>
 					<td><input type="hidden" name="bot[]" value="<?php echo $no; ?>"><input type="hidden" name="menu[<?php echo $no; ?>]" value="<?php echo $rows->menu_id; ?>"></td>	
 					<td><?php echo $no; ?></td>
-					<td><?php echo $rows->menu_nama." ( ".$rows->menu_uri." )"; ?></td>
+					<td><?php echo $this->alus_auth->decrypt($rows->menu_nama)." ( ".$this->alus_auth->decrypt($rows->menu_uri)." )"; ?></td>
 
 					<td class="text-center">
 					

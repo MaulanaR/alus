@@ -24,7 +24,6 @@
 
     <!-- Datatables , jika tidak digunakan silahkan dihapus -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/components/datatables/media/css/jquery.dataTables.min.css" >
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/components/datatables/media/css/dataTables.bootstrap.min.css" >
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets/components/datatables/Buttons/css/buttons.dataTables.min.css" >
     <script src="<?php echo base_url();?>assets/components/datatables/media/js/dataTables.bootstrap.min.js"></script>
     <script src="<?php echo base_url();?>assets/components/datatables/Buttons/js/dataTables.buttons.min.js"></script>
@@ -119,13 +118,13 @@ function edit_person(id)
         success: function(data)
         {
  
-            $('[name="id"]').val(data.menu_id);
-            $('[name="name"]').val(data.menu_nama);
-            $('[name="uri"]').val(data.menu_uri);
-            $('[name="order"]').val(data.order_num);
-            $('[name="target"]').val(data.menu_target);
-            document.formnih.parent.value=data.menu_parent;
-            document.formnih.icon.value=data.menu_icon;
+            $('[name="id"]').val(data.data.menu_id);
+            $('[name="name"]').val(data.nama);
+            $('[name="uri"]').val(data.uri);
+            $('[name="order"]').val(data.data.order_num);
+            $('[name="target"]').val(data.data.menu_target);
+            document.formnih.parent.value=data.data.menu_parent;
+            document.formnih.icon.value=data.data.menu_icon;
 
             $('#modal_form').modal('show'); // show bootstrap modal when complete loaded
             $('.modal-title').text('Edit Person'); // Set title to Bootstrap modal title

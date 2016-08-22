@@ -106,8 +106,8 @@ class Alus_hmvc extends CI_Model {
                $this->html[] = sprintf(
                '%1$s<li class="dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="%5$s" aria-hidden="true"></i> %3$s</a>',
                $tab,   // %1$s = tabulation
-               $option['value']['menu_uri'],   // %2$s = menu_uri (URL)
-               $option['value']['menu_nama'],   // %3$s = menu_nama
+               $this->alus_auth->decrypt($option['value']['menu_uri']),   // %2$s = menu_uri (URL)
+               $this->alus_auth->decrypt($option['value']['menu_nama']),   // %3$s = menu_nama
                $option['value']['menu_target'],   // %4$s = menu_target
                $option['value']['menu_icon']   // %5$s = menu_target
             );   
@@ -117,8 +117,8 @@ class Alus_hmvc extends CI_Model {
             $this->html[] = sprintf(
                '%1$s<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="%5$s" aria-hidden="true"></i> %3$s<b class="caret"></b></a>',
                $tab,   // %1$s = tabulation
-               $option['value']['menu_uri'],   // %2$s = menu_uri (URL)
-               $option['value']['menu_nama'],   // %3$s = menu_nama
+               $this->alus_auth->decrypt($option['value']['menu_uri']),   // %2$s = menu_uri (URL)
+               $this->alus_auth->decrypt($option['value']['menu_nama']),   // %3$s = menu_nama
                $option['value']['menu_target'],   // %4$s = menu_target
                $option['value']['menu_icon']   // %5$s = menu_target
             );    
@@ -134,8 +134,8 @@ class Alus_hmvc extends CI_Model {
             $this->html[] = sprintf(
                '%1$s<li><a href="'.base_url().'%2$s" target="%4$s"><i class="%5$s" aria-hidden="true"></i> %3$s</a></li>',
                str_repeat( "\t", ( count( $parent_stack ) + 1 ) * 2 - 1 ),   // %1$s = tabulation
-               $option['value']['menu_uri'],   // %2$s = menu_uri (URL)
-               $option['value']['menu_nama'],   // %3$s = menu_nama
+               $this->alus_auth->decrypt($option['value']['menu_uri']),   // %2$s = menu_uri (URL)
+               $this->alus_auth->decrypt($option['value']['menu_nama']),   // %3$s = menu_nama
                $option['value']['menu_target'],   // %4$s = menu_target
                $option['value']['menu_icon']   // %5$s = menu_target
             );
@@ -304,7 +304,7 @@ class Alus_hmvc extends CI_Model {
    	function cek_id_menu($menu_uri) //jika ada return angka ,  jika tidak return false
    	{
    		$this->db->select('menu_id');
-   		$this->db->where('menu_uri', $menu_uri);
+   		$this->db->where('menu_uri', $this->alus_auth->encrypt($menu_uri));
    		$this->db->limit(1);
    		$menu = $this->db->get($this->alus_co['alus_mg']);
    		if($menu->num_rows() < 1)
