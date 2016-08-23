@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50621
 File Encoding         : 65001
 
-Date: 2016-08-16 14:03:16
+Date: 2016-08-23 10:25:12
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -109,11 +109,11 @@ CREATE TABLE `alus_mg` (
 -- ----------------------------
 -- Records of alus_mg
 -- ----------------------------
-INSERT INTO `alus_mg` VALUES ('11', '0', 'Menus', 'menus', '', 'fa fa-cubes fa-fw', '1');
-INSERT INTO `alus_mg` VALUES ('12', '0', 'Group', 'group', '', 'fa fa-diamond fa-fw', '2');
-INSERT INTO `alus_mg` VALUES ('13', '0', 'User', 'users', '', 'fa fa-user-plus fa-fw', '3');
-INSERT INTO `alus_mg` VALUES ('25', '0', 'encrypt', 'enc', '', 'fa fa-warning fa-fw', '1');
-INSERT INTO `alus_mg` VALUES ('26', '0', 'Themes', 'themes', '', 'fa fa-eye fa-fw', '99');
+INSERT INTO `alus_mg` VALUES ('11', '0', 'MTIzNDU2Nzg5MDEyMzQ1NtauvIkj', 'MTIzNDU2Nzg5MDEyMzQ1NvauvIkj', '', 'fa fa-cubes fa-fw', '1');
+INSERT INTO `alus_mg` VALUES ('12', '0', 'MTIzNDU2Nzg5MDEyMzQ1Nty5vYkg', 'MTIzNDU2Nzg5MDEyMzQ1Nvy5vYkg', '', 'fa fa-diamond fa-fw', '2');
+INSERT INTO `alus_mg` VALUES ('13', '0', 'MTIzNDU2Nzg5MDEyMzQ1Ns64t44=', 'MTIzNDU2Nzg5MDEyMzQ1Nu64t44j', '', 'fa fa-user-plus fa-fw', '3');
+INSERT INTO `alus_mg` VALUES ('25', '0', 'MTIzNDU2Nzg5MDEyMzQ1Nv6lsY4p1L0=', 'MTIzNDU2Nzg5MDEyMzQ1Nv6lsQ==', '', 'fa fa-warning fa-fw', '1');
+INSERT INTO `alus_mg` VALUES ('26', '0', 'MTIzNDU2Nzg5MDEyMzQ1Ns+jt5E11w==', 'MTIzNDU2Nzg5MDEyMzQ1Nu+jt5E11w==', '', 'fa fa-eye fa-fw', '99');
 
 -- ----------------------------
 -- Table structure for alus_mga
@@ -132,7 +132,7 @@ CREATE TABLE `alus_mga` (
   `psed` datetime DEFAULT NULL,
   `peed` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2363 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2383 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of alus_mga
@@ -141,11 +141,11 @@ INSERT INTO `alus_mga` VALUES ('2348', '82', '11', '1', '1', '1', '0', '1970-01-
 INSERT INTO `alus_mga` VALUES ('2349', '82', '12', '1', '1', '1', '0', '1970-01-01 01:00:00', '1970-01-01 01:00:00', '1970-01-01 01:00:00', '1970-01-01 01:00:00');
 INSERT INTO `alus_mga` VALUES ('2350', '82', '13', '1', '1', '1', '0', '1970-01-01 01:00:00', '1970-01-01 01:00:00', '1970-01-01 01:00:00', '1970-01-01 01:00:00');
 INSERT INTO `alus_mga` VALUES ('2352', '82', '25', '0', '0', '0', '0', '1970-01-01 01:00:00', '1970-01-01 01:00:00', '1970-01-01 01:00:00', '1970-01-01 01:00:00');
-INSERT INTO `alus_mga` VALUES ('2358', '1', '11', '1', '1', '1', '1', '2016-08-08 12:05:00', '2016-08-08 12:05:00', '2016-08-08 12:06:00', '2016-08-08 12:06:00');
-INSERT INTO `alus_mga` VALUES ('2359', '1', '12', '1', '1', '1', '1', '2016-08-08 12:05:00', '2016-08-09 12:05:00', '2016-08-08 12:06:00', '2016-08-09 12:06:00');
-INSERT INTO `alus_mga` VALUES ('2360', '1', '13', '1', '1', '1', '1', '2016-08-08 12:05:00', '2016-08-09 01:50:00', '2016-08-08 12:06:00', '2016-08-09 13:50:00');
-INSERT INTO `alus_mga` VALUES ('2361', '1', '25', '1', '1', '1', '1', '1970-01-01 01:00:00', '1970-01-01 01:00:00', '1970-01-01 01:00:00', '1970-01-01 01:00:00');
-INSERT INTO `alus_mga` VALUES ('2362', '1', '26', '1', '1', '1', '1', '1970-01-01 01:00:00', '1970-01-01 01:00:00', '1970-01-01 01:00:00', '1970-01-01 01:00:00');
+INSERT INTO `alus_mga` VALUES ('2378', '1', '11', '1', '1', '1', '1', '2016-08-08 12:05:00', '2016-08-08 12:05:00', '2016-08-08 12:06:00', '2016-08-08 12:06:00');
+INSERT INTO `alus_mga` VALUES ('2379', '1', '12', '1', '1', '1', '1', '2016-08-08 12:05:00', '2016-08-09 12:05:00', '2016-08-08 12:06:00', '2016-08-09 12:06:00');
+INSERT INTO `alus_mga` VALUES ('2380', '1', '13', '1', '1', '1', '1', '2016-08-08 12:05:00', '2016-08-09 01:50:00', '2016-08-08 12:06:00', '2016-08-09 13:50:00');
+INSERT INTO `alus_mga` VALUES ('2381', '1', '25', '1', '1', '1', '1', '1970-01-01 01:00:00', '1970-01-01 01:00:00', '1970-01-01 01:00:00', '1970-01-01 01:00:00');
+INSERT INTO `alus_mga` VALUES ('2382', '1', '26', '1', '1', '1', '1', '1970-01-01 01:00:00', '1970-01-01 01:00:00', '1970-01-01 01:00:00', '1970-01-01 01:00:00');
 
 -- ----------------------------
 -- Table structure for alus_u
@@ -179,7 +179,7 @@ CREATE TABLE `alus_u` (
 -- ----------------------------
 -- Records of alus_u
 -- ----------------------------
-INSERT INTO `alus_u` VALUES ('64', 'admins', 'admins', 'MTIzNDU2Nzg5MDEyMzQ1Nvqvv5U+5Kixew57njDPeg==', '::1', '$2y$08$.sbsuXatbF/d4/RvUy77GeeX/Nw48XoXXS/3Xurj7O/ujoQu3KGzK', 'xEfWFClsAdO4BnNm', null, null, null, null, '1469523580', '1471235149', '1', 'admin', 'master', null, '11', '0');
+INSERT INTO `alus_u` VALUES ('64', 'admins', 'admins', 'MTIzNDU2Nzg5MDEyMzQ1Nvqvv5U+5Kixew57njDPeg==', '::1', '$2y$08$.sbsuXatbF/d4/RvUy77GeeX/Nw48XoXXS/3Xurj7O/ujoQu3KGzK', 'xEfWFClsAdO4BnNm', null, null, null, null, '1469523580', '1471851089', '1', 'admin', 'master', null, '11', '0');
 INSERT INTO `alus_u` VALUES ('68', 'admin2', 'admin', 'MTIzNDU2Nzg5MDEyMzQ1Nvqvv5U+lom0cgp83n3DeFY=', '::1', '$2y$08$yIRex/yyJ.6ZR9d.OFvHxOzbC9nKOWf0Qyi3RBdK.WxBgsfhDMiIm', 'IAG6tL1CMEuh4ewg', null, null, null, null, '1471000460', '1471000511', '1', 'Admin', 'Ke-dua', null, '2', '1');
 
 -- ----------------------------
@@ -223,4 +223,4 @@ CREATE TABLE `themes` (
 -- ----------------------------
 -- Records of themes
 -- ----------------------------
-INSERT INTO `themes` VALUES ('1', 'linear-gradient(to bottom, rgba(40,45,51,1) 0%, rgba(40,45,51,1) 15%, rgba(41,46,52,1) 83%, rgba(40,45,51,1) 89%, rgba(55,67,84,1) 100%)', 'linear-gradient(to bottom, rgba(58,72,89,0.92) 0%, rgba(58,72,89,0.92) 100%)', 'linear-gradient(to bottom, rgba(58,72,89,0.92) 0%, rgba(58,72,89,0.92) 100%)', '#FFFFFF', '#FFFFFF', '#384556', '#FFFFFF');
+INSERT INTO `themes` VALUES ('1', 'linear-gradient(to bottom, rgba(40,45,51,1) 0%, rgba(40,45,51,1) 15%, rgba(41,46,52,1) 83%, rgba(40,45,51,1) 89%, rgba(55,67,84,1) 100%)', 'linear-gradient(to bottom, rgba(58,72,89,0.92) 0%, rgba(58,72,89,0.92) 100%)', 'linear-gradient(to bottom, rgba(58,72,89,0.92) 0%, rgba(58,72,89,0.92) 100%)', '#FFFFFF', '#FFFFFF', '#495666', '#FFFFFF');
