@@ -88,7 +88,7 @@
           </ul>
           
            <?php
-           echo $head;
+           echo $this->Alus_hmvc->get_menu();
             ?>
           
         </div>

@@ -27,11 +27,11 @@ echo $this->session->userdata('last_name');
 echo "<br/>";
 echo $this->session->userdata('old_last_login');
 echo "<br/>";
-print_r($this->session->userdata('group'));
+
 echo "<br/>";
 echo $this->session->userdata('job');
 echo "<br/>";*/
-
+print_r($this->session->userdata('group'));
 
 
 

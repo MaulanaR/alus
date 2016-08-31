@@ -23,7 +23,6 @@ class Group extends CI_Controller {
             redirect('dashboard','refresh');
         }
 	}
-		
 
 	public function index()
 	{
