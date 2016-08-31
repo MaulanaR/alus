@@ -23,8 +23,8 @@ class Alus_hmvc extends CI_Model {
 
          	}else{
          		$group = $this->session->userdata('group');
-         		if (empty(array_filter($this->session->userdata('group')))) {
-    				       $menu[] = "";
+         		if (!$this->session->userdata('group')) {
+    				       $menu = "";
    		   			return $menu;
 			   	}
 	         		

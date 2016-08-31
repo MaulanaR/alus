@@ -241,7 +241,7 @@ class Users extends CI_Controller {
 
 			if($this->session->userdata('user_id') == $id)
 			{
-				echo json_encode(array("status" => FALSE,"msg" => "You Cant kill yourself bro xD"));
+				echo json_encode(array("status" => FALSE,"msg" => "You Cant kill yourself !"));
 			}else
 			{
 				$proces = $this->alus_auth->delete_user($id);
