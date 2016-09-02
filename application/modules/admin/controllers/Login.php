@@ -75,18 +75,19 @@ class Login extends CI_Controller {
 		//validate form input
 		$this->form_validation->set_rules('identity', 'Identity', 'required');
 		$this->form_validation->set_rules('password', 'Password', 'required');
-		$this->form_validation->set_rules('captcha', 'captcha', 'required');
-
+//		$this->form_validation->set_rules('g-recaptcha-response', 'captcha', 'required');
 
 		if ($this->form_validation->run() == true)
 		{
-			$captcha = $this->input->post('captcha');
+			$captcha = $this->input->post('g-recaptcha-response');
 			//cek captcha
-				$captchacek = $this->check_captcha($captcha);
-			if($captchacek == false)
+			$response=json_decode(file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret='6Lf7JCkTAAAAAAvCD0mjGK7_2QjopBf1v0KsRnvH'&response=".$captcha."&remoteip=".$_SERVER['REMOTE_ADDR']), true);
+
+//			$captchacek = $this->check_captcha($captcha);
+			if($response['success'] == false)
 			{
-				$this->session->set_flashdata('message',"Kode Captcha tidak sesuai");
-				echo json_encode(array("status" => FALSE,"msg" => "Kode Captcha tidak sesuai" ));
+				$this->session->set_flashdata('message',"ERROR . Anda Manusia ? ");
+				echo json_encode(array("status" => FALSE,"msg" => "ERROR . Anda Manusia ?" ));
 				
 			}elseif($this->alus_auth->login($this->input->post('identity'), $this->input->post('password')))
 			{

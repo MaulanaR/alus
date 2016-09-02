@@ -1,4 +1,5 @@
 document.getElementById('submitform').onclick =masukbr;
+
 function masukbr()
    {
       var base_url = '<?php echo base_url();?>';
@@ -6,10 +7,11 @@ function masukbr()
       var identity = $("#emailn").val();
       var pass = $("#passn").val();
       var capt = $("#captn").val();
+      var respons = $("#g-recaptcha-response").val();
       $.ajax({
             type:"POST",
             url:form.attr("action"),
-            data:{'identity' : identity,'password' : pass,'captcha' : capt},
+            data:{'identity' : identity,'password' : pass,'captcha' : capt, 'g-recaptcha-response' :respons},
             dataType: "json",
             beforeSend: function() 
             { $("#load_ajax").show(); },

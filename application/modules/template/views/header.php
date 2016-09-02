@@ -17,6 +17,7 @@
   <script src="<?php echo base_url();?>assets/components/datatables/media/js/jquery.dataTables.min.js"></script>
   <script src="<?php echo base_url();?>assets/dist/js/bootstrap.min.js"></script>
   <script src="<?php echo base_url();?>assets/dist/js/patternfly.min.js"></script>
+  <script src="<?php echo base_url();?>assets/components/datatables/pdfmake/build/pdfmake.min.js"></script>
 
 
 <style>
