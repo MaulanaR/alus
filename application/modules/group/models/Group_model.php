@@ -47,7 +47,8 @@ class Group_model extends CI_Model {
 
 			if ($node->menu_parent == $pid) {
 				
-				$node->menu_nama = str_repeat('---', $depth) . $node->menu_nama;
+				$node->menu_nama = $node->menu_nama;
+                $node->order_num = str_repeat('---', $depth);
 				$children   = $this->getChildren($nodes, $node->menu_id, ($depth + 1));
 				$tree[]     = $node;
 

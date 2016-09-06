@@ -36,17 +36,6 @@
 				<?php 
 				$no = 1;
 				$ar = 0;
-				foreach ($sql->result() as $oo) {
-					$menus[] = $oo->id_menu;
-					$canad[] = $oo->can_add;
-					$canedit[] = $oo->can_edit;
-					$candelet[] = $oo->can_delete;
-					$canview[] = $oo->can_view;
-					$psv[] = $oo->psv;
-					$pev[] = $oo->pev;
-					$psed[] = $oo->psed;
-					$peed[] = $oo->peed;
-				}
 
 				//get list menu 
    				foreach ($result as $rows) {
@@ -87,7 +76,7 @@
 				<tr>
 					<td><input type="hidden" name="bot[]" value="<?php echo $no; ?>"><input type="hidden" name="menu[<?php echo $no; ?>]" value="<?php echo $rows->menu_id; ?>"></td>	
 					<td><?php echo $no; ?></td>
-					<td><?php echo $this->alus_auth->decrypt($rows->menu_nama)." ( ".$this->alus_auth->decrypt($rows->menu_uri)." )"; ?></td>
+					<td><?php echo $rows->order_num.$this->alus_auth->decrypt($rows->menu_nama)." ( ".$this->alus_auth->decrypt($rows->menu_uri)." )"; ?></td>
 
 					<td class="text-center">
 					

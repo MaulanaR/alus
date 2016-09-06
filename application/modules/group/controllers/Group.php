@@ -46,7 +46,18 @@ class Group extends CI_Controller {
 	public function hak_akses($id)
 	{
 		$data['id'] = $id;
-		$data['sql'] = $this->model->hak_akses_mod($id);
+		$sql = $this->model->hak_akses_mod($id);
+		foreach ($sql->result() as $oo) {
+					$data['menus'][] = $oo->id_menu;
+					$data['canad'][] = $oo->can_add;
+					$data['canedit'][] = $oo->can_edit;
+					$data['candelet'][] = $oo->can_delete;
+					$data['canview'][] = $oo->can_view;
+					$data['psv'][] = $oo->psv;
+					$data['pev'][] = $oo->pev;
+					$data['psed'][] = $oo->psed;
+					$data['peed'][] = $oo->peed;
+				}
 		$data['result'] = $this->model->all_tree();
 		$this->load->view('group/hak_akses',$data);
 	}
@@ -61,7 +72,6 @@ class Group extends CI_Controller {
 			$this->form_validation->set_rules('bot[]', 'Menu', 'required');
 		if ($this->form_validation->run() == true)
 		{
-
 			$id_group = $this->input->post('id_group');
 			$mlist = $this->input->post('bot');
 			$result = array();
@@ -73,16 +83,16 @@ class Group extends CI_Controller {
 							$this->model->del_ga($id_group);
 							//buat baru
 							$result[] = array(
-							"id_group" => $id_group,
-							"id_menu" => $_POST['menu'][$val],
-							"can_view" => $_POST['canview'][$val],
-							"can_edit" => $_POST['canedit'][$val],
-							"can_add" => $_POST['canadd'][$val],
+							"id_group" 	 => $id_group,
+							"id_menu" 	 => $_POST['menu'][$val],
+							"can_view" 	 => $_POST['canview'][$val],
+							"can_edit" 	 => $_POST['canedit'][$val],
+							"can_add" 	 => $_POST['canadd'][$val],
 							"can_delete" => $_POST['candelete'][$val],
-							"psv" => date('Y-m-d H:i:s' , strtotime($_POST['psv'][$val])),
-							"pev" => date('Y-m-d H:i:s' , strtotime($_POST['pev'][$val])),
-							"psed" => date('Y-m-d H:i:s' , strtotime($_POST['psed'][$val])),
-							"peed" => date('Y-m-d H:i:s' , strtotime($_POST['peed'][$val]))
+							"psv" 		 => date('Y-m-d H:i:s' , strtotime($_POST['psv'][$val])),
+							"pev" 		 => date('Y-m-d H:i:s' , strtotime($_POST['pev'][$val])),
+							"psed" 		 => date('Y-m-d H:i:s' , strtotime($_POST['psed'][$val])),
+							"peed" 		 => date('Y-m-d H:i:s' , strtotime($_POST['peed'][$val]))
 							);
 						}			
 			}
