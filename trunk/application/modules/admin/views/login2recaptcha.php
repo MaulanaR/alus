@@ -4,7 +4,7 @@
 
 <script src="<?php echo base_url()?>assets/dist/js/jquery-2.1.4.min.js"></script>  
 <script src="<?php echo base_url();?>assets/dist/js/toasty.js"></script>
-
+<script src='https://www.google.com/recaptcha/api.js'></script>
 <style type="text/css">
 /* latin-ext */
 @font-face {
@@ -267,20 +267,21 @@ button.outline:active,
       <form action="<?php echo base_url();?>admin/Login/login" method="post" autocomplete="off" id="form">
         <input type="text" placeholder="Email" id="emailn" name="identity" required><br>
         <input type="password" placeholder="password" id="passn" name="password" required><br>
-        <div id="cap">
-        <div style="padding-left:18%; padding-top:3%; padding-bottom:3%;"><?php echo $captcha ;?></div>
-        <input type="text" placeholder="Captcha" name="captcha" id="captn" required><br>
-        </div>
+        <?php if($inet)
+        {?>
+          <div class="g-recaptcha" data-sitekey="6Lf7JCkTAAAAACsEKdm_OAoYV3VAwKMLueQQLEku"></div><br>
+        <?php}else{ ?>
+          
+          <div id="cap">
+            <div style="padding-left:18%; padding-top:3%; padding-bottom:3%;"><?php echo $captcha ;?></div>
+            <input type="text" placeholder="Captcha" name="captcha" id="captn" required><br>
+          </div>
+        <?php };?>
         <div>
           <button type="button" id="submitform" class="button outline">Log-in</button>
         </div>
           <p style="padding-top:10px;"><a href="<?php echo base_url();?>forgot_password/">Forgot Password ?</a></p>
       </form>
     </div>    
-  <script src="<?php echo base_url();?>assets/dist/js/master.js"></script>
+<script src="<?php echo base_url();?>assets/dist/js/master.js"></script>
   </body>
-
-
-
-
-<!--- CONTROLLER -->

@@ -34,7 +34,7 @@ class Alus_hmvc extends CI_Model {
 	   					$grup[] = $key->id;
 	   				}
                   $this->db->where_in('id_group',$grup);  
-	   				$this->db->where('can_view','1');
+	   				$this->db->where('can_view', 1 );
 	
 	   		   	$result = $this->db->get();
 	   		   	if($result->num_rows()>0)
