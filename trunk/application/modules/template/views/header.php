@@ -17,7 +17,6 @@
   <script src="<?php echo base_url();?>assets/components/datatables/media/js/jquery.dataTables.min.js"></script>
   <script src="<?php echo base_url();?>assets/dist/js/bootstrap.min.js"></script>
   <script src="<?php echo base_url();?>assets/dist/js/patternfly.min.js"></script>
-  <script src="<?php echo base_url();?>assets/components/datatables/pdfmake/build/pdfmake.min.js"></script>
 
 
 <style>
@@ -52,8 +51,9 @@
  
 <body>
 <div class="load_ajax" id="load_ajax" style="display:none">
-  <img src="<?php echo base_url();?>assets/dist/img/bigspin.gif" >
-  <h2 style="color:white;">Loading</h2>
+  <!-- <img src="<?php echo base_url();?>assets/dist/img/bigspin.gif" > -->
+  <i class="fa fa-refresh fa-spin fa-5x" style="color:white;"></i>
+  <h2 style="color:white;">Loading ...</h2>
 </div>
 <nav class="navbar navbar-default navbar-pf" role="navigation" style="background:<?php echo $this->alus_auth->get_theme_header();?>">
         <div class="navbar-header">
