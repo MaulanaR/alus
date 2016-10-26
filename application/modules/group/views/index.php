@@ -35,10 +35,8 @@
     <script src="<?php echo base_url();?>assets/components/datatables/media/js/dataTables.bootstrap.min.js"></script>
     <script src="<?php echo base_url();?>assets/components/datatables/Buttons/js/dataTables.buttons.min.js"></script>
     <script src="<?php echo base_url();?>assets/components/datatables/Buttons/js/buttons.flash.min.js"></script>
-    <script src="<?php echo base_url();?>assets/components/datatables/jszip/dist/jszip.min.js"></script>
     <script src="<?php echo base_url();?>assets/components/datatables/Buttons/js/buttons.html5.min.js"></script>
     <script src="<?php echo base_url();?>assets/components/datatables/Buttons/js/buttons.colVis.min.js"></script>
-    <script src="<?php echo base_url();?>assets/components/datatables/pdfmake/build/vfs_fonts.js"></script>
 
     
     <!-- End Data tables -->
@@ -78,18 +76,18 @@ $(document).ready(function() {
                   key: { key: 'e', altkey: true },
                   title:"Data Groups",
                   exportOptions: {
-                       columns: [0,1,2]
+                       columns: [0,1]
                       }
 
               },
-                {   extend: 'pdf',
+                /*{   extend: 'pdf',
                   text: 'Export Pdf(F)',
                   key: { key: 'f', altkey: true },
                   title:"Data Groups",
                   exportOptions: {
-                       columns: [0,1,2]
+                       columns: [0,1]
                       }
-              },
+              },*/
                 { extend: 'colvis', text: 'Show/Hide columns(H)',key: { key: 'h', altkey: true }}
               ],
  

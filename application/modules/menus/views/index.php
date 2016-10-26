@@ -33,10 +33,8 @@
     <script src="<?php echo base_url();?>assets/components/datatables/media/js/dataTables.bootstrap.min.js"></script>
     <script src="<?php echo base_url();?>assets/components/datatables/Buttons/js/dataTables.buttons.min.js"></script>
     <script src="<?php echo base_url();?>assets/components/datatables/Buttons/js/buttons.flash.min.js"></script>
-    <script src="<?php echo base_url();?>assets/components/datatables/jszip/dist/jszip.min.js"></script>
     <script src="<?php echo base_url();?>assets/components/datatables/Buttons/js/buttons.html5.min.js"></script>
     <script src="<?php echo base_url();?>assets/components/datatables/Buttons/js/buttons.colVis.min.js"></script>
-    <script src="<?php echo base_url();?>assets/components/datatables/pdfmake/build/vfs_fonts.js"></script>
     <!-- End Data tables -->
 
 <script type="text/javascript">
@@ -86,7 +84,7 @@ $(document).ready(function() {
                 {   extend: 'pdf',
                   text: 'Export Pdf(F)',
                   key: { key: 'f', altkey: true },
-                  title:"Data Menus",
+                  title:"Data Menus.pdf",
                   exportOptions: {
                        columns: [0,1,2]
                       }
@@ -222,7 +220,6 @@ function popup(ms = null) {
         autoHide: 3000
     }); 
   } 
-  
 }
 </script>
  
